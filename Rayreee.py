@@ -18,19 +18,17 @@ design="""
 
 logo=("""{B}
 **************************************************
-{G}Remember >>  •••Allah Always Watching You•••
+{G} >>  •••Team Gamoudi•••
 {B}**************************************************
-{C} ____We Work To Sarve You a Clean Cyber Space____
-{Y}   ____Well Come To Noob-Hacker's World____
+{C} ____Rayen Gamoudi Atef Ben Amor wissem Akoudi____
+{Y}   ____Well Come To Team Gamoudi____
 {B}**************************************************
 {ascii}
 {B}**************************************************
-{G}Author   >>  Tahsan-Nayem [Noob-Hacker71]
-{Y}Facebook >>  https://facebook.com/Noob.Hacker71
-{C}Github   >>  https://github.com/Noob-Hacker71
+{Y}Facebook >>  https://www.facebook.com/profile.php?id=100082294714512
 {B}**************************************************
 """.format(ascii=design,B=B,C=C,G=G,Y=Y))
 
-User="Noob-Hacker71"
-Pwd="THBD"
+User="1"
+Pwd="1"
 Permission="On"
