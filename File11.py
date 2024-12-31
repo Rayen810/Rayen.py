@@ -1,6 +1,6 @@
 from datetime import datetime
 
-# تحديد تاريخ انتهاء الصلاحيةززو (مثال: 1 أكتوبر 2025 الساعة 12:00)
+# تحديد تاريخ انتهاء الصلاحية (مثال: 1 أكتوبر 2025 الساعة 12:00)
 end_date = "2025-10-01 12:00:00"
 
 # تحويل التاريخ إلى كائن datetime
@@ -145,10 +145,11 @@ def Menu():
         Console().print(f"""\033{Na}
 
                       _______________
-                     < 𝐓𝐄𝐀𝐌<>𝐀𝐑𝐖-x > 𝚅3
+                     < 𝚁𝚊𝚢𝚎𝚗-x > 𝚅7
                      """)
         # Check for saved cookies status
         
+        Console().print(f'\n   عصبة لكودي ')
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞')
         choice = Console().input(' [?]   ➛  ')
     
@@ -226,9 +227,8 @@ class Require:
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
             self.one.append(first_name.capitalize() + '12')
-            self.one.append(first_name + '2020')
-            self.one.append(first_name + '2023')
-
+            self.one.append(first_name + first_name +'123')
+            self.one.append(first_name + first_name +'12345')
         # التعامل مع الأسماء الثلاثية
         elif len(names) == 3:
             first_name = names[0].lower()  # الاسم الأولn
@@ -250,8 +250,8 @@ class Require:
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
             self.one.append(first_name.capitalize() + '12')
-            self.one.append(first_name + '2020')
-            self.one.append(first_name + '2023')
+            self.one.append(first_name + first_name +'123')
+            self.one.append(first_name + first_name +'12345')
 
         # خلط القائمة بشكل عشوائي
         random.shuffle(self.one)
