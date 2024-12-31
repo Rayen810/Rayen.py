@@ -149,7 +149,7 @@ def Menu():
                      """)
         # Check for saved cookies status
         
-        Console().print(f'\n   عصبة لكودي ')
+        Console().print(f'\n   عصبة لتونس كاملة ')
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞')
         choice = Console().input(' [?]   ➛  ')
     
