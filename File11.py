@@ -1,4 +1,19 @@
+from datetime import datetime
 
+# تحديد تاريخ انتهاء الصلاحية (مثال: 1 أكتوبر 2025 الساعة 12:00)
+end_date = "2025-10-01 12:00:00"
+
+# تحويل التاريخ إلى كائن datetime
+end_datetime = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S")
+
+# التحقق من التاريخ الحالي
+current_datetime = datetime.now()
+
+if current_datetime >= end_datetime:
+    print("OK.")
+else:
+    print("error.")
+    # يمكن هنا تنفيذ باقي الكود
 import os
 import re
 import sys
