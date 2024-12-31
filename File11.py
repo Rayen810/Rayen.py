@@ -145,7 +145,7 @@ def Menu():
         Console().print(f"""\033{Na}
 
                       _______________
-                     < 𝚁𝚊𝚢𝚎𝚗-x > 𝚅7
+                     < 𝐓𝐄𝐀𝐌 𝐀𝐑𝐖-x > 𝚅3
                      """)
         # Check for saved cookies status
         
