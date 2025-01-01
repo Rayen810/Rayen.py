@@ -159,13 +159,13 @@ def Menu():
                           _______________
                         𖣘-< 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 >-𖣘 𝚅3.
                      """)
-        # Check for saved cookies status
+        # Check for saved cookies stajjjtus
         print('''
 \033[1;34m         **************************************************\n
 \033[1;35m       ____𓆩Atef Ben Amor & Rayen Gamoudi & wissem Akoudi𓆪____\n
 \033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
-        Console().print(f'\n   نيك زبي &عصبة لتونس كاملة# ')
+        Console().print(f'\n   نيك زبي &.عصبة لتونس كاملة.# ')
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         choice = Console().input(' [?]   ➛  ')
     
