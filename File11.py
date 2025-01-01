@@ -204,7 +204,7 @@ def Menu():
 \033[1;35m       ____𓆩Atef Ben Amor & Rayen Gamoudi & wissem Akoudi𓆪____\n
 \033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
-        Console().print(f'\n   نيك زبي &عصبة لتونس كاملة# ')
+        Console().print(f'\n   اي تهبط&نيك زبي &عصبة لتونس كاملة# ')
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         Console().print(f'\n [2]. 𝐃𝐮𝐦𝐩 𝐅𝐢𝐥𝐞 𝐋𝐢𝐬𝐭 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 (soon)\n')
         choice = Console().input(' [?]   ➛  ')
@@ -572,7 +572,7 @@ if __name__ == "__main__":
 
         if not os.path.exists(os.path.join(list_folder, 'rayen.txt')):
             with open(os.path.join(list_folder, 'rayen.txt'), 'w') as file:
-                file.write("datr=chx1Z8FM3FQREhpSvRYdMvwE; ig_did=C8B37CEC-0B24-44FB-9117-C152B88F8A3B; dpr=1.6687500476837158; mid=Z3UccgABAAGXnxA485TVnIICDkAx; ig_nrcb=1; ps_l=1; ps_n=1; csrftoken=SwonmmPEujnMf695NVOT9ZgPSyFgU1sW; ds_user_id=63532616272; sessionid=63532616272%3ABoNdkoEq1vChS4%3A24%3AAYeBidNep534HC8lx10l6muE_TVSyRoVIFYC4cls5A; wd=432x887; rur=CLN\05463532616272\0541767277357:01f71f760aad5569b21ed68e45e05bc76c6a0dfbf254d78ae31043e51e771cb77b8e6232")
+                file.write("datr=52d1Z_HPibq4HvFfEfWT4Hkd; ig_did=D0948AD7-1B95-45BF-8274-F2A972A49937; dpr=1.6687500476837158; mid=Z3Vn5wABAAGqWhBmC88ZhkwzBp2C; csrftoken=POwuOLsJNmQnu8dj9VwCi69Qnfy5wzUW; ds_user_id=63532616272; sessionid=63532616272%3AJjN5GeYwjf8Ww4%3A11%3AAYfrS2mP1SoyqH5AfSvGQIqIdSa_Q_oVECQCj-HmjA; datr=52d1Z_HPibq4HvFfEfWT4Hkd; ig_did=D0948AD7-1B95-45BF-8274-F2A972A49937; dpr=1.6687500476837158; mid=Z3Vn5wABAAGqWhBmC88ZhkwzBp2C; wd=432x887; csrftoken=POwuOLsJNmQnu8dj9VwCi69Qnfy5wzUW; ds_user_id=63532616272; sessionid=63532616272%3AJjN5GeYwjf8Ww4%3A11%3AAYfrS2mP1SoyqH5AfSvGQIqIdSa_Q_oVECQCj-HmjA; rur=")
 
         print("")
 
