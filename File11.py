@@ -196,17 +196,6 @@ def Menu():
     while True:
         clear_screen()
 
-        # Check for saved cookies status
-        if os.path.isfile("/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/rayen.txt"):
-            with open("/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/rayen.txt", "r") as file:
-                cookies = {"cookie": file.read().strip()}
-            if check_cookies_validity(cookies):
-                cookies_status = "[green]found Cookies. / يوجد كوكيز في ملف[/green]"
-            else:
-                cookies_status = "[yellow]Cookies not working / كوكيز لا يعمل [/yellow]"
-        else:
-            cookies_status = "[yellow]Cookie not found / لم يتم العثور على ملف كوكيز[/yellow]"
-
         
         Console().print(f"""\033{Na}
 
@@ -220,7 +209,7 @@ def Menu():
 \033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
 
-        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 -:- {H2} {cookies_status}\n")
+        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 : {H2} \n")
         
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         Console().print(f'\n [2]. 𝐃𝐮𝐦𝐩 𝐅𝐢𝐥𝐞 𝐋𝐢𝐬𝐭 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 (soon)\n')
@@ -303,9 +292,9 @@ class Require:
             self.one.append(first_name.capitalize() + '1234')
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
-            self.one.append(first_name.capitalize() + '2000')
-            self.one.append(first_name +'2009')
-            self.one.append(last_name +'2010')
+            self.one.append(first_name.capitalize() + '12')
+            self.one.append(last_name +'123')
+            self.one.append(last_name +'12345')
         # التعامل مع الأسماء الثلاثية
         elif len(names) == 3:
             first_name = names[0].lower()  # الاسم الأولn
@@ -326,9 +315,9 @@ class Require:
             self.one.append(first_name.capitalize() + '1234')
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
-            self.one.append(first_name.capitalize() + '2008')
-            self.one.append(last_name +'2010')
-            self.one.append(last_name +'2009')
+            self.one.append(first_name.capitalize() + '12')
+            self.one.append(last_name +'123')
+            self.one.append(last_name +'12345')
 
         # خلط القائمة بشكل عشوائي
         random.shuffle(self.one)
@@ -570,13 +559,14 @@ if __name__ == "__main__":
         # تحديد المسارات
         main_folder = '/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦'
         accounts_folder = os.path.join(main_folder, 'حسابات Ok-CP')
-
+        list_folder = os.path.join(main_folder, '')
         
         # التحقق من وجود المجلدات وإنشائها إذا لم تكن موجودة
         if not os.path.exists(accounts_folder):
             os.makedirs(accounts_folder)
         
-
+        if not os.path.exists(list_folder):
+            os.makedirs(list_folder)
 
         # إنشاء الملفات فقط إذا لم تكن موجودة
         if not os.path.exists(os.path.join(accounts_folder, 'حسابات-OK.txt')):
@@ -587,8 +577,8 @@ if __name__ == "__main__":
             with open(os.path.join(accounts_folder, 'حسابات-CP.txt'), 'w') as file:
                 file.write("")
 
-        if not os.path.exists(os.path.join(accounts_folder, 'rayen.txt')):
-            with open(os.path.join(accounts_folder, 'rayen.txt'), 'w') as file:
+        if not os.path.exists(os.path.join(list_folder, 'rayen.txt')):
+            with open(os.path.join(list_folder, 'rayen.txt'), 'w') as file:
                 file.write("datr=52d1Z_HPibq4HvFfEfWT4Hkd; ig_did=D0948AD7-1B95-45BF-8274-F2A972A49937; dpr=1.6687500476837158; mid=Z3Vn5wABAAGqWhBmC88ZhkwzBp2C; csrftoken=POwuOLsJNmQnu8dj9VwCi69Qnfy5wzUW; ds_user_id=63532616272; sessionid=63532616272%3AJjN5GeYwjf8Ww4%3A11%3AAYfrS2mP1SoyqH5AfSvGQIqIdSa_Q_oVECQCj-HmjA; datr=52d1Z_HPibq4HvFfEfWT4Hkd; ig_did=D0948AD7-1B95-45BF-8274-F2A972A49937; dpr=1.6687500476837158; mid=Z3Vn5wABAAGqWhBmC88ZhkwzBp2C; wd=432x887; csrftoken=POwuOLsJNmQnu8dj9VwCi69Qnfy5wzUW; ds_user_id=63532616272; sessionid=63532616272%3AJjN5GeYwjf8Ww4%3A11%3AAYfrS2mP1SoyqH5AfSvGQIqIdSa_Q_oVECQCj-HmjA; rur=")
 
         print("")
@@ -600,4 +590,4 @@ if __name__ == "__main__":
     brute = Brute()  # كائن من الفئة Brute
     Menu()           # عرض القائnnمjjة أو nتنفيذ الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhhhhyةة
+    #bhgوتyyyتتتتناتتjjhhhhyاتااا,😙😋
