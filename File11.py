@@ -1,4 +1,5 @@
-from datetime import datetime
+nstagram.com',
+            from datetime import datetime
 
 # تحديد تاريخ انتهاء الصلاحية (مثال: 1 أكتوبر 2025 الساعة 12:00)
 end_date = "2025-10-01 12:00:00"
@@ -220,7 +221,7 @@ def Menu():
 \033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
 
-        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 : {H2} {cookies_status}\n")
+        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 -: {H2} {cookies_status}\n")
         
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         Console().print(f'\n [2]. 𝐃𝐮𝐦𝐩 𝐅𝐢𝐥𝐞 𝐋𝐢𝐬𝐭 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 (soon)\n')
@@ -587,7 +588,7 @@ if __name__ == "__main__":
             with open(os.path.join(accounts_folder, 'حسابات-CP.txt'), 'w') as file:
                 file.write("")
 
-        if not os.path.exists(os.path.join(list_folder, 'rayen.txt')):
+        if not os.path.exists(os.path.join(main_folder, 'rayen.txt')):
             with open(os.path.join(list_folder, 'rayen.txt'), 'w') as file:
                 file.write("datr=52d1Z_HPibq4HvFfEfWT4Hkd; ig_did=D0948AD7-1B95-45BF-8274-F2A972A49937; dpr=1.6687500476837158; mid=Z3Vn5wABAAGqWhBmC88ZhkwzBp2C; csrftoken=POwuOLsJNmQnu8dj9VwCi69Qnfy5wzUW; ds_user_id=63532616272; sessionid=63532616272%3AJjN5GeYwjf8Ww4%3A11%3AAYfrS2mP1SoyqH5AfSvGQIqIdSa_Q_oVECQCj-HmjA; datr=52d1Z_HPibq4HvFfEfWT4Hkd; ig_did=D0948AD7-1B95-45BF-8274-F2A972A49937; dpr=1.6687500476837158; mid=Z3Vn5wABAAGqWhBmC88ZhkwzBp2C; wd=432x887; csrftoken=POwuOLsJNmQnu8dj9VwCi69Qnfy5wzUW; ds_user_id=63532616272; sessionid=63532616272%3AJjN5GeYwjf8Ww4%3A11%3AAYfrS2mP1SoyqH5AfSvGQIqIdSa_Q_oVECQCj-HmjA; rur=")
 
@@ -600,4 +601,4 @@ if __name__ == "__main__":
     brute = Brute()  # كائن من الفئة Brute
     Menu()           # عرض القائnnمjjة أو nتنفيذ الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhhhhyة
+    #bhgوتyyyتتتتناتتjjhhhhyةة
