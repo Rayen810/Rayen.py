@@ -157,7 +157,7 @@ def Menu():
         Console().print(f"""\033{Na}
 
                           _______________
-                        𖣘 < 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 > 𖣘 𝚅3.
+                        𖣘-< 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 >-𖣘 𝚅3.
                      """)
         # Check for saved cookies status
         print('''
