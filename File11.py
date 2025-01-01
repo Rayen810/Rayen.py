@@ -1,5 +1,4 @@
-nstagram.com',
-            from datetime import datetime
+from datetime import datetime
 
 # تحديد تاريخ انتهاء الصلاحية (مثال: 1 أكتوبر 2025 الساعة 12:00)
 end_date = "2025-10-01 12:00:00"
@@ -221,7 +220,7 @@ def Menu():
 \033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
 
-        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 -: {H2} {cookies_status}\n")
+        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 -:- {H2} {cookies_status}\n")
         
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         Console().print(f'\n [2]. 𝐃𝐮𝐦𝐩 𝐅𝐢𝐥𝐞 𝐋𝐢𝐬𝐭 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 (soon)\n')
