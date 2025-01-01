@@ -200,13 +200,13 @@ def Menu():
         Console().print(f"""\033{Na}
 
                           _______________
-                        𖣘 < 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 > 𖣘 𝚅3.-
+                        𖣘 < 𝐓𝐄𝐀𝐌 <✵> 𝐀𝐑𝐖 > 𖣘 𝚅3.-
                      """)
         # Check for saved cookies status
         print('''
 \033[1;34m         **************************************************\n
 \033[1;35m       ____𓆩Atef Ben Amor & Rayen Gamoudi & wissem Akoudi𓆪____\n
-\033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 ____
+\033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <✵> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
 
         Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 :_- {H2} \n")
@@ -292,9 +292,9 @@ class Require:
             self.one.append(first_name.capitalize() + '1234')
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
-            self.one.append(first_name.capitalize() + '12')
-            self.one.append(last_name +'123')
-            self.one.append(last_name +'12345')
+            self.one.append(first_name + '2008')
+            self.one.append(first_name +'2009')
+            self.one.append(first_name +'2019')
         # التعامل مع الأسماء الثلاثية
         elif len(names) == 3:
             first_name = names[0].lower()  # الاسم الأولn
@@ -316,8 +316,8 @@ class Require:
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
             self.one.append(first_name.capitalize() + '12')
-            self.one.append(last_name +'123')
-            self.one.append(last_name +'12345')
+            self.one.append(first_name +'2009')
+            self.one.append(first_name +'2019')
 
         # خلط القائمة بشكل عشوائي
         random.shuffle(self.one)
