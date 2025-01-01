@@ -136,21 +136,37 @@ def Clear():
     try:os.system('clear' if 'linux' in sys.platform.lower() else 'cls')
     except:pass
 #33,
+
+import os
+os.system("clear")
+GG="\033[1;32m"
+BB="\033[1;34m"
+YY="\033[1;33m"
+PP="\033[1;35m"
+CC="\033[1;36m"
+
+
+
+
 def Menu():
     """Display the main menu."""
     clear_screen()
-    
+
     while True:
-        clear_screen()
+        
         Console().print(f"""\033{Na}
 
-                      _______________
-                     < 𝐓𝐄𝐀𝐌<>𝐀𝐑𝐖-x > 𝚅3
+                          _______________
+                        𖣘 < 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 > 𖣘 𝚅3.
                      """)
         # Check for saved cookies status
-        
-        Console().print(f'\n   عصبة لتونس كاملة ')
-        Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞')
+        print('''
+\033[1;34m         **************************************************\n
+\033[1;35m       ____𓆩Atef Ben Amor & Rayen Gamoudi & wissem Akoudi𓆪____\n
+\033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 ____
+\n\033[1;00m''')
+        Console().print(f'\n   نيك زبي &عصبة لتونس كاملة# ')
+        Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         choice = Console().input(' [?]   ➛  ')
     
         if choice == "1":
@@ -227,8 +243,8 @@ class Require:
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
             self.one.append(first_name.capitalize() + '12')
-            self.one.append(first_name + first_name +'123')
-            self.one.append(first_name + first_name +'12345')
+            self.one.append(last_name +'123')
+            self.one.append(last_name +'12345')
         # التعامل مع الأسماء الثلاثية
         elif len(names) == 3:
             first_name = names[0].lower()  # الاسم الأولn
@@ -250,8 +266,8 @@ class Require:
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
             self.one.append(first_name.capitalize() + '12')
-            self.one.append(first_name + first_name +'123')
-            self.one.append(first_name + first_name +'12345')
+            self.one.append(last_name +'123')
+            self.one.append(last_name +'12345')
 
         # خلط القائمة بشكل عشوائي
         random.shuffle(self.one)
@@ -519,6 +535,6 @@ if __name__ == "__main__":
     
     # استكمال العمل بعد إنشاء المجلدات والملفات
     brute = Brute()  # كائن من الفئة Brute-+--
-    Menu()           # عرض القائnnمjjة أو nتنفيذ اyyلخياراتgh
+    Menu()           # عرض القائnnمjjbjة أو nتنفيذ اyyلخياراتgh
     
     #bhgوتyyyتتتتناتتjjhhhhy𝚑𝚞𝚞jjتت
