@@ -574,9 +574,6 @@ if __name__ == "__main__":
             with open(os.path.join(accounts_folder, 'حسابات-CP.txt'), 'w') as file:
                 file.write("")
 
-        if not os.path.exists(os.path.join(list_folder, 'كوكيز.txt')):
-            with open(os.path.join(list_folder, 'كوكيز.txt'), 'w') as file:
-                file.write("datr=52d1Z_HPibq4HvFfEfWT4Hkd; ig_did=D0948AD7-1B95-45BF-8274-F2A972A49937; dpr=1.6687500476837158; mid=Z3Vn5wABAAGqWhBmC88ZhkwzBp2C; csrftoken=POwuOLsJNmQnu8dj9VwCi69Qnfy5wzUW; ds_user_id=63532616272; sessionid=63532616272%3AJjN5GeYwjf8Ww4%3A11%3AAYfrS2mP1SoyqH5AfSvGQIqIdSa_Q_oVECQCj-HmjA; datr=52d1Z_HPibq4HvFfEfWT4Hkd; ig_did=D0948AD7-1B95-45BF-8274-F2A972A49937; dpr=1.6687500476837158; mid=Z3Vn5wABAAGqWhBmC88ZhkwzBp2C; wd=432x887; csrftoken=POwuOLsJNmQnu8dj9VwCi69Qnfy5wzUW; ds_user_id=63532616272; sessionid=63532616272%3AJjN5GeYwjf8Ww4%3A11%3AAYfrS2mP1SoyqH5AfSvGQIqIdSa_Q_oVECQCj-HmjA; rur=")
 
         print("")
 
