@@ -177,7 +177,7 @@ def cek_DYNO(user, cookie_string):
         full_name = sop.find('meta', property='og:title')['content']
         full_name = full_name.split('•')[0].strip()  # استخراج الاسم الكامل قبل "•"
 
-        console.print(f"\r\n[bold yellow]           ➛ followers : {B2}{followers_count}.     ✓\n[bold yellow]           ➛ full name : {B2}{full_name}.     ✓\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
+        console.print(f"\r\n[bold yellow]          -➛ followers : {B2}{followers_count}.     ✓\n[bold yellow]           ➛ full name : {B2}{full_name}.     ✓\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
     except Exception as e:
         console.print(f"\r [red]  Error: {e}")
 
@@ -199,7 +199,7 @@ def Menu():
         Console().print(f"""\033{Na}
 
                           _______________
-                        {B2}𖣘 < 𝐓𝐄𝐀𝐌 <-✵-> 𝐀𝐑𝐖 > 𖣘 𝚅3.-
+                        {B2}𖣘 < 𝐓𝐄𝐀𝐌 <✵> 𝐀𝐑𝐖 > 𖣘 𝚅3.-
                      """)
         # Check for saved cookies status
         print('''
