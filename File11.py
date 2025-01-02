@@ -185,7 +185,7 @@ def cek_DYNO(user, cookie_string):
 cookie_string = "datr=la91ZyugolYjsOk_hS3WaceC; ig_did=084282CC-A90C-498B-892B-DF0AD63ACE6C; dpr=1.6687500476837158; mid=Z3WvlgABAAF4Fvz0eROdgBTWK2n7; ig_nrcb=1; ps_l=1; ps_n=1; wd=432x887; csrftoken=Etc4PgAK7iXgwRmenNeV4Lk6tDJZRVtP; ds_user_id=48416624176; sessionid=48416624176%3A2s6vuaL1AIvUjR%3A27%3AAYfYXCYW_0aIUViuAsmaR4qQF5T3rxK0cG3cGg_WKw; rur=\"LDC\\05448416624176\\0541767339582:01f7f0aec9ec28858359a3d976e6222c32609ee06a873ad4909c27bb59f9e9e80d015a40\""
 
 
-cek_DYNO(user, cookie_string)
+
 # كيفية الاستخدام:
 
 def Menu():
