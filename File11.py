@@ -455,7 +455,7 @@ class Brute:
     def exec_malink(self, methode_login, xontolmek):
 
 
-        Console().print(f'\n {M2}[{H2}+{M2}] {Na} cracking \n')
+        Console().print(f'\n {M2}[{H2}+{M2}] {Na} 𝚆𝚊𝚒𝚝𝚒𝚗𝚐 \n')
         with executor(max_workers=25) as bol:
            for kontol in self.id:
                username, nama = kontol.split('|')
@@ -579,4 +579,4 @@ if __name__ == "__main__":
     brute = Brute()  # كائن من الفئة Brute
     Menu()           # عرض القائnnمjjة أو nتنفيذ الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhhhhyاتااا,😙😋gbhj
+    #bhgوتyyyتتتتناتتjjhhhhyاتااا,😙𝚑𝚑😋gbhj
