@@ -177,7 +177,7 @@ def cek_DYNO(user, cookie_string):
         full_name = sop.find('meta', property='og:title')['content']
         full_name = full_name.split('•')[0].strip()  # استخراج الاسم الكامل قبل "•"
 
-        console.print(f"\r\n[bold yellow]           ➛ followers : {followers_count}\n[bold yellow]           ➛ full name : {full_name}\n            𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
+        console.print(f"\r\n[bold yellow]           ➛ followers : {B2}{followers_count}.     ✓\n[bold yellow]           ➛ full name : {B2}{full_name}.     ✓\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
     except Exception as e:
         console.print(f"\r [red]  Error: {e}")
 
@@ -203,7 +203,7 @@ def Menu():
         # Check for saved cookies status
         print('''
 \033[1;34m         **************************************************\n
-\033[1;35m       ____𓆩Atef Ben Amor & Rayen Gamoudi & wissem Akoudi𓆪____\n
+\033[1;35m       ____𓆩𝙰𝚝𝚎𝚏 𝙱𝚎𝚗 𝙰𝚖𝚘𝚛 & 𝚁𝚊𝚢𝚎𝚗 𝙶𝚊𝚖𝚘𝚞𝚍𝚒 & 𝚆𝚒𝚜𝚜𝚎𝚖 𝙰𝚔𝚘𝚞𝚍𝚒𓆪____\n
 \033[1;33m                  ____𝐖𝐞𝐥𝐥 𝐂𝐨𝐦𝐞 𝐓𝐨 𝐓𝐄𝐀𝐌 <✵> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
 
