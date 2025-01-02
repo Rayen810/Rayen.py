@@ -207,7 +207,7 @@ def Menu():
 \033[1;33m                  ____𝐖𝐞𝐥𝐥 𝐂𝐨𝐦𝐞 𝐓𝐨 𝐓𝐄𝐀𝐌 <✵> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
 
-        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 :_- {H2} \n")
+        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 :_- {H2}𝚅3 \n")
         
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         Console().print(f'\n [2]. 𝐃𝐮𝐦𝐩 𝐅𝐢𝐥𝐞 𝐋𝐢𝐬𝐭 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 (soon)\n')
@@ -290,9 +290,6 @@ class Require:
             self.one.append(first_name.capitalize() + '1234')
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
-            self.one.append(first_name + '2008')
-            self.one.append(first_name +'2009')
-            self.one.append(first_name +'2019')
         # التعامل مع الأسماء الثلاثية
         elif len(names) == 3:
             first_name = names[0].lower()  # الاسم الأولn
@@ -314,8 +311,6 @@ class Require:
             self.one.append(first_name.capitalize() + '1234567')
             self.one.append(first_name + first_name)
             self.one.append(first_name.capitalize() + '12')
-            self.one.append(first_name +'2009')
-            self.one.append(first_name +'2019')
 
         # خلط القائمة بشكل عشوائي
         random.shuffle(self.one)
