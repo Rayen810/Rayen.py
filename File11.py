@@ -2521,7 +2521,7 @@ if __name__ == "__main__":
                 file.write("")
 
         if not os.path.exists(os.path.join(main_folder, 'حسابات-CP.txt')):
-            with open(os.path.join(main_folder, 'حسابات-CP.txt), 'w') as file:
+            with open(os.path.join(main_folder, 'حسابات-CP.txt'), 'w') as file:
                 file.write("")
 
 
