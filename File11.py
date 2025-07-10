@@ -89,7 +89,7 @@ operation_counter = 1
 
 def show_header():
     print("\n" + "=" * 60)
-    print(f" 📱 𝙼𝚢 - 𝚄𝚜𝚎𝚛 :\033[2;32m {target_username}\033[2;00m")
+    print(f" 📱 𝙼𝚢 -d 𝚄𝚜𝚎𝚛 :\033[2;32m {target_username}\033[2;00m")
     print("=" * 60)
 
 def process_site(site_name, login_url, send_follower_url, start_url_template, username, password):
