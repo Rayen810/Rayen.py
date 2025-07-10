@@ -23,25 +23,12 @@ F = '\033[2;32m' # اخضر
 C = "\033[1;97m" # ابيض
 B = '\033[2;36m'# سمائي
 Y = '\033[1;34m' # ازرق فاتح
-import os,zlib
-from os import system as osRUB
-from os import system as cmd
-from urllib.request import Request, urlopen
-import os, requests, re,platform, sys, random, subprocess, threading, itertools,base64,uuid,zlib,re,json,uuid,subprocess,shutil,webbrowser,time,json,sys,random,datetime,time,re,subprocess,platform,string,json,time,re,random,sys,string,uuid
-from concurrent.futures import ThreadPoolExecutor as YousuFYousuF
-from string import * 
-from random import randint
-from time import sleep as slp
-from os import system as cmd
-from zlib import decompress 
-import os, platform
-from concurrent.futures import ThreadPoolExecutor
+
 
 #─━─━─━─━Find User Agent─━──━─━#
 
     
 #─━─━─━─━COLOUR SYS━─━─━─━─#
-sys.stdout.write('\x1b]2; YousuF\x07')
 S = '\033[1;37m'
 A = '\x1b[38;5;208m'
 R = '\x1b[38;5;46m'
