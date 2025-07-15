@@ -38,9 +38,10 @@ ver ='\033[92;1m7.0\033[93;1m'
 #─━─━─━─━LOGO SYS─━─━─━─━─#
 
 #» \033[1;33m1\033[0m -    ⠀⠀⠀⠀⠀   \033[1;41m
-logo = (f"""\n                  \033[2;32m   [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐫𝐞𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]\033[4;00m\n\n
-\033[1;97m >  \033[1;3 𝙼𝚢 33𝙽𝚊kggugu𝚖𝚎 \033[1;3: \033[1;41m +216 - 𝚁𝚊𝚢𝚎𝚗 \033[2;00m
+logo = (f"""\n                  \033[2;32m   [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]\033[4;00m\n\n
+\033[1;97m >  \033[1;3 𝙼𝚢 𝙽𝚊𝚖𝚎 \033[1;3: \033[1;41m +216 - 𝚁𝚊𝚢𝚎𝚗 \033[2;00m
 """)
+
 def linex():
         print(f"\33[1;37m==============================================""")
 
@@ -53,17 +54,24 @@ import os
 
 # الحسابات username|passwordcjchhccgcgcgcg
 accounts = [
+    "tyty235182023|Rayen@111a",
+    "haifahjayeij|haifahaifa",
     "aziz_douissa|aziz2006",
+    "+21627980987|thara123456789",
+    "oussama_ait.45|oussama1234",
+    "tns.heeedyyyyl|hadil@123",
+    "najemeddinechangel|najem123456789",
+    "youssef_bellehirch|youssef123456",
     "alijbeli888|ali123456",
-    "zied_zaidoun22|zied12345678",
+    "yahyaoui.menyar|menyarmenyar",
+    "_a_z_i_z_20|azizaziz1",
     "adem_hmaydi|adem12345",
-    "bensidhoumhoussem|houssem123",
+    "farah.998362|farah1234",
     "yassine_ben_yoness|yassine123456789",
     "amirrr__prvvv|amir12345",
     "ba.ssem6342|bassem123",
     "911_____maeb|maeb123",
     "asil_elharari|asil12",
-   
     "rajmohan__negi|rajmohan11",
     "ma3ak_________youssef|youssef12",
     "hama_abdelati|hamahama",
@@ -75,11 +83,12 @@ accounts = [
     "+21656329481|ahlem123"
 ]
 
+
 def clear():
     os.system('clear')
 
 print(logo)    
-target_username = input('\033[1;91m kggigu➛ ').strip()
+target_username = input(f'{C} 🧾 ᴜsᴇʀ : ').strip()
 clear()
 
 
@@ -173,7 +182,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
         print("  𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚜 : 𝙾𝙺 🚀 ")
     else:
         print(f"🚀 𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚜 : 𝙵𝚊𝚒𝚕 {start_resp.status_code} ")
-    time.sleep(10)
+    time.sleep(5)
 
 def process_followersize(username, password):
     process_site(
