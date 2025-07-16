@@ -23,7 +23,7 @@ import threading
 import os
 import requests
 import threading
-from PIL import Image
+
 import io
 import time
 
