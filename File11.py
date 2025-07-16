@@ -183,6 +183,40 @@ def process_tiktok_like(username, password, video_url):
         print(f"❌ فشل الإرسال من {username}")
     time.sleep(2)
 # =============== القائمة الرئيسية ===============
+
+
+
+#######
+def process_tiktok_view(username, password, video_url):
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Requested-With": "XMLHttpRequest",
+        "User-Agent": "Mozilla/5.0 (Linux; Android 10; Infinix X692 Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/138.0.7204.67 Mobile Safari/537.36"
+    }
+    session = requests.Session()
+    login_url = "https://takipcikrali.com/login"
+    send_url = "https://takipcikrali.com/tools/send-tiktok-view?formType=send"
+
+    print(f"\n🔐 تسجيل الدخول للحساب: {username}")
+    login_resp = session.post(login_url, data={"username": username, "password": password}, headers=headers)
+    if login_resp.status_code != 200:
+        print(f"❌ فشل تسجيل الدخول للحساب {username}")
+        return
+
+    print(f"🎬 إرسال مشاهدات إلى: {video_url}")
+    post_data = {
+        "mediaUrl": video_url,
+        "adet": "500"
+    }
+
+    send_resp = session.post(send_url, data=post_data, headers=headers)
+    if send_resp.status_code == 200:
+        print(f"👁️‍🗨️ تم إرسال مشاهدات بنجاح من {username}")
+    else:
+        print(f"❌ فشل إرسال المشاهدات من {username}")
+    time.sleep(5)
+
+#####
 while True:
     option = show_menu()
 
@@ -210,7 +244,15 @@ while True:
         input("\n✅ انتهى الإرسال! اضغط Enter للعودة للقائمة.")
 
     elif option == "3":
-        input("🚧 هذا الخيار غير متوفر حالياً... اضغط Enter للرجوع.")
+        clear()
+        print(logo())
+        video_url = input("🎬 أدخل رابط الفيديو (TikTok View): ").strip()
+        clear()
+        show_header(video_url)
+        for acc in accounts:
+            username, password = acc.split("|")
+            process_tiktok_view(username, password, video_url)
+        input("\n✅ تم إرسال المشاهدات! اضغط Enter للعودة للقائمة.")
     elif option == "0":
         print("👋 إلى اللقاء!")
         break
