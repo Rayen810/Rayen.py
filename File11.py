@@ -18,7 +18,7 @@ def logo():
     return f"""
 {F}                  [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]
 
-{C} > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z}اكودي _@@@ سكس من مؤخرة 🤦
+{C} > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z} 𝐑𝐚𝐲𝐞𝐧 𝐆𝐚𝐦𝐦𝐨𝐮𝐝𝐢
 """
 
 # ============== قائمة الحسابات ==============
@@ -64,11 +64,11 @@ def show_header(identifier):
 def show_menu():
     clear()
     print(logo())
-    print("1️⃣  إرسال متابعين")
-    print("2️⃣  إرسال لايكات (TikTok Like)")
-    print("3️⃣  إرسال مشاهدات (TikTok Views)")
-    print("0️⃣  خروج")
-    choice = input("\nاختر خيارك: ")
+    print("   إرسال متابعين (𝚒𝚗𝚜𝚝𝚊𝚐𝚛𝚊𝚖 𝚏𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜) 1️⃣\n")
+    print("   إرسال لايكات (𝚃𝚒𝚔𝚝𝚘𝚔 𝙻𝚒𝚔𝚜) 2️⃣\n")
+    print("   إرسال مشاهدات (𝚃𝚒𝚔𝚝𝚘𝚔 𝚅𝚒𝚎𝚠) 3️⃣\n")
+    print("   خروج (𝚎𝚡𝚒𝚝) 0️⃣\n")
+    choice = input(' \033[1;91m ➛   ') 
     return choice
 
 # ============ دوال الإرسال العامة ============
@@ -129,7 +129,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
     else:
         print(f" ❌ فشل الإرسال - {start_resp.status_code}")
 
-    time.sleep(2)
+    time.sleep(2.5)
 
 def process_followersize(username, password, target_username):
     process_site(
@@ -178,7 +178,7 @@ def process_tiktok_like(username, password, video_url):
 
     send_resp = session.post(send_url, data=post_data, headers=headers)
     if send_resp.status_code == 200:
-        print(f"❤️‍🔥 تم إرسال لايكات بنجاح من {username}")
+        print("  𝚂𝚞𝚌𝚌𝚎𝚜𝚜𝚏𝚞𝚕𝚕𝚢 {username} ✓ ")
     else:
         print(f"❌ فشل الإرسال من {username}")
     time.sleep(2)
@@ -214,7 +214,7 @@ def process_tiktok_view(username, password, video_url):
         print(f"👁️‍🗨️ تم إرسال مشاهدات بنجاح من {username}")
     else:
         print(f"❌ فشل إرسال المشاهدات من {username}")
-    time.sleep(5)
+    time.sleep(1.5)
 
 #####
 while True:
@@ -235,7 +235,7 @@ while True:
     elif option == "2":
         clear()
         print(logo())
-        video_url = input("🎥 أدخل رابط الفيديو: ").strip()
+        video_url = input(" 𝙻𝚒𝚗𝚔  𝚟𝚒𝚍𝚎𝚘  (𝚃𝚒𝚔𝚝𝚘𝚔 𝙻𝚒𝚔𝚜) 🎥 : ").strip()
         clear()
         show_header(video_url)
         for acc in accounts:
@@ -246,7 +246,7 @@ while True:
     elif option == "3":
         clear()
         print(logo())
-        video_url = input("🎬 أدخل رابط الفيديو (TikTok View): ").strip()
+        video_url = input(" 𝙻𝚒𝚗𝚔  𝚟𝚒𝚍𝚎𝚘  (𝚃𝚒𝚔𝚝𝚘𝚔 𝚅𝚒𝚎𝚠) 🎥 : ").strip()
         clear()
         show_header(video_url)
         for acc in accounts:
