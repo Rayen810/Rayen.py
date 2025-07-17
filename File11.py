@@ -18,7 +18,7 @@ CYAN = "\033[1;36m"
 def logo():
     return f"""\033[1;92m
            [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]\n
-{C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z} 𝐑𝐚𝐲𝐞𝐧 𝐆𝐚𝐦𝐦𝐨𝐮𝐝𝐢 @سكس اكودي 
+{C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z} 𝐑𝐚𝐲𝐞𝐧 𝐆𝐚𝐦𝐦𝐨𝐮𝐝𝐢 @@@@@سكس اكودي 
 """
 
 # ========== الحسابات ==========
@@ -493,7 +493,7 @@ def process_tiktok_like(username, password, video_url):
         "X-Requested-With": "XMLHttpRequest",
         "User-Agent": "Mozilla/5.0"
     }
-    login_resp = session.post("https://takipcitime.net/login",
+    login_resp = session.post("https://followersize.com/member",
                               data={"username": username, "password": password},
                               headers=headers, verify=False)
     if login_resp.status_code != 200:
@@ -505,7 +505,7 @@ def process_tiktok_like(username, password, video_url):
     print("=" * 60)
     print("")
     post_data = {"mediaUrl": video_url, "adet": "20"}
-    send_resp = session.post("https://takipcitime.net/tools/send-tiktok-like?formType=send",
+    send_resp = session.post("https://followersize.com/tools/send-tiktok-like?formType=send",
                              data=post_data, headers=headers, verify=False)
     if send_resp.status_code == 200:
         print(f"")
@@ -520,7 +520,7 @@ def process_tiktok_view(username, password, video_url):
         "X-Requested-With": "XMLHttpRequest",
         "User-Agent": "Mozilla/5.0"
     }
-    login_resp = session.post("https://takipcitime.net/login",
+    login_resp = session.post("https://followersize.com/member",
                               data={"username": username, "password": password},
                               headers=headers, verify=False)
     if login_resp.status_code != 200:
@@ -533,7 +533,7 @@ def process_tiktok_view(username, password, video_url):
     print("=" * 60)
     print("")
     post_data = {"mediaUrl": video_url, "adet": "500"}
-    send_resp = session.post("https://takipcitime.net/tools/send-tiktok-view?formType=send",
+    send_resp = session.post("https://followersize.com/tools/send-tiktok-view?formType=send",
                              data=post_data, headers=headers, verify=False)
     if send_resp.status_code == 200:
         print(f"")
