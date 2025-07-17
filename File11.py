@@ -3,27 +3,27 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import os
 import time
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# ========== ألوان ==========
+Z = '\033[1;31m'
+F = '\033[2;32m'
+C = "\033[1;97m"
+B = '\033[2;36m'
+Y = '\033[1;34m'
+S = '\033[1;37m'
+CYAN = "\033[1;36m"
 
-# ================= ألوان ====================
-Z = '\033[1;31m'  # أحمر
-F = '\033[2;32m'  # أخضر
-C = "\033[1;97m"  # أبيض
-B = '\033[2;36m'  # سماوي
-Y = '\033[1;34m'  # أزرق
-S = '\033[1;37m'  # رمادي
-CYAN = "\033[1;36m"  # سماوي للزخرفة
-
-# ================ لوجو ======================
+# ========== لوجو ==========
 def logo():
-    return f"""
-{F}                  [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]
-
-{C} > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z} 𝐑𝐚𝐲𝐞𝐧 𝐆𝐚𝐦𝐦𝐨𝐮𝐝𝐢
+    return f"""\033[1;92m
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]\n
+{C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z} 𝐑𝐚𝐲𝐞𝐧 𝐆𝐚𝐦𝐦𝐨𝐮𝐝𝐢
 """
 
-# ============== قائمة الحسابات ==============
+# ========== الحسابات ==========
 accounts = [
-    "tyty235182023|Rayen@111a",
+
     "haifahjayeij|haifahaifa",
     "aziz_douissa|aziz2006",
     "+21627980987|thara123456789",
@@ -52,39 +52,51 @@ accounts = [
     "+21656329481|ahlem123"
 ]
 
-# =============== دوال المساعدة ================
+# ========== وظائف ==========و
 def clear():
     os.system('clear')
-
-def show_header(identifier):
-    print("\n" + "=" * 60)
-    print(f" 📱 𝙼𝚢 - 𝚄𝚜𝚎𝚛 : {F}{identifier}{C}")
-    print("=" * 60)
 
 def show_menu():
     clear()
     print(logo())
-    print("   إرسال متابعين (𝚒𝚗𝚜𝚝𝚊𝚐𝚛𝚊𝚖 𝚏𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜) 1️⃣\n")
-    print("   إرسال لايكات (𝚃𝚒𝚔𝚝𝚘𝚔 𝙻𝚒𝚔𝚜) 2️⃣\n")
-    print("   إرسال مشاهدات (𝚃𝚒𝚔𝚝𝚘𝚔 𝚅𝚒𝚎𝚠) 3️⃣\n")
-    print("   خروج (𝚎𝚡𝚒𝚝) 0️⃣\n")
-    choice = input(' \033[1;91m ➛   ') 
-    return choice
+    
+    print(f"\033[1;33m» \033[0m\033[1;41m إرسال متابعين (𝙸𝚗𝚜𝚝𝚊𝚐𝚛𝚊𝚖 𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜) - 1 \033[0m\n")
+    print(f"\033[1;33m» \033[0m\033[1;41m   إرسال لايكات (𝚃𝚒𝚔𝚝𝚘𝚔 𝙻𝚒𝚔𝚎𝚜) - 2 \033[0m\n")
+    print(f"\033[1;33m» \033[0m\033[1;41m   إرسال مشاهدات (𝚃𝚒𝚔𝚝𝚘𝚔 𝚅𝚒𝚎𝚠) - 3 \033[0m\n")
+    print(f"\033[1;33m» \033[0m\033[1;41m   خروج (𝙴𝚡𝚒𝚝) - 0 \033[0m\n")
 
-# ============ دوال الإرسال العامة ============
-def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username):
+    return input(' \033[1;91m  ➛  \033[1;92m ') 
+
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+import time
+operation_counter = 1  # عداد تسجيل الدخول
+
+def show_header(target_username):
+    
+    print("\033[2;00m")
+    print("\n" + "=" * 60)
+    print(f" \033[2;00m📱 𝙼𝚢 - 𝚄𝚜𝚎𝚛 :\033[2;32m {target_username}\033[2;00m")
+    print("=" * 60)
+
+def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username, operation_counter):
+    show_header(target_username)
+def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username, operation_counter):
+    show_header(target_username)
+    print(f"\n\n  𝙻𝚘𝚐𝚒𝚗\033[1;33m [{operation_counter}] 📦 \033[1;00m")
+
     session = requests.Session()
-    print(f"\n📦 𝙻𝚘𝚐𝚒𝚗 : {username}")
-
-    login_resp = session.post(login_url, data={"username": username, "password": password})
+    login_resp = session.post(login_url, data={"username": username, "password": password}, verify=False)
     if login_resp.status_code != 200:
-        print(f" ❌ فشل تسجيل الدخول - {site_name}")
+        print(f"\n    𝙤𝙣𝙡𝙞𝙣𝙚 : 📡 ")
         return
 
-    page_resp = session.get(send_follower_url)
+    page_resp = session.get(send_follower_url, verify=False)
     if page_resp.status_code != 200:
-        print(f" ❌ فشل تحميل صفحة النموذج - {site_name}")
+        print(f"{Z} 𝙴𝚛𝚛𝚘𝚛 𝚕𝚘𝚊𝚍 𝚜𝚎𝚗𝚍-𝚏𝚘𝚕𝚕𝚘𝚠𝚎𝚛 𝚙𝚊𝚐𝚎 ❌ - {site_name}")
         return
+    print("  𝚂𝚞𝚌𝚌𝚎𝚜𝚜𝚏𝚞𝚕𝚕𝚢 ✓ ")
 
     soup = BeautifulSoup(page_resp.text, "html.parser")
     form = None
@@ -95,54 +107,80 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
             break
 
     if not form:
-        print(" ❌ النموذج غير موجود")
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
         return
 
-    action = urljoin(send_follower_url, form.get("action", ""))
-    post_data = {tag.get("name"): tag.get("value", "") for tag in form.find_all("input") if tag.get("name")}
+    action = form.get("action") or send_follower_url
+    if not action.startswith("http"):
+        action = urljoin(send_follower_url, action)
+
+    post_data = {input_tag.get("name"): input_tag.get("value", "") for input_tag in form.find_all("input") if input_tag.get("name")}
     post_data["username"] = target_username
 
-    submit_resp = session.post(action, data=post_data)
+    submit_resp = session.post(action, data=post_data, verify=False)
     if submit_resp.status_code != 200:
-        print(" ❌ فشل في إرسال النموذج")
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
         return
+    print("  𝙾𝙺 📤  ")
+    
 
     soup2 = BeautifulSoup(submit_resp.text, "html.parser")
-    adet = soup2.find("input", {"name": "adet"})
-    userID = soup2.find("input", {"name": "userID"})
-    userName = soup2.find("input", {"name": "userName"})
+    adet = soup2.find("input", {"name": "adet"}).get("value", "888")
+    userID = soup2.find("input", {"name": "userID"}).get("value", None)
+    userName = soup2.find("input", {"name": "userName"}).get("value", None)
 
     if not userID or not userName:
-        print(" ❌ لم يتم استخراج معلومات الحساب")
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ ")
         return
 
-    start_url = start_url_template.format(userID=userID.get("value"))
-    start_post_data = {
-        "adet": adet.get("value") if adet else "5000",
-        "userID": userID.get("value"),
-        "userName": userName.get("value")
+    start_url = start_url_template.format(userID=userID)
+    start_data = {
+        "adet": adet,
+        "userID": userID,
+        "userName": userName
     }
-
-    start_resp = session.post(start_url, data=start_post_data)
+    start_resp = session.post(start_url, data=start_data, verify=False)
     if start_resp.status_code == 200:
-        print(f" ✅ تم الإرسال إلى {target_username}")
+        print("  𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜 : 𝙾𝙺 🚀 ")
     else:
-        print(f" ❌ فشل الإرسال - {start_resp.status_code}")
-
-    time.sleep(2.5)
-
-def process_followersize(username, password, target_username):
+        print(f"🚀 𝙵𝚊𝚒𝚕 ({start_resp.status_code})")
+    time.sleep(4.5)
+    
+def process_takipcimx(username, password, target_username, operation_counter):
     process_site(
-        site_name="followersize.com",
-        login_url="https://followersize.com/member",
-        send_follower_url="https://followersize.com/tools/send-follower",
-        start_url_template="https://followersize.com/tools/send-follower/{userID}?formType=send",
+        site_name="takipcimx.net",
+        login_url="https://takipcimx.net/login",
+        send_follower_url="https://takipcimx.net/tools/send-follower",
+        start_url_template="https://takipcimx.net/tools/send-follower/{userID}?formType=send",
         username=username,
         password=password,
-        target_username=target_username
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+def process_bayitakipci(username, password, target_username, operation_counter):
+    process_site(
+        site_name="bayitakipci.com",
+        login_url="https://bayitakipci.com/memberlogin",
+        send_follower_url="https://bayitakipci.com/tools/send-follower",
+        start_url_template="https://bayitakipci.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+def process_fastfollow(username, password, target_username, operation_counter):
+    process_site(
+        site_name="fastfollow.in",
+        login_url="https://fastfollow.in/member",
+        send_follower_url="https://fastfollow.in/tools/send-follower",
+        start_url_template="https://fastfollow.in/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
     )
 
-def process_takipcikrali(username, password, target_username):
+def process_takipcikrali(username, password, target_username, operation_counter):
     process_site(
         site_name="takipcikrali.com",
         login_url="https://takipcikrali.com/login",
@@ -150,94 +188,235 @@ def process_takipcikrali(username, password, target_username):
         start_url_template="https://takipcikrali.com/tools/send-follower/{userID}?formType=send",
         username=username,
         password=password,
-        target_username=target_username
+        target_username=target_username,
+        operation_counter=operation_counter
     )
-
-# ============ دالة إرسال لايكات (مؤقتة) ============
+    
+def process_takipcizen(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcizen.com",
+        login_url="https://takipcizen.com/login",
+        send_follower_url="https://takipcizen.com/tools/send-follower",
+        start_url_template="https://takipcizen.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipciking(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipciking.net",
+        login_url="https://takipciking.net/login",
+        send_follower_url="https://takipciking.net/tools/send-follower",
+        start_url_template="https://takipciking.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_platintakipci(username, password, target_username, operation_counter):
+    process_site(
+        site_name="platintakipci.com",
+        login_url="https://platintakipci.com/member",
+        send_follower_url="https://platintakipci.com/tools/send-follower",
+        start_url_template="https://platintakipci.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipcigen(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcigen.com",
+        login_url="https://takipcigen.com/login",
+        send_follower_url="https://takipcigen.com/tools/send-follower",
+        start_url_template="https://takipcigen.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_bigtakip(username, password, target_username, operation_counter):
+    process_site(
+        site_name="bigtakip.net",
+        login_url="https://bigtakip.net/login",
+        send_follower_url="https://bigtakip.net/tools/send-follower",
+        start_url_template="https://bigtakip.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipcitime(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcitime.net",
+        login_url="https://takipcitime.net/login",
+        send_follower_url="https://takipcitime.net/tools/send-follower",
+        start_url_template="https://takipcitime.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipzan(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipzan.com",
+        login_url="https://takipzan.com/login",
+        send_follower_url="https://takipzan.com/tools/send-follower",
+        start_url_template="https://takipzan.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_followersize_net(username, password, target_username, operation_counter):
+    process_site(
+        site_name="followersize.net",
+        login_url="https://followersize.net/login",
+        send_follower_url="https://followersize.net/tools/send-follower",
+        start_url_template="https://followersize.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_birtakipci(username, password, target_username, operation_counter):
+    process_site(
+        site_name="birtakipci.net",
+        login_url="https://birtakipci.net/login",
+        send_follower_url="https://birtakipci.net/tools/send-follower",
+        start_url_template="https://birtakipci.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_mixtakip(username, password, target_username, operation_counter):
+    process_site(
+        site_name="mixtakip.com",
+        login_url="https://mixtakip.com/login",
+        send_follower_url="https://mixtakip.com/tools/send-follower",
+        start_url_template="https://mixtakip.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
 def process_tiktok_like(username, password, video_url):
+    session = requests.Session()
     headers = {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         "X-Requested-With": "XMLHttpRequest",
-        "User-Agent": "Mozilla/5.0 (Linux; Android 10; Infinix X692 Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/138.0.7204.67 Mobile Safari/537.36"
+        "User-Agent": "Mozilla/5.0"
     }
-    session = requests.Session()
-    login_url = "https://takipcikrali.com/login"
-    send_url = "https://takipcikrali.com/tools/send-tiktok-like?formType=send"
-
-    print(f"\n🔐 تسجيل الدخول للحساب: {username}")
-    login_resp = session.post(login_url, data={"username": username, "password": password}, headers=headers)
+    login_resp = session.post("https://takipcitime.net/login",
+                              data={"username": username, "password": password},
+                              headers=headers, verify=False)
     if login_resp.status_code != 200:
-        print(f"❌ فشل تسجيل الدخول للحساب {username}")
+        print(f"{Z}❌ خطأ تسجيل دخول {username}")
         return
 
-    print(f"📹 إرسال لايكات إلى: {video_url}")
-    post_data = {
-        "mediaUrl": video_url,
-        "adet": "20"
-    }
-
-    send_resp = session.post(send_url, data=post_data, headers=headers)
+    print("\n\033[2;00m" + "=" * 60)
+    print(f"\n\033[1;31m 𝚜𝚎𝚗𝚝 𝙻𝚒𝚔𝚜 𝚝𝚘 𝚟𝚒𝚍𝚎𝚘 (لايكلات) : \033[2;32m{video_url} 👁️ \033[1;00m\n")
+    print("=" * 60)
+    print("")
+    post_data = {"mediaUrl": video_url, "adet": "20"}
+    send_resp = session.post("https://takipcitime.net/tools/send-tiktok-like?formType=send",
+                             data=post_data, headers=headers, verify=False)
     if send_resp.status_code == 200:
-        print("  𝚂𝚞𝚌𝚌𝚎𝚜𝚜𝚏𝚞𝚕𝚕𝚢 {username} ✓ ")
+        print(f"")
     else:
-        print(f"❌ فشل الإرسال من {username}")
+        print(f"Erro")
     time.sleep(2)
-# =============== القائمة الرئيسية ===============
 
-
-
-#######
 def process_tiktok_view(username, password, video_url):
+    session = requests.Session()
     headers = {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         "X-Requested-With": "XMLHttpRequest",
-        "User-Agent": "Mozilla/5.0 (Linux; Android 10; Infinix X692 Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/138.0.7204.67 Mobile Safari/537.36"
+        "User-Agent": "Mozilla/5.0"
     }
-    session = requests.Session()
-    login_url = "https://takipcikrali.com/login"
-    send_url = "https://takipcikrali.com/tools/send-tiktok-view?formType=send"
-
-    print(f"\n🔐 تسجيل الدخول للحساب: {username}")
-    login_resp = session.post(login_url, data={"username": username, "password": password}, headers=headers)
+    login_resp = session.post("https://takipcitime.net/login",
+                              data={"username": username, "password": password},
+                              headers=headers, verify=False)
     if login_resp.status_code != 200:
-        print(f"❌ فشل تسجيل الدخول للحساب {username}")
+        print(f"❌ فشل تسجيل الدخول {username}")
         return
 
-    print(f"🎬 إرسال مشاهدات إلى: {video_url}")
-    post_data = {
-        "mediaUrl": video_url,
-        "adet": "500"
-    }
-
-    send_resp = session.post(send_url, data=post_data, headers=headers)
+    
+    print("\n\033[2;00m" + "=" * 60)
+    print(f"\n\033[1;31m 𝚜𝚎𝚗𝚝 𝚅𝚒𝚎𝚠𝚜 𝚝𝚘 𝚟𝚒𝚍𝚎𝚘 (مشاهدات) : \033[2;32m{video_url} 👁️ \033[1;00m\n")
+    print("=" * 60)
+    print("")
+    post_data = {"mediaUrl": video_url, "adet": "500"}
+    send_resp = session.post("https://takipcitime.net/tools/send-tiktok-view?formType=send",
+                             data=post_data, headers=headers, verify=False)
     if send_resp.status_code == 200:
-        print(f"👁️‍🗨️ تم إرسال مشاهدات بنجاح من {username}")
+        print(f"")
     else:
-        print(f"❌ فشل إرسال المشاهدات من {username}")
+        print(f"❌ error")
     time.sleep(1.5)
 
-#####
+# ========== القائمة ==========jjنjj
 while True:
     option = show_menu()
 
     if option == "1":
         clear()
         print(logo())
-        target_username = input(f'{CYAN} 🧾 ᴜsᴇʀ : ').strip()
+        target_username = input(f'{CYAN} 🧾 ᴜsᴇʀ  \033[1;00m: \033[1;92m ').strip()
         clear()
-        show_header(target_username)
+        print(logo())
+        operation_counter = 1  # إعادة التهيئة هنا
         for acc in accounts:
             username, password = acc.split("|")
-            process_followersize(username, password, target_username)
-            process_takipcikrali(username, password, target_username)
-        input("\n✅ اكتملت العملية! اضغط Enter للعودة للقائمة.")
-
+            process_mixtakip(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_birtakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipzan(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcitime(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_followersize_net(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bigtakip(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcizen(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_fastfollow(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_platintakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcikrali(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcigen(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipciking(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bayitakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimx(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
     elif option == "2":
         clear()
         print(logo())
         video_url = input(" 𝙻𝚒𝚗𝚔  𝚟𝚒𝚍𝚎𝚘  (𝚃𝚒𝚔𝚝𝚘𝚔 𝙻𝚒𝚔𝚜) 🎥 : ").strip()
         clear()
-        show_header(video_url)
+        
         for acc in accounts:
             username, password = acc.split("|")
             process_tiktok_like(username, password, video_url)
@@ -248,7 +427,7 @@ while True:
         print(logo())
         video_url = input(" 𝙻𝚒𝚗𝚔  𝚟𝚒𝚍𝚎𝚘  (𝚃𝚒𝚔𝚝𝚘𝚔 𝚅𝚒𝚎𝚠) 🎥 : ").strip()
         clear()
-        show_header(video_url)
+        
         for acc in accounts:
             username, password = acc.split("|")
             process_tiktok_view(username, password, video_url)
@@ -258,3 +437,6 @@ while True:
         break
     else:
         input("❌ خيار غير صالح! اضغط Enter للمحاولة مجدداً.")
+        
+        
+        #'+'-6'تت
