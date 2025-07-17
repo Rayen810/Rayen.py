@@ -412,7 +412,7 @@ def process_takipciking(username, password, target_username, operation_counter):
     )
     
 def process_takipcifox(username, password, target_username, operation_counter):
-    process_site(b
+    process_site(
         site_name="takipcifox.com",
         login_url="https://takipcifox.com/member",
         send_follower_url="https://takipcifox.com/tools/send-follower",
