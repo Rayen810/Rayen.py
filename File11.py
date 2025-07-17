@@ -18,12 +18,12 @@ CYAN = "\033[1;36m"
 def logo():
     return f"""\033[1;92m
            [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]\n
-{C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z} 𝐑𝐚𝐲𝐞𝐧 𝐆𝐚𝐦𝐦𝐨𝐮𝐝𝐢
+{C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z} 𝐑𝐚𝐲𝐞𝐧 𝐆𝐚𝐦𝐦𝐨𝐮𝐝𝐢 ⚠︎
 """
 
 # ========== الحسابات ==========
 accounts = [
-
+    "tyty235182023|Rayen@111a",
     "haifahjayeij|haifahaifa",
     "aziz_douissa|aziz2006",
     "+21627980987|thara123456789",
@@ -71,7 +71,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import time
-operation_counter = 1  # عداد تسجيل الدخول
+operation_counter = 1  # عداد تسجيل الدخولhh
 
 def show_header(target_username):
     
@@ -80,8 +80,7 @@ def show_header(target_username):
     print(f" \033[2;00m📱 𝙼𝚢 - 𝚄𝚜𝚎𝚛 :\033[2;32m {target_username}\033[2;00m")
     print("=" * 60)
 
-def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username, operation_counter):
-    show_header(target_username)
+
 def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username, operation_counter):
     show_header(target_username)
     print(f"\n\n  𝙻𝚘𝚐𝚒𝚗\033[1;33m [{operation_counter}] 📦 \033[1;00m")
@@ -107,7 +106,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
             break
 
     if not form:
-        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ⚠︎ \033[1;00m ")
         return
 
     action = form.get("action") or send_follower_url
@@ -119,7 +118,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
 
     submit_resp = session.post(action, data=post_data, verify=False)
     if submit_resp.status_code != 200:
-        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ⚠︎ \033[1;00m ")
         return
     print("  𝙾𝙺 📤  ")
     
@@ -130,7 +129,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
     userName = soup2.find("input", {"name": "userName"}).get("value", None)
 
     if not userID or not userName:
-        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ ")
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ⚠︎ ")
         return
 
     start_url = start_url_template.format(userID=userID)
@@ -141,7 +140,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
     }
     start_resp = session.post(start_url, data=start_data, verify=False)
     if start_resp.status_code == 200:
-        print("  𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜 : 𝙾𝙺 🚀 ")
+        print("  𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜 : 𝙾𝙺 𖠌 ")
     else:
         print(f"🚀 𝙵𝚊𝚒𝚕 ({start_resp.status_code})")
     time.sleep(4.5)
@@ -378,7 +377,6 @@ while True:
         print(logo())
         target_username = input(f'{CYAN} 🧾 ᴜsᴇʀ  \033[1;00m: \033[1;92m ').strip()
         clear()
-        print(logo())
         operation_counter = 1  # إعادة التهيئة هنا
         for acc in accounts:
             username, password = acc.split("|")
