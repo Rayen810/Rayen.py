@@ -14,10 +14,10 @@ Y = '\033[1;34m'
 S = '\033[1;37m'
 CYAN = "\033[1;36m"
 
-# ========== logo hjhhh==========vvnb
+# ========== لوجو ==========vvnb
 def logo():
     return f"""\033[1;92m
-           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~𝔾 ︎☠︎︎]\n
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎ ]\n
 {C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {CYAN} 𖤍 𝚁𝚊𝚢𝚎𝚗 𖤍 
 """
 
@@ -142,7 +142,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
         print("  𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜 : 𝙾𝙺 🚀 ")
     else:
         print(f"🚀 𝙵𝚊𝚒𝚕 ({start_resp.status_code})")
-    
+    time.sleep(5)
     
 
     
@@ -580,7 +580,7 @@ while True:
             process_followersize_com(username, password, target_username, operation_counter)
             operation_counter += 1
             process_medyahizmeti(username, password, target_username, operation_counter)
-            operation_counter += 1  # بعد ما يكمل هذا الحسابju
+            operation_counter += 1   بعد ما يكمل هذا الحسابju
             process_hepsitakipci(username, password, target_username, operation_counter)
             operation_counter += 1
             
@@ -614,24 +614,24 @@ while True:
 
 
             process_fastfollow(username, password, target_username, operation_counter)
-            operation_counter += 1
+            operation_counter += 1#
             process_bigtakip_com(username, password, target_username, operation_counter)
             operation_counter += 1
             process_takipcimx_com(username, password, target_username, operation_counter)
             operation_counter += 1
-            process_takipcimax(username, password, target_username, operation_counter)#
+            process_takipcimax(username, password, target_username, operation_counter)
             operation_counter += 1
             
-            process_takipcigir(username, password, target_username, operation_counter)#
+            process_takipcigir(username, password, target_username, operation_counter)
             operation_counter += 1
-            process_takipcikingcom(username, password, target_username, operation_counter)#
-            operation_counter += 1
-            
-            process_takipstarcom(username, password, target_username, operation_counter)#
+            process_takipcikingcom(username, password, target_username, operation_counter)
             operation_counter += 1
             
-            process_takipcizencom(username, password, target_username, operation_counter)#
+            process_takipstarcom(username, password, target_username, operation_counter)
             operation_counter += 1
+            
+            process_takipcizencom(username, password, target_username, operation_counter)
+            operation_counter += 1#
 
 
 
