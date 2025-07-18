@@ -14,10 +14,10 @@ Y = '\033[1;34m'
 S = '\033[1;37m'
 CYAN = "\033[1;36m"
 
-# ========== لوجو ==========vv
+# ========== لوجو ==========vvnb
 def logo():
     return f"""\033[1;92m
-           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾 ︎☠︎︎]\n
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~𝔾 ︎☠︎︎]\n
 {C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {CYAN} 𖤍 𝚁𝚊𝚢𝚎𝚗 𖤍 
 """
 
@@ -457,8 +457,110 @@ def process_tiktok_view(username, password, video_url):
     else:
         print(f"❌ error")
     time.sleep(1.5)
+    
+def process_takipcizencom(username, password, target_username, operation_counter):#9
+    process_site(
+        site_name="takipcizen.com",
+        login_url="https://takipcizen.com/login,
+        send_follower_url="https://takipcizen.com/tools/send-follower",
+        start_url_template="https://takipcizen.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_takipstarcom(username, password, target_username, operation_counter):#8
+    process_site(
+        site_name="takipstar.com",
+        login_url="https://takipstar.com/login",
+        send_follower_url="https://takipstar.com/tools/send-follower",
+        start_url_template="https://takipstar.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipcikingcom(username, password, target_username, operation_counter):#7
+    process_site(
+        site_name="takipciking.com",
+        login_url="https://takipciking.com/member",
+        send_follower_url="https://takipciking.com/tools/send-follower",
+        start_url_template="https://takipciking.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_takipcigir(username, password, target_username, operation_counter):#6
+    process_site(
+        site_name="takipcigir.com",
+        login_url="https://takipcigir.com/login",
+        send_follower_url="https://takipcigir.com/tools/send-follower",
+        start_url_template="https://takipcigir.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
 
-# ========== القائمة ==========jjنjj
+def process_takipcimx_com(username, password, target_username, operation_counter):#4
+    process_site(
+        site_name="takipcimx.com",
+        login_url="https://takipcimx.com/member",
+        send_follower_url="https://takipcimx.com/tools/send-follower",
+        start_url_template="https://takipcimx.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+
+    
+def process_takipcimax(username, password, target_username, operation_counter):#3
+    process_site(
+        site_name="takipcimax.com",
+        login_url="https://takipcimax.com/login",
+        send_follower_url="https://takipcimax.com/tools/send-follower",
+        start_url_template="https://takipcimax.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )#&&
+
+    
+
+def process_bigtakip_com(username, password, target_username, operation_counter):#2
+    process_site(
+        site_name="bigtakip.com",
+        login_url="https://bigtakip.com/member",
+        send_follower_url="https://bigtakip.com/tools/send-follower",
+        start_url_template="https://bigtakip.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_fastfollow(username, password, target_username, operation_counter):#1
+    process_site(
+        site_name="fastfollow.in",
+        login_url="https://fastfollow.in/member",
+        send_follower_url="https://fastfollow.in/tools/send-follower",
+        start_url_template="https://fastfollow.in/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+# ========== القائمة ==========jjنjjbb
 while True:
     option = show_menu()
 
@@ -506,7 +608,35 @@ while True:
             operation_counter += 1
             process_takipcikingnet(username, password, target_username, operation_counter)#
             operation_counter += 1
+
+
+
+
+
+            process_fastfollow(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bigtakip_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimx_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimax(username, password, target_username, operation_counter)#
+            operation_counter += 1
             
+            process_takipcigir(username, password, target_username, operation_counter)#
+            operation_counter += 1
+            process_takipcikingcom(username, password, target_username, operation_counter)#
+            operation_counter += 1
+            
+            process_takipstarcom(username, password, target_username, operation_counter)#
+            operation_counter += 1
+            
+            process_takipcizencom(username, password, target_username, operation_counter)#
+            operation_counter += 1
+
+
+
+
+
             process_platintakipci(username, password, target_username, operation_counter)
             operation_counter += 1
             
@@ -551,4 +681,4 @@ while True:
         input("❌ خيار غير صالح! اضغط Enter للمحاولة مجدداً.")
         
         
-        #'+'-6'تتjvvhggfvv
+        #'+'-6'تتjvvhggfvvnhh
