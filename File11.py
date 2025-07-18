@@ -17,8 +17,8 @@ CYAN = "\033[1;36m"
 # ========== لوجو ==========vv
 def logo():
     return f"""\033[1;92m
-           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾]\n
-{C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z} 𝐑𝐚𝐲𝐞𝐧 𝐆𝐚𝐦𝐦𝐨𝐮𝐝𝐢 @@@@@ سكس اكودي  عنيف
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 _ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ/𝔾 ︎☠︎︎]\n
+{C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {Z} 𖤍 𝚁𝚊𝚢𝚎𝚗 𖤍
 """
 
 # ========== الحسابات ==========
@@ -543,81 +543,67 @@ while True:
         print(logo())
         target_username = input(f'{CYAN} 🧾 ᴜsᴇʀ  \033[1;00m: \033[1;92m ').strip()
         clear()
-        loop_counter = 1  # عداد التكرار الكليhh
-
-        while True:
-            print(f"\n\n{Y}🔁 بدء الدورة رقم {loop_counter} - إرسال المتابعين لكل الحسابات والمواقع\n")
-            operation_counter = 1
-
-            for acc in accounts:
-                username, password = acc.split("|")
-                process_takipcimax(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_takipcivar(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_begenivar(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_bigtakip_com(username, password, target_username, operation_counter)
-                operation_counter += 1
-
-                process_followersize_com(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_medyahizmeti(username, password, target_username, operation_counter)
-                operation_counter += 1  # بعد ما يكمل هذا الحسابju
-                process_hepsitakipci(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_takipcimx_com(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_takipfun(username, password, target_username, operation_counter)
-                operation_counter += 1
-
-                process_instamoda(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_takipcitime_com(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_birtakipci_com(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_takipcibase(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_takip88(username, password, target_username, operation_counter)
-                operation_counter += 1
-                
-                process_takipcitime(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_takipzan(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_followersize_net(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_birtakipci(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_mixtakip(username, password, target_username, operation_counter)
-                operation_counter += 1
-                
-                process_takipcikrali(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_takipcikingnet(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_platintakipci(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_takipcigen(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_bigtakip(username, password, target_username, operation_counter)
-                operation_counter += 1
-
-                process_takipcimx(username, password, target_username, operation_counter)
-                operation_counter += 1
-                process_bayitakipci(username, password, target_username, operation_counter)
-                operation_counter += 1
-                
-                
-                
-                
-
-
-            print(f"\n{F}✅ اكتملت الدورة رقم {loop_counter} ✅")
-            print(f"{B}⏳ جاري الانتظار 20 ثانية قبل إعادة الإرسال...\n")
-            loop_counter += 1
-            time.sleep(3)
+        print(logo())
+        operation_counter = 1  # إعادة التهيئة هنا
+        for acc in accounts:
+            username, password = acc.split("|")
+            process_takipcimax(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcivar(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_begenivar(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bigtakip_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_followersize_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_medyahizmeti(username, password, target_username, operation_counter)
+            operation_counter += 1  # بعد ما يكمل هذا الحسابju
+            process_hepsitakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimx_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipfun(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_instamoda(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcitime_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_birtakipci_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcibase(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takip88(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcitime(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipzan(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_followersize_net(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_birtakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_mixtakip(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcikrali(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcikingnet(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_platintakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcigen(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bigtakip(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimx(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bayitakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            
+            
+            
+            
     elif option == "2":
         clear()
         print(logo())
@@ -646,4 +632,4 @@ while True:
         input("❌ خيار غير صالح! اضغط Enter للمحاولة مجدداً.")
         
         
-        #'+'-6'تتjتتتتju****تاggubb
+        #'+'-6'تتj
