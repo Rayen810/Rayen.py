@@ -461,7 +461,7 @@ def process_tiktok_view(username, password, video_url):
 def process_takipcizencom(username, password, target_username, operation_counter):#9
     process_site(
         site_name="takipcizen.com",
-        login_url="https://takipcizen.com/login,
+        login_url="https://takipcizen.com/login",
         send_follower_url="https://takipcizen.com/tools/send-follower",
         start_url_template="https://takipcizen.com/tools/send-follower/{userID}?formType=send",
         username=username,
