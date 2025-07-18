@@ -541,6 +541,7 @@ while True:
     if option == "1":
         clear()
         print(logo())
+        print("")
         target_username = input(f'{CYAN} 🧾 ᴜsᴇʀ  \033[1;00m: \033[1;92m ').strip()
         clear()
         print(logo())
