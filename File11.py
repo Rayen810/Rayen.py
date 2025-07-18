@@ -580,7 +580,7 @@ while True:
             process_followersize_com(username, password, target_username, operation_counter)
             operation_counter += 1
             process_medyahizmeti(username, password, target_username, operation_counter)
-            operation_counter += 1   بعد ما يكمل هذا الحسابju
+            operation_counter += 1   
             process_hepsitakipci(username, password, target_username, operation_counter)
             operation_counter += 1
             
