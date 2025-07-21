@@ -14,41 +14,21 @@ Y = '\033[1;34m'
 S = '\033[1;37m'
 CYAN = "\033[1;36m"
 
-# ========== logo ==========vvnb
+# ========== لوجو ==========vvnb
 def logo():
     return f"""\033[1;92m
-           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎ ]\n
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰22 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎]\n
 {C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {CYAN} 𖤍 𝚁𝚊𝚢𝚎𝚗 𖤍 
 """
 
 # ========== الحسابات ==========
 accounts = [
-    "tyty235182023|Rayen@111a",
-    "haifahjayeij|haifahaifa",
-    "aziz_douissa|aziz2006",
-    "+21627980987|thara123456789",
-    "tns.heeedyyyyl|hadil@123",
-    "najemeddinechangel|najem123456789",
-    "youssef_bellehirch|youssef123456",
-    "alijbeli888|ali123456",
-    "yahyaoui.menyar|menyarmenyar",
-    "_a_z_i_z_20|azizaziz1",
-    "adem_hmaydi|adem12345",
-    "farah.998362|farah1234",
-    "yassine_ben_yoness|yassine123456789",
-    "amirrr__prvvv|amir12345",
-    "ba.ssem6342|bassem123",
+    "san_achref|achref1234",
     "911_____maeb|maeb123",
-    "asil_elharari|asil12",
-    "rajmohan__negi|rajmohan11",
-    "ma3ak_________youssef|youssef12",
-    "hama_abdelati|hamahama",
-    "aymenmaster27|aymen12",
+    "najemeddinechangel|najem123456789",
+    "yassine_ben_yoness|yassine123456789",
     "_azizchouchene|aziz12345",
-    "brahim_adamben|adam123",
-    "maryem_.bacha|mariem12345678",
-    "rawen.bahrouni|rawen123",
-    "+21656329481|ahlem123"
+    "habibelghoulbhiri|habib12345"
 ]
 
 # ========== وظائف ==========و
@@ -359,7 +339,7 @@ def process_takip88(username, password, target_username, operation_counter):
         target_username=target_username,
         operation_counter=operation_counter
     )
-    
+    #1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣
 def process_followersize_com(username, password, target_username, operation_counter):
     process_site(
         site_name="followersize.com",
@@ -375,7 +355,7 @@ def process_followersize_com(username, password, target_username, operation_coun
 
     
     
-    
+    #2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣
 def process_medyahizmeti(username, password, target_username, operation_counter):
     process_site(
         site_name="medyahizmeti.com",
@@ -389,7 +369,7 @@ def process_medyahizmeti(username, password, target_username, operation_counter)
     )
     
     
-def process_hepsitakipci(username, password, target_username, operation_counter):
+def process_hepsitakipci(username, password, target_username, operation_counter):#1111113️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣
     process_site(
         site_name="hepsitakipci.com",
         login_url="https://www.hepsitakipci.com/member",
@@ -572,7 +552,7 @@ while True:
         target_username = input(f'{CYAN} 🧾 ᴜsᴇʀ  \033[1;00m: \033[1;92m ').strip()
         clear()
         print(logo())
-        operation_counter = 1  # إعادة التهيئة هنا
+        operation_counter = 1  # إعادة التهيئة هنhا
         for acc in accounts:
             username, password = acc.split("|")
             
