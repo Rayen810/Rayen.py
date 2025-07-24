@@ -17,7 +17,7 @@ CYAN = "\033[1;36m"
 # ========== لوجو ==========vvnb
 def logo():
     return f"""\033[1;92m
-           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝐕3 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎]\n
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝐕3 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎ ]\n
 {C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {CYAN} 𖤍 𝚁𝚊𝚢𝚎𝚗 𖤍 
 """
 
@@ -75,7 +75,7 @@ def show_header(target_username):
 
 def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username, operation_counter):
     show_header(target_username)
-    print(f"\n  𝙻𝚘𝚐𝚒𝚗\033[1;33m [{operation_counter}] 📦{username} \033[1;00m")
+    print(f"\n  𝙻𝚘𝚐𝚒𝚗\033[1;33m [{operation_counter}] 📦 \033[1;00m")
 
     session = requests.Session()
     login_resp = session.post(login_url, data={"username": username, "password": password})
