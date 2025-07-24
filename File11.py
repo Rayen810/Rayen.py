@@ -17,17 +17,30 @@ CYAN = "\033[1;36m"
 # ========== لوجو ==========vvnb
 def logo():
     return f"""\033[1;92m
-           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰22 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎]\n
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝐕3 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎]\n
 {C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {CYAN} 𖤍 𝚁𝚊𝚢𝚎𝚗 𖤍 
 """
 
 # ========== الحسابات ==========
 accounts = [
-    "san_achref|achref1234",
+    
+    "sirinedridi71|sirine12345",
+    "joujou_wejden1999|wejden123456",
     "911_____maeb|maeb123",
-    "najemeddinechangel|najem123456789",
-    "yassine_ben_yoness|yassine123456789",
-    "_azizchouchene|aziz12345",
+    "nadhir13282|nadhir12345",
+
+    "frajchaima99@gmail.com|isra12345",
+    "theyluv_sayda|sayda123456b",
+
+
+    "rahmaben.halima|rahma123456",
+    "ayoub_bouzuita|BR9Zz!",
+    "ramijbnouni|Rami1234",
+    "garbaayakine|yakine1234",
+    "+21628075915|Rahma123",
+    
+
+
     "habibelghoulbhiri|habib12345"
 ]
 
@@ -62,15 +75,15 @@ def show_header(target_username):
 
 def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username, operation_counter):
     show_header(target_username)
-    print(f"\n\n  𝙻𝚘𝚐𝚒𝚗\033[1;33m [{operation_counter}] 📦 \033[1;00m")
+    print(f"\n  𝙻𝚘𝚐𝚒𝚗\033[1;33m [{operation_counter}] 📦{username} \033[1;00m")
 
     session = requests.Session()
-    login_resp = session.post(login_url, data={"username": username, "password": password}, verify=False)
+    login_resp = session.post(login_url, data={"username": username, "password": password})
     if login_resp.status_code != 200:
         print(f"\n    𝙤𝙣𝙡𝙞𝙣𝙚 : 📡 ")
         return
 
-    page_resp = session.get(send_follower_url, verify=False)
+    page_resp = session.get(send_follower_url)
     if page_resp.status_code != 200:
         print(f"{Z} 𝙴𝚛𝚛𝚘𝚛 𝚕𝚘𝚊𝚍 𝚜𝚎𝚗𝚍-𝚏𝚘𝚕𝚕𝚘𝚠𝚎𝚛 𝚙𝚊𝚐𝚎 ❌ - {site_name}")
         return
@@ -95,7 +108,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
     post_data = {input_tag.get("name"): input_tag.get("value", "") for input_tag in form.find_all("input") if input_tag.get("name")}
     post_data["username"] = target_username
 
-    submit_resp = session.post(action, data=post_data, verify=False)
+    submit_resp = session.post(action, data=post_data)
     if submit_resp.status_code != 200:
         print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
         return
@@ -103,7 +116,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
     
 
     soup2 = BeautifulSoup(submit_resp.text, "html.parser")
-    adet = soup2.find("input", {"name": "adet"}).get("value", "888")
+    adet = soup2.find("input", {"name": "adet"}).get("value", "50")
     userID = soup2.find("input", {"name": "userID"}).get("value", None)
     userName = soup2.find("input", {"name": "userName"}).get("value", None)
 
@@ -117,17 +130,14 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
         "userID": userID,
         "userName": userName
     }
-    start_resp = session.post(start_url, data=start_data, verify=False)
+    start_resp = session.post(start_url, data=start_data)
+    time.sleep(3)
     if start_resp.status_code == 200:
         print("  𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜 : 𝙾𝙺 🚀 ")
     else:
         print(f"🚀 𝙵𝚊𝚒𝚕 ({start_resp.status_code})")
-    time.sleep(5)
-    
+    time.sleep(4)
 
-    
-    
-    
     
     
     
@@ -557,7 +567,7 @@ while True:
             username, password = acc.split("|")
             
             
-            process_followersize_com(username, password, target_username, operation_counter)
+            process_followersize_com(username, password, target_username, operation_counter)#1
             operation_counter += 1
             process_medyahizmeti(username, password, target_username, operation_counter)
             operation_counter += 1   
@@ -611,14 +621,14 @@ while True:
             operation_counter += 1
             
             process_takipcizencom(username, password, target_username, operation_counter)
-            operation_counter += 1#
+            operation_counter += 1#cv
 
 
 
 
 
-            process_platintakipci(username, password, target_username, operation_counter)
-            operation_counter += 1
+            #process_platintakipci(username, password, target_username, operation_counter)
+          #  operation_counter += 1
             
             process_takipcigen(username, password, target_username, operation_counter)
             operation_counter += 1
@@ -661,4 +671,4 @@ while True:
         input("❌ خيار غير صالح! اضغط Enter للمحاولة مجدداً.")
         
         
-        #'+'-6'تتjvvhggfvvnhh
+        #'+'-6'تتjvvhggfvvnhhj
