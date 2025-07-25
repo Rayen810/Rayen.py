@@ -17,7 +17,7 @@ CYAN = "\033[1;36m"
 # ========== لوجو ==========vvnb
 def logo():
     return f"""\033[1;92m
-           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝐕3 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎ ]\n
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝐕4 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎]\n
 {C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {CYAN} 𖤍 𝚁𝚊𝚢𝚎𝚗 𖤍 
 """
 
@@ -116,7 +116,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
     
 
     soup2 = BeautifulSoup(submit_resp.text, "html.parser")
-    adet = soup2.find("input", {"name": "adet"}).get("value", "50")
+
     userID = soup2.find("input", {"name": "userID"}).get("value", None)
     userName = soup2.find("input", {"name": "userName"}).get("value", None)
 
@@ -126,7 +126,7 @@ def process_site(site_name, login_url, send_follower_url, start_url_template, us
 
     start_url = start_url_template.format(userID=userID)
     start_data = {
-        "adet": adet,
+        "adet": "5000",
         "userID": userID,
         "userName": userName
     }
