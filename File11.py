@@ -1,391 +1,653 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-import time
 import os
-import random
+import time
 import urllib3
-import json
-from tenacity import retry, stop_after_attempt, wait_exponential
-from contextlib import contextmanager
-
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# ========== ألوان ==========
+Z = '\033[1;31m'
+F = '\033[2;32m'
+C = "\033[1;97m"
+B = '\033[2;36m'
+Y = '\033[1;34m'
+S = '\033[1;37m'
+CYAN = "\033[1;36m"
 
-# List of accounts
+# ========== لوجو ==========vvnbgg
+def logo():
+    return f"""\033[1;92m
+           [ 𝐢𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬 ✰ 𝐕4 𝚉𝚎𝚛𝚘 𝚃𝚛𝚊𝚌𝚎 ℝ~~𝔾 ︎☠︎︎]\n
+{C}  > 𝙼𝚢 𝙽𝚊𝚖𝚎 : {CYAN} 𖤍 𝚁𝚊𝚢𝚎𝚗 𖤍 
+"""
+
+# ========== الحسابات ==========n
 accounts = [
+    "sabersaber236|saber123456789",
     "issra2888|issra123456789",
     "elwaerayoub|ayoub123",
+    "prv_______fares|fares123456789",
+    "_adamabed_|adam1234",
+    "bettach1234567890|bettach123456789",
     "ayoubelwear|ayoub123",
+    "naderdoigtsdor|nader12345",
     "wess.ml|wessml123",
     "nabiljamjem|nabil123456789"
 ]
 
-# List of sites
-sites = [
-    {
-        "name": "V1",
-        "login_url": "https://takipcigir.com/login",
-        "send_follower_url": "https://takipcigir.com/tools/send-follower",
-        "start_url_template": "https://takipcigir.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V2",
-        "login_url": "https://takipcizen.com/login",
-        "send_follower_url": "https://takipcizen.com/tools/send-follower",
-        "start_url_template": "https://takipcizen.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V3",
-        "login_url": "https://takipstar.com/login",
-        "send_follower_url": "https://takipstar.com/tools/send-follower",
-        "start_url_template": "https://takipstar.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V4",
-        "login_url": "https://takipcifox.com/member",
-        "send_follower_url": "https://takipcifox.com/tools/send-follower",
-        "start_url_template": "https://takipcifox.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V5",
-        "login_url": "https://takipciking.com/member",
-        "send_follower_url": "https://takipciking.com/tools/send-follower",
-        "start_url_template": "https://takipciking.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V6",
-        "login_url": "https://bayitakipci.com/memberlogin",
-        "send_follower_url": "https://bayitakipci.com/tools/send-follower",
-        "start_url_template": "https://bayitakipci.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V7",
-        "login_url": "https://fastfollow.in/member",
-        "send_follower_url": "https://fastfollow.in/tools/send-follower",
-        "start_url_template": "https://fastfollow.in/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V8",
-        "login_url": "https://takipcikrali.com/login",
-        "send_follower_url": "https://takipcikrali.com/tools/send-follower",
-        "start_url_template": "https://takipcikrali.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V9",
-        "login_url": "https://takipcimx.net/login",
-        "send_follower_url": "https://takipcimx.net/tools/send-follower",
-        "start_url_template": "https://takipcimx.net/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V10",
-        "login_url": "https://takipciking.net/login",
-        "send_follower_url": "https://takipciking.net/tools/send-follower",
-        "start_url_template": "https://takipciking.net/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V11",
-        "login_url": "https://takipcigen.com/login",
-        "send_follower_url": "https://takipcigen.com/tools/send-follower",
-        "start_url_template": "https://takipcigen.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V12",
-        "login_url": "https://bigtakip.net/login",
-        "send_follower_url": "https://bigtakip.net/tools/send-follower",
-        "start_url_template": "https://bigtakip.net/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V13",
-        "login_url": "https://takipcitime.net/login",
-        "send_follower_url": "https://takipcitime.net/tools/send-follower",
-        "start_url_template": "https://takipcitime.net/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V14",
-        "login_url": "https://takipzan.com/login",
-        "send_follower_url": "https://takipzan.com/tools/send-follower",
-        "start_url_template": "https://takipzan.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V15",
-        "login_url": "https://followersize.net/login",
-        "send_follower_url": "https://followersize.net/tools/send-follower",
-        "start_url_template": "https://followersize.net/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V16",
-        "login_url": "https://birtakipci.net/login",
-        "send_follower_url": "https://birtakipci.net/tools/send-follower",
-        "start_url_template": "https://birtakipci.net/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V17",
-        "login_url": "https://mixtakip.com/login",
-        "send_follower_url": "https://mixtakip.com/tools/send-follower",
-        "start_url_template": "https://mixtakip.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V18",
-        "login_url": "https://instamoda.org/login",
-        "send_follower_url": "https://instamoda.org/tools/send-follower",
-        "start_url_template": "https://instamoda.org/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V19",
-        "login_url": "https://takipcitime.com/login",
-        "send_follower_url": "https://takipcitime.com/tools/send-follower",
-        "start_url_template": "https://takipcitime.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V20",
-        "login_url": "https://birtakipci.com/member",
-        "send_follower_url": "https://birtakipci.com/tools/send-follower",
-        "start_url_template": "https://birtakipci.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V21",
-        "login_url": "https://takipcibase.com/login",
-        "send_follower_url": "https://takipcibase.com/tools/send-follower",
-        "start_url_template": "https://takipcibase.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V22",
-        "login_url": "https://takip88.com/login",
-        "send_follower_url": "https://takip88.com/tools/send-follower",
-        "start_url_template": "https://takip88.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V23",
-        "login_url": "https://followersize.com/member",
-        "send_follower_url": "https://followersize.com/tools/send-follower",
-        "start_url_template": "https://followersize.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V24",
-        "login_url": "https://medyahizmeti.com/member",
-        "send_follower_url": "https://medyahizmeti.com/tools/send-follower",
-        "start_url_template": "https://medyahizmeti.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V25",
-        "login_url": "https://www.hepsitakipci.com/member",
-        "send_follower_url": "https://www.hepsitakipci.com/tools/send-follower",
-        "start_url_template": "https://www.hepsitakipci.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V26",
-        "login_url": "https://takipcimax.com/login",
-        "send_follower_url": "https://takipcimax.com/tools/send-follower",
-        "start_url_template": "https://takipcimax.com/tools/send-follower/{userID}?formType=send"
-    },
-    {
-        "name": "V27",
-        "login_url": "https://takipcimx.com/member",
-        "send_follower_url": "https://takipcimx.com/tools/send-follower",
-        "start_url_template": "https://takipcimx.com/tools/send-follower/{userID}?formType=send"
-    }
-]
-
-# Configuration settings
-CONFIG = {
-    "retry_attempts": 3,
-    "min_delay": 1,  # تأخير عشوائي بين 1 و3 ثوانٍ لتجنب الحظر
-    "max_delay": 3,
-    "min_operation_delay": 2,
-    "max_operation_delay": 5,
-    "post_success_delay_min": 5,  # تأخير بعد نجاح الإرسال
-    "post_success_delay_max": 10
-}
-
-# Session management
-@contextmanager
-def session_manager():
-    session = requests.Session()
-    session.headers.update({
-        'User-Agent': 'Instagram 146.0.0.27.125 Android (28/9; 420dpi; 1080x2131; samsung; SM-A505FN; a50; exynos9610; en_US; 221134032)',
-        'Accept': '*/*',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Accept-Encoding': 'gzip, deflate',
-        'Connection': 'keep-alive'
-    })
-    try:
-        yield session
-    finally:
-        session.close()
-
-# Site processing function
-@retry(stop=stop_after_attempt(CONFIG["retry_attempts"]), wait=wait_exponential(multiplier=1, min=2, max=10))
-def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username, stats, repeat_on_success):
-    with session_manager() as session:
-        # Login
-        try:
-            login_resp = session.post(login_url, data={"username": username, "password": password}, timeout=10, verify=False)
-            time.sleep(random.uniform(CONFIG["min_delay"], CONFIG["max_delay"]))  # تأخير بعد تسجيل الدخول
-            if login_resp.status_code != 200:
-                print(f" error: Failed to connect to {site_name} ❌ ")
-                stats["failed"] += 1
-                return False
-            print(f" OK: Logged in to {site_name} ✅")
-        except requests.exceptions.RequestException as e:
-            print(f" error: Connection issue with {site_name} ❌ ")
-            stats["failed"] += 1
-            return False
-
-        while True:
-            try:
-                # Access the send follower page
-                page_resp = session.get(send_follower_url, timeout=10, verify=False)
-                time.sleep(random.uniform(CONFIG["min_delay"], CONFIG["max_delay"]))  # تأخير بعد الوصول إلى الصفحة
-                if page_resp.status_code != 200:
-                    print(f" error: Failed to access the send follower page ❌ ")
-                    stats["failed"] += 1
-                    return False
-                print(" OK: Accessed the send page ✅")
-
-                # Parse the page
-                soup = BeautifulSoup(page_resp.text, "html.parser")
-                form = None
-                # Search for the "Kullanıcıyı Bul" button
-                for f in soup.find_all("form"):
-                    btn = f.find("button", string=lambda t: t and "Kullanıcıyı Bul" in t)
-                    if btn:
-                        form = f
-                        break
-                # Search for the "username" field
-                if not form:
-                    for f in soup.find_all("form"):
-                        if f.find("input", {"name": "username"}):
-                            form = f
-                            break
-                # First form if other methods fail
-                if not form:
-                    form = soup.find("form")
-                
-                if not form:
-                    print(" error: Form not found ❌ ")
-                    stats["failed"] += 1
-                    return False
-                print(" OK: Form found ✅")
-
-                # Prepare form data
-                action = urljoin(send_follower_url, form.get("action", send_follower_url))
-                post_data = {input_tag.get("name"): input_tag.get("value", "") for input_tag in form.find_all("input") if input_tag.get("name")}
-                post_data["username"] = target_username
-
-                # Submit the form
-                submit_resp = session.post(action, data=post_data, timeout=10, verify=False)
-                time.sleep(random.uniform(CONFIG["min_delay"], CONFIG["max_delay"]))  # تأخير بعد إرسال النموذج
-                if submit_resp.status_code != 200:
-                    print(" error: Failed to submit the form ❌ ")
-                    stats["failed"] += 1
-                    return False
-                print(" OK: Form submitted 📤")
-
-                # Parse form response
-                soup2 = BeautifulSoup(submit_resp.text, "html.parser")
-                adet_input = soup2.find("input", {"name": "adet"})
-                userID_input = soup2.find("input", {"name": "userID"})
-                userName_input = soup2.find("input", {"name": "userName"})
-
-                if not all([adet_input, userID_input, userName_input]):
-                    print(" error: Required fields not found ❌ ")
-                    stats["failed"] += 1
-                    return False
-
-                # Prepare data for sending followers
-                start_url = start_url_template.format(userID=userID_input.get("value"))
-                start_post_data = {
-                    "adet": adet_input.get("value", "50"),
-                    "userID": userID_input.get("value"),
-                    "userName": userName_input.get("value")
-                }
-
-                # Send followers
-                start_resp = session.post(start_url, data=start_post_data, timeout=10, verify=False)
-                time.sleep(random.uniform(CONFIG["min_delay"], CONFIG["max_delay"]))  # تأخير بعد إرسال المتابعين
-
-                # Parse JSON response
-                try:
-                    response_json = start_resp.json()
-                    status = response_json.get("status")
-                    message = response_json.get("message", "")
-                    followers_sent = response_json.get("followers_sent", None)
-
-                    if status == "success" and "Başarılı" in message:
-                        print(f"🚀 Start: OK {start_resp.status_code} - {message}")
-                        if followers_sent:
-                            print(f" 📊 Sent {followers_sent} followers")
-                            stats["followers_sent"] += int(followers_sent)
-                        stats["successful"] += 1
-                        # Add random delay after successful follower send
-                        time.sleep(random.uniform(CONFIG["post_success_delay_min"], CONFIG["post_success_delay_max"]))
-                        if repeat_on_success:
-                            time.sleep(random.uniform(CONFIG["min_operation_delay"], CONFIG["max_operation_delay"]))
-                            continue
-                        return True
-                    elif "Takipçi Eklenemedi. Takipçi krediniz kalmadı!" in message:
-                        print(f" error: Failed to send followers - {message} ❌ ")
-                        stats["failed"] += 1
-                        return True
-                    else:
-                        print(f" error: Failed to send followers - {message} ❌ ")
-                        stats["failed"] += 1
-                        return False
-                except json.JSONDecodeError:
-                    print(f" error: Non-JSON response - {start_resp.status_code} ❌ ")
-                    stats["failed"] += 1
-                    return False
-                except Exception as e:
-                    print(f" error: Issue parsing response - {e} ❌ ")
-                    stats["failed"] += 1
-                    return False
-            except requests.exceptions.RequestException as e:
-                print(f" error: Connection issue with {site_name} ❌ ")
-                stats["failed"] += 1
-                return False
-
-def main(target_username):
-    repeat_on_success = False
-    stats = {"successful": 0, "failed": 0, "followers_sent": 0}
-    # Iterate over sites
-    for site in sites:
-        print(f"\n{'='*60}\n 🌐 Site: \033[2;32m{site['name']}\033[2;00m\n{'='*60}")
-        print(f" 📦 Site: {site['name']} - Being tested with all accounts")
-
-        # Iterate over accounts
-        for acc in accounts:
-            if "|" not in acc:
-                print(f" error: Invalid account format - {acc} ❌ ")
-                stats["failed"] += 1
-                continue
-            username, password = acc.split("|")
-            if not username or not password:
-                print(f" error: Username or password empty - {acc} ❌ ")
-                stats["failed"] += 1
-                continue
-            print(f" 📦 Login: {site['name']}")
-            process_site(
-                site_name=site['name'],
-                login_url=site["login_url"],
-                send_follower_url=site["send_follower_url"],
-                start_url_template=site["start_url_template"],
-                username=username,
-                password=password,
-                target_username=target_username,
-                stats=stats,
-                repeat_on_success=repeat_on_success
-            )
-            time.sleep(random.uniform(CONFIG["min_delay"], CONFIG["max_delay"]))
-
-        time.sleep(random.uniform(CONFIG["min_delay"] * 2, CONFIG["max_delay"] * 2))
-
-    # Display statistics
-    print(f"\n{'='*60}\n 📊 Final Statistics:")
-    print(f" ✅ Successful operations: {stats['successful']}")
-    print(f" ❌ Failed operations: {stats['failed']}")
-    print(f" 📈 Total followers sent: {stats['followers_sent']}\n{'='*60}")
-
-if __name__ == "__main__":
-    target_username = input('\033[1;91m ➛ ').strip()
+# ========== وظائف ==========و
+def clear():
     os.system('clear')
-    main(target_username)
+
+def show_menu():
+    clear()
+    print(logo())
+    
+    print(f"\033[1;33m» \033[0m\033[1;41m إرسال متابعين (𝙸𝚗𝚜𝚝𝚊𝚐𝚛𝚊𝚖 𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜) - 1 \033[0m\n")
+    print(f"\033[1;33m» \033[0m\033[1;41m   إرسال لايكات (𝚃𝚒𝚔𝚝𝚘𝚔 𝙻𝚒𝚔𝚎𝚜) - 2 \033[0m\n")
+    print(f"\033[1;33m» \033[0m\033[1;41m   إرسال مشاهدات (𝚃𝚒𝚔𝚝𝚘𝚔 𝚅𝚒𝚎𝚠) - 3 \033[0m\n")
+    print(f"\033[1;33m» \033[0m\033[1;41m   خروج (𝙴𝚡𝚒𝚝) - 0 \033[0m\n")
+
+    return input(' \033[1;91m  ➛  \033[1;92m ') 
+
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+import time
+operation_counter = 1  # عداد تسجيل الدخولhhggggf
+
+def show_header(target_username):
+    
+    print("\033[2;00m")
+    print("\n" + "=" * 60)
+    print(f" \033[2;00m📱 𝙼𝚢 - 𝚄𝚜𝚎𝚛 :\033[2;32m {target_username}\033[2;00m")
+    print("=" * 60)
+
+
+def process_site(site_name, login_url, send_follower_url, start_url_template, username, password, target_username, operation_counter):
+    show_header(target_username)
+    print(f"\n  𝙻𝚘𝚐𝚒𝚗\033[1;33m [{operation_counter}] 📦 \033[1;00m")
+
+    session = requests.Session()
+    login_resp = session.post(login_url, data={"username": username, "password": password})
+    if login_resp.status_code != 200:
+        print(f"\n    𝙤𝙣𝙡𝙞𝙣𝙚 : 📡 ")
+        return
+
+    page_resp = session.get(send_follower_url)
+    if page_resp.status_code != 200:
+        print(f"{Z} 𝙴𝚛𝚛𝚘𝚛 𝚕𝚘𝚊𝚍 𝚜𝚎𝚗𝚍-𝚏𝚘𝚕𝚕𝚘𝚠𝚎𝚛 𝚙𝚊𝚐𝚎 ❌ - {site_name}")
+        return
+    print("  𝚂𝚞𝚌𝚌𝚎𝚜𝚜𝚏𝚞𝚕𝚕𝚢 ✓ ")
+
+    soup = BeautifulSoup(page_resp.text, "html.parser")
+    form = None
+    for f in soup.find_all("form"):
+        btn = f.find("button", string=lambda t: t and "Kullanıcıyı Bul" in t)
+        if btn:
+            form = f
+            break
+
+    if not form:
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
+        return
+
+    action = form.get("action") or send_follower_url
+    if not action.startswith("http"):
+        action = urljoin(send_follower_url, action)
+
+    post_data = {input_tag.get("name"): input_tag.get("value", "") for input_tag in form.find_all("input") if input_tag.get("name")}
+    post_data["username"] = target_username
+
+    submit_resp = session.post(action, data=post_data)
+    if submit_resp.status_code != 200:
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ \033[1;00m ")
+        return
+    print("  𝙾𝙺 📤  ")
+    
+
+    soup2 = BeautifulSoup(submit_resp.text, "html.parser")
+
+    userID = soup2.find("input", {"name": "userID"}).get("value", None)
+    userName = soup2.find("input", {"name": "userName"}).get("value", None)
+
+    if not userID or not userName:
+        print(f"{Z}  𝚎𝚛𝚛𝚘𝚛 ❌ ")
+        return
+
+    start_url = start_url_template.format(userID=userID)
+    start_data = {
+        "adet": "9900",
+        "userID": userID,
+        "userName": userName
+    }
+    start_resp = session.post(start_url, data=start_data)
+    time.sleep(3)
+    if start_resp.status_code == 200:
+        print("  𝙵𝚘𝚕𝚕𝚘𝚠𝚎𝚛𝚜 : 𝙾𝙺 🚀 ")
+    else:
+        print(f"🚀 𝙵𝚊𝚒𝚕 ({start_resp.status_code})")
+    time.sleep(7)
+
+    
+    
+    
+def process_takipcimx(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcimx.net",
+        login_url="https://takipcimx.net/login",
+        send_follower_url="https://takipcimx.net/tools/send-follower",
+        start_url_template="https://takipcimx.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+def process_bayitakipci(username, password, target_username, operation_counter):
+    process_site(
+        site_name="bayitakipci.com",
+        login_url="https://bayitakipci.com/memberlogin",
+        send_follower_url="https://bayitakipci.com/tools/send-follower",
+        start_url_template="https://bayitakipci.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+def process_takipcikrali(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcikrali.com",
+        login_url="https://takipcikrali.com/login",
+        send_follower_url="https://takipcikrali.com/tools/send-follower",
+        start_url_template="https://takipcikrali.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+
+    
+def process_takipcikingnet(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipciking.net",
+        login_url="https://takipciking.net/login",
+        send_follower_url="https://takipciking.net/tools/send-follower",
+        start_url_template="https://takipciking.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+
+    
+def process_takipcigen(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcigen.com",
+        login_url="https://takipcigen.com/login",
+        send_follower_url="https://takipcigen.com/tools/send-follower",
+        start_url_template="https://takipcigen.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_bigtakip(username, password, target_username, operation_counter):
+    process_site(
+        site_name="bigtakip.net",
+        login_url="https://bigtakip.net/login",
+        send_follower_url="https://bigtakip.net/tools/send-follower",
+        start_url_template="https://bigtakip.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+def process_takipcitime(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcitime.net",
+        login_url="https://takipcitime.net/login",
+        send_follower_url="https://takipcitime.net/tools/send-follower",
+        start_url_template="https://takipcitime.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipzan(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipzan.com",
+        login_url="https://takipzan.com/login",
+        send_follower_url="https://takipzan.com/tools/send-follower",
+        start_url_template="https://takipzan.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_followersize_net(username, password, target_username, operation_counter):
+    process_site(
+        site_name="followersize.net",
+        login_url="https://followersize.net/login",
+        send_follower_url="https://followersize.net/tools/send-follower",
+        start_url_template="https://followersize.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_birtakipci(username, password, target_username, operation_counter):
+    process_site(
+        site_name="birtakipci.net",
+        login_url="https://birtakipci.net/login",
+        send_follower_url="https://birtakipci.net/tools/send-follower",
+        start_url_template="https://birtakipci.net/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_mixtakip(username, password, target_username, operation_counter):
+    process_site(
+        site_name="mixtakip.com",
+        login_url="https://mixtakip.com/login",
+        send_follower_url="https://mixtakip.com/tools/send-follower",
+        start_url_template="https://mixtakip.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+def process_instamoda(username, password, target_username, operation_counter):
+    process_site(
+        site_name="instamoda.org",
+        login_url="https://instamoda.org/login",
+        send_follower_url="https://instamoda.org/tools/send-follower",
+        start_url_template="https://instamoda.org/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+    
+def process_takipcitime_com(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcitime.com",
+        login_url="https://takipcitime.com/login",
+        send_follower_url="https://takipcitime.com/tools/send-follower",
+        start_url_template="https://takipcitime.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+def process_birtakipci_com(username, password, target_username, operation_counter):
+    process_site(
+        site_name="birtakipci.com",
+        login_url="https://birtakipci.com/member",
+        send_follower_url="https://birtakipci.com/tools/send-follower",
+        start_url_template="https://birtakipci.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipcibase(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takipcibase.com",
+        login_url="https://takipcibase.com/login",
+        send_follower_url="https://takipcibase.com/tools/send-follower",
+        start_url_template="https://takipcibase.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_takip88(username, password, target_username, operation_counter):
+    process_site(
+        site_name="takip88.com",
+        login_url="https://takip88.com/login",
+        send_follower_url="https://takip88.com/tools/send-follower",
+        start_url_template="https://takip88.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    #1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣
+def process_followersize_com(username, password, target_username, operation_counter):
+    process_site(
+        site_name="followersize.com",
+        login_url="https://followersize.com/member",
+        send_follower_url="https://followersize.com/tools/send-follower",
+        start_url_template="https://followersize.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+
+    
+    
+    #2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣2️⃣
+def process_medyahizmeti(username, password, target_username, operation_counter):
+    process_site(
+        site_name="medyahizmeti.com",
+        login_url="https://medyahizmeti.com/member",
+        send_follower_url="https://medyahizmeti.com/tools/send-follower",
+        start_url_template="https://medyahizmeti.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_hepsitakipci(username, password, target_username, operation_counter):#1111113️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣3️⃣
+    process_site(
+        site_name="hepsitakipci.com",
+        login_url="https://www.hepsitakipci.com/member",
+        send_follower_url="https://www.hepsitakipci.com/tools/send-follower",
+        start_url_template="https://www.hepsitakipci.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+
+def process_tiktok_like(username, password, video_url):
+    session = requests.Session()
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Requested-With": "XMLHttpRequest",
+        "User-Agent": "Mozilla/5.0"
+    }
+    login_resp = session.post("https://followersize.com/member",
+                              data={"username": username, "password": password},
+                              headers=headers, verify=False)
+    if login_resp.status_code != 200:
+        print(f"{Z}❌ خطأ تسجيل دخول {username}")
+        return
+
+    print("\n\033[2;00m" + "=" * 60)
+    print(f"\n\033[1;31m 𝚜𝚎𝚗𝚝 𝙻𝚒𝚔𝚜 𝚝𝚘 𝚟𝚒𝚍𝚎𝚘 (لايكلات) : \033[2;32m{video_url} 👁️ \033[1;00m\n")
+    print("=" * 60)
+    print("")
+    post_data = {"mediaUrl": video_url, "adet": "20"}
+    send_resp = session.post("https://followersize.com/tools/send-tiktok-like?formType=send",
+                             data=post_data, headers=headers, verify=False)
+    if send_resp.status_code == 200:
+        print(f"")
+    else:
+        print(f"Erro")
+    time.sleep(2)
+
+def process_tiktok_view(username, password, video_url):
+    session = requests.Session()
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Requested-With": "XMLHttpRequest",
+        "User-Agent": "Mozilla/5.0"
+    }
+    login_resp = session.post("https://followersize.com/member",
+                              data={"username": username, "password": password},
+                              headers=headers, verify=False)
+    if login_resp.status_code != 200:
+        print(f"❌ فشل تسجيل الدخول {username}")
+        return
+
+    
+    print("\n\033[2;00m" + "=" * 60)
+    print(f"\n\033[1;31m 𝚜𝚎𝚗𝚝 𝚅𝚒𝚎𝚠𝚜 𝚝𝚘 𝚟𝚒𝚍𝚎𝚘 (مشاهدات) : \033[2;32m{video_url} 👁️ \033[1;00m\n")
+    print("=" * 60)
+    print("")
+    post_data = {"mediaUrl": video_url, "adet": "500"}
+    send_resp = session.post("https://followersize.com/tools/send-tiktok-view?formType=send",
+                             data=post_data, headers=headers, verify=False)
+    if send_resp.status_code == 200:
+        print(f"")
+    else:
+        print(f"❌ error")
+    time.sleep(1.5)
+    
+def process_takipcizencom(username, password, target_username, operation_counter):#9
+    process_site(
+        site_name="takipcizen.com",
+        login_url="https://takipcizen.com/login",
+        send_follower_url="https://takipcizen.com/tools/send-follower",
+        start_url_template="https://takipcizen.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_takipstarcom(username, password, target_username, operation_counter):#8
+    process_site(
+        site_name="takipstar.com",
+        login_url="https://takipstar.com/login",
+        send_follower_url="https://takipstar.com/tools/send-follower",
+        start_url_template="https://takipstar.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_takipcikingcom(username, password, target_username, operation_counter):#7
+    process_site(
+        site_name="takipciking.com",
+        login_url="https://takipciking.com/member",
+        send_follower_url="https://takipciking.com/tools/send-follower",
+        start_url_template="https://takipciking.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+    
+def process_takipcigir(username, password, target_username, operation_counter):#6
+    process_site(
+        site_name="takipcigir.com",
+        login_url="https://takipcigir.com/login",
+        send_follower_url="https://takipcigir.com/tools/send-follower",
+        start_url_template="https://takipcigir.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+def process_takipcimx_com(username, password, target_username, operation_counter):#4
+    process_site(
+        site_name="takipcimx.com",
+        login_url="https://takipcimx.com/member",
+        send_follower_url="https://takipcimx.com/tools/send-follower",
+        start_url_template="https://takipcimx.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+
+    
+def process_takipcimax(username, password, target_username, operation_counter):#3
+    process_site(
+        site_name="takipcimax.com",
+        login_url="https://takipcimax.com/login",
+        send_follower_url="https://takipcimax.com/tools/send-follower",
+        start_url_template="https://takipcimax.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )#&&
+
+    
+
+def process_bigtakip_com(username, password, target_username, operation_counter):#2
+    process_site(
+        site_name="bigtakip.com",
+        login_url="https://bigtakip.com/member",
+        send_follower_url="https://bigtakip.com/tools/send-follower",
+        start_url_template="https://bigtakip.com/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+    
+def process_fastfollow(username, password, target_username, operation_counter):#1
+    process_site(
+        site_name="fastfollow.in",
+        login_url="https://fastfollow.in/member",
+        send_follower_url="https://fastfollow.in/tools/send-follower",
+        start_url_template="https://fastfollow.in/tools/send-follower/{userID}?formType=send",
+        username=username,
+        password=password,
+        target_username=target_username,
+        operation_counter=operation_counter
+    )
+
+# ========== القائمة ==========jjنjjbb
+while True:
+    option = show_menu()
+
+    if option == "1":
+        clear()
+        print(logo())
+        print("")
+
+        target_username = input(f'{CYAN} 🧾 ᴜsᴇʀ  \033[1;00m: \033[1;92m ').strip()
+        clear()
+        print(logo())
+        operation_counter = 1  # إعادة التهيئة هنhا
+        for acc in accounts:
+            username, password = acc.split("|")
+            
+            
+            process_followersize_com(username, password, target_username, operation_counter)#1
+            operation_counter += 1
+            process_medyahizmeti(username, password, target_username, operation_counter)
+            operation_counter += 1   
+            process_hepsitakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            process_instamoda(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcitime_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_birtakipci_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcibase(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takip88(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcitime(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipzan(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_followersize_net(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_birtakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_mixtakip(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcikrali(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcikingnet(username, password, target_username, operation_counter)#
+            operation_counter += 1
+
+
+
+
+
+            process_fastfollow(username, password, target_username, operation_counter)
+            operation_counter += 1#
+            process_bigtakip_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimx_com(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimax(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            process_takipcigir(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcikingcom(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            process_takipstarcom(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            process_takipcizencom(username, password, target_username, operation_counter)
+            operation_counter += 1#cv
+
+
+
+
+
+
+            process_takipcigen(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bigtakip(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_takipcimx(username, password, target_username, operation_counter)
+            operation_counter += 1
+            process_bayitakipci(username, password, target_username, operation_counter)
+            operation_counter += 1
+            
+            
+            
+            
+            
+    elif option == "2":
+        clear()
+        print(logo())
+        video_url = input(" 𝙻𝚒𝚗𝚔  𝚟𝚒𝚍𝚎𝚘  (𝚃𝚒𝚔𝚝𝚘𝚔 𝙻𝚒𝚔𝚜) 🎥 : ").strip()
+        clear()
+        
+        for acc in accounts:
+            username, password = acc.split("|")
+            process_tiktok_like(username, password, video_url)
+        input("\n✅ انتهى الإرسال! اضغط Enter للعودة للقائمة.")
+
+    elif option == "3":
+        clear()
+        print(logo())
+        video_url = input(" 𝙻𝚒𝚗𝚔  𝚟𝚒𝚍𝚎𝚘  (𝚃𝚒𝚔𝚝𝚘𝚔 𝚅𝚒𝚎𝚠) 🎥 : ").strip()
+        clear()
+        
+        for acc in accounts:
+            username, password = acc.split("|")
+            process_tiktok_view(username, password, video_url)
+        input("\n✅ تم إرسال المشاهدات! اضغط Enter للعودة للقائمة.")
+    elif option == "0":
+        print("👋 إلى اللقاء!")
+        break
+    else:
+        input("❌ خيار غير صالح! اضغط Enter للمحاولة مجدداً.")
+        
+        
+        #'+'-6'تتjvvhggfvvnhhj
