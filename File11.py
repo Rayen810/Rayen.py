@@ -271,24 +271,29 @@ class Require:
         if len(names) == 2:
             first_name = names[0].lower()  # الاسم الأول
             last_name = names[1].lower()  # الاسم الأخير
+
             self.one.append(first_name + '123')             
             self.one.append(first_name + '1234')            
             self.one.append(first_name + '12345')      
             self.one.append(first_name + '123456')
-
             self.one.append(first_name + '1234567')   
+            self.one.append(first_name.capitalize() + '2010')
+            self.one.append(first_name.capitalize() + '2009')
+            self.one.append(first_name.capitalize() + '2008')
+            self.one.append(first_name.capitalize() + '2011')
             self.one.append(first_name + '12')   
-            self.one.append(first_name + '123456789') 
-
-
-
+            self.one.append(first_name + '123456789')   
+            self.one.append(first_name + '123123') 
             self.one.append(first_name.capitalize() + '123')
-            self.one.append(first_name.capitalize() + '12')
             self.one.append(first_name.capitalize() + '12345')
             self.one.append(first_name.capitalize() + '123456')
-            self.one.append(first_name.capitalize() + '123456789')
             self.one.append(first_name.capitalize() + '1234')
             self.one.append(first_name.capitalize() + '1234567')
+            self.one.append(first_name + first_name)
+            self.one.append(first_name + '2008')
+            self.one.append(first_name + '2009')
+            self.one.append(first_name + '2010')
+            self.one.append(first_name + '2011')
         # التعامل مع الأسماء الثلاثية
         elif len(names) == 3:
             first_name = names[0].lower()  # الاسم الأولnh
@@ -299,20 +304,24 @@ class Require:
             self.one.append(first_name + '1234')            
             self.one.append(first_name + '12345')      
             self.one.append(first_name + '123456')
-
             self.one.append(first_name + '1234567')   
+            self.one.append(first_name.capitalize() + '2010')
+            self.one.append(first_name.capitalize() + '2009')
+            self.one.append(first_name.capitalize() + '2008')
+            self.one.append(first_name.capitalize() + '2011')
             self.one.append(first_name + '12')   
-            self.one.append(first_name + '123456789') 
-
-
-
+            self.one.append(first_name + '123456789')   
+            self.one.append(first_name + '123123') 
             self.one.append(first_name.capitalize() + '123')
-            self.one.append(first_name.capitalize() + '12')
             self.one.append(first_name.capitalize() + '12345')
             self.one.append(first_name.capitalize() + '123456')
-            self.one.append(first_name.capitalize() + '123456789')
             self.one.append(first_name.capitalize() + '1234')
             self.one.append(first_name.capitalize() + '1234567')
+            self.one.append(first_name + first_name)
+            self.one.append(first_name + '2008')
+            self.one.append(first_name + '2009')
+            self.one.append(first_name + '2010')
+            self.one.append(first_name + '2011')
             
 
 
@@ -321,6 +330,12 @@ class Require:
 
         # إرجاع القائمة
         return self.one
+        
+        
+
+
+        
+        
     def Signature(self, data, body='SIGNATURE'):
         return 'signed_body={}.{}&ig_sig_key_version=4'.format(body, urllib.parse.quote_plus(data))
 
@@ -687,8 +702,8 @@ def dump2(idt, fields, cookie, token):
         pass
 def multi_dump():
 	try:
-		token = 'EAABsbCS1iHgBO6ORfFE2PogW8dc8KXxHgBbTvlRFFhn21X0HVmW4O1dvMLGKZBCbyiAzjZBWH80vV2qShz2VEDlZAQTnHFl70ZCeJ1PpIa6K1ZCTUOMhoLYzYZCTrG9kWDGoYd9PHJTeVD76GZA61QQQzWvZBj7KopADKqAZAO8nLkNcW9PpWDYFaPfLSuAZDZD'
-		cok = 'ps_l=1;ps_n=1;c_user=100004175477727;fr=09M44PEKx2aUi3FSt.AWWFO96CWGeBBKrPcauFI79V18O5U4Gfn1MZtQ.Bn4Fv3..AAA.0.0.Bn4GjF.AWX2Y_t8iu4;sb=9lvgZ7F80kWKSr5kd50-6MRj;xs=44%3A4fjP1zOhQ6308w%3A2%3A1742760134%3A-1%3A12166;locale=fr_CA;m_pixel_ratio=1.6687500476837158;wd=432x983;datr=bW7gZ6Gdr67zT-5tPbP-w0XJ;vpd=v1%3B832x432x1.6687500476837158;fbl_st=100738121%3BT%3A29046044;wl_cbv=v2%3Bclient_version%3A2766%3Btimestamp%3A1742762667;'
+		token = 'EAABsbCS1iHgBPyZB0P3yDU0ikH6OvRYDlqZAvxTZAxmxCFGL12R12tdZAnvYFJrQzGR2ZAelchCxS7NOf9vf2L1pPJpQlWQfE0JrVwfCFqYykJgO0NKyxHkXhWlrnTuyXd0ecxKb886Jznr6J32azGf1gCiLrZCNK5u4LJa6ij7q8F2bgGjZBwg2n3XCD9wv5a0EAZDZD'
+		cok = 'ps_l=1;ps_n=1;sb=0sQDaF2hX0kVkT8iemZ6KDP8;datr=eNT8aEwz0VQTQ_UuC4tXi8uC;dpr=1.8828027248382568;locale=fr_FR;vpd=v1%3B840x421x1.712499976158142;m_pixel_ratio=1.712499976158142;wd=421x958;c_user=100057723427401;xs=28%3A55EPj3p4falNyg%3A2%3A1761401101%3A-1%3A-1;fr=0ejaCvWzVtErGyjw0.AWfCAtJDLwWd2HUzHkJ_e32KI3jvoMvyf6BiqRl4SbnOrPnTFcA.BoA8TT..AAA.0.0.Bo_NkS.AWf0_lejha0RcdfAU156jjtZ9IY;pas=100023481514536%3Aks9GINwTRw%2C100057723427401%3A2RR74pYXEy;wl_cbv=v2%3Bclient_version%3A2964%3Btimestamp%3A1761401106;fbl_st=100715928%3BT%3A29356685;'
 
 	except IOError:
 	    exit()
@@ -1296,7 +1311,7 @@ def process_accounts_parallel(accounts):
                 elapsed_time = time.time() - start_time
 
                 # توقف بعد 17 ثانية
-                if elapsed_time >= 20:
+                if elapsed_time >= 25:
                     print("\n⏸️ توقف لمدة 5 ثوانٍ...\n")
                     time.sleep(4)  # انتظار 5 ثوانٍ
                     start_time = time.time()  # إعادة ضبط الوقت بعد التوقف
@@ -3083,7 +3098,13 @@ def password():
 
 
                 first_small + last_small,
-                first_small + ' ' + last_small,
+                first_small + '123',
+                first_small + '12345',
+                first_small + '1234',
+                first_small + '123456',
+                first_small + '1234567',
+                first_small + '123456789',
+                
 
             ]
 
@@ -3259,7 +3280,7 @@ def clean_file():
         "zayneb", "Kawther", "solo", "Raouf", "Yomna", "Ahlem", "Olfaa", "Nassima", "MârYèm", 
         "Narjes", "Nawel", "maram", "Rihab", "safee", "zayneebb", "Rihem", "Râhmã", "Zeineb", 
         "sarra", "Yosr", "Emna", "Nermine", "Rāniā", "rawand", "wafa", "Safsoufa", "Safae", 
-        "Ala", "Safa", "Márÿèeem", "Rania", "Alå", "maryem", "marami", "Noura‍", "Yasmin", "Noor", "noor", "omayma", "hiba", "ibtihel", "Dhia", "takwa", "…", "ela", "awatef", "amal", "noorr", "isra", "lamiss", "Lamiss", "Amal", "Marouma", "sana", "Ines", "NERMINE", "nermine", "ines", "Lamjjhiss", "Amal", "Marouma", "Amira", "manel", "emna", "rim", "hajer", "Hajer", "Yesmine", "yesmine", "israa"
+        "Ala", "Safa", "Márÿèeem", "Rania", "Alå", "maryem", "marami", "Noura‍", "Yasmin", "Noor", "noor", "omayma", "hiba", "ibtihel", "Dhia", "takwa", "…", "ela", "awatef", "amal", "noorr", "isra", "lamiss", "Lamiss", "Amal", "Marouma", "sana", "Ines", "NERMINE", "nermine", "ines", "Lamjjhiss", "Amal", "Marouma", "Amira", "manel", "emna", "rim", "hajer", "Hajer", "Yesmine", "yesmine", "israa", "najla", "Najla", "zayeni", "Zayeni", "ameni", "Ameni", "linda", "Linda", "nesrine", "Nesrine", "yessmine", "Yessmine", "Sirine", "sirine", "amina", "Amina"
     ]
 
     try:
@@ -3322,7 +3343,7 @@ def menu():
     print(f"» \033[1;33m5\033[0m -  ︎︎⠀ ⠀⠀⠀⠀         \033[1;46m ( 𝚃𝙴𝚂𝚃 𝙲𝙾𝙾𝙺𝙸𝙴𝚂 ) ఌ︎ \033[0m\n")
     print(f"» \033[1;33m6\033[0m -  ︎︎       ⠀⠀⠀ ⠀⠀  \033[1;46m (  𝙲𝚕𝚎𝚊𝚗 𝙵𝚒𝚕𝚎  ) ✔︎︎︎︎ \033[0m\n")
     print('')
-    choice = input('\033[1;91m ➛   ')
+    choice = input('\033[1;91m ➛hhhh   ')
 
     if choice == '1':
         file_path = get_file_path()
@@ -3420,7 +3441,7 @@ if __name__ == "__main__":
             
         if not os.path.exists(os.path.join(main_folder, '𝙲𝚘𝚘𝚔𝚒𝚎𝚜.txt')):
             with open(os.path.join(main_folder, '𝙲𝚘𝚘𝚔𝚒𝚎𝚜.txt'), 'w') as file:
-                file.write("")
+                file.write("ig_did=4534F1C9-35B3-4EC3-B746-E22A9BE627AA; ig_nrcb=1; wd=431x887; dpr=1.6687500476837158; mid=Z-7MOgABAAHI2hWNaaT3qyeb75j-; datr=OszuZ3mErGvgQ0fdekm1N9NM; fbm_124024574287414=base_domain=.instagram.com; ds_user_id=44814296679; fbsr_124024574287414=C6SAAH4ZNiuAqOkvOxR_NZNOSrwfN7dyXutZCkLdsUE.eyJ1c2VyX2lkIjoiMTAwMDM3MTI4ODEyMzQyIiwiY29kZSI6IkFRQzZyNDYtMnh5QXBkbjBHMFlBN0xqTno1ZllLQ1NQdFlsSUNHVVBRNHd4U2lkTWxKcFFVQjh0N1d3b2N1NXNkdzZuRWFqWmdzUHpOTkltOVo4NFVnOC1fWnVrRVJYTFYyTDVzd05aZHVVQkx0dFk0b1RYeTRTTkpyYmp4V09SRUZnSE1PcTQyVTFLQV9Xc0RGelR5Vk1TVm1ZeEY3SDI0MlljX3VodDdyWV9tM3QwbjdMbDhBM3gxVjVaNGMzVC1NZmhubWFIXzhpVHlpdTc0MU9DMlNCUWJoREFfc1FOMld2YVN6RkVMc1ZXTDhoTGZkZEhkVXBwT01EaGdhSlRHVFNuTWFidlFIdWMxYnpSUkotbXI1dng2UkFWQVpfOUw5eml2VXgtRTMzdjJKTnBkYzJpcmVPUlI4YmhkSVRCa3dRS1RnZU9MbldxRWxvWE1rNWN3YnJ3Iiwib2F1dGhfdG9rZW4iOiJFQUFCd3pMaXhuallCTzNYWkFYZXNYM3h6NjRudTZpREVBY3RqYmtFOG9PeXhVMDZaQlpDcGdkaFRBRERYTkRKTkRYaGtZem45dzNsamcxTkJZSFZ6NFpBR3lyTVdtRmRrN3hrRTVPdEg5bWlhQkVPTU1zcEs4WVFXUzBsTldWZ1JMQmthS0dYdm9vY1E1andRSEZUSmZNWkE5ZGk0TUNCa29OanJoNm45Y0VYQXhEbnd6TjdtcU5mVEFZaE9pd1pBWkFPYVFVWkQiLCJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImlzc3VlZF9hdCI6MTc0MzcwMzExMn0; fbsr_124024574287414=OqPknJHQWaU-vHvEeIA_jgMkHxzsFFrjcx5wX78AA20.eyJ1c2VyX2lkIjoiMTAwMDM3MTI4ODEyMzQyIiwiY29kZSI6IkFRQWF2UGxYT1Q0OEpwYUx2SE5kM1VkenRGUDNVMnlqbWNiOVNoTnpaNlpHbzdvbEZPTVhkSmdmVnFVZWVxWHZncHBEWlVJcTk0ZmQ4NmpsdXNmWk1fVHBCUmR6cElpQW4xTGZJT1hzVzhWODFaUlM1bHJzVTVUdVFhWDhWZ19ZdE05LVFwcXIxb1RsRXptM1B1bXROMlhSRnlIMlRfM3ByenRxMmItQXpOQkdoZzFaUTZ3SG5GNmI1VkNaaUtneWdtVDVhTTQzX0xpQzRqOURYckRUZ1dxTHpxTzQwN0w0OXA4SEtaX0lCSlZIcm55aVVhMk9MVk9FSEoySE55bWRGMU8zdzFZN2VWcGxfMEZldnRBdm1HOXJEYmVPMlY2V3gtdWNERHdSLVZUUTh1VU1lajhwUDJtUFRuTTZJb0VfUTZsT2I1ajRDRGY2QVlHOVBuWWVHTXZlIiwib2F1dGhfdG9rZW4iOiJFQUFCd3pMaXhuallCTzJaQXdESE1lOFpBQWFOa25SelhnWkJyTDhaQVZJY0tqVjRHeDNPV2wyVlpBRWVwWkNaQlR2ck9WQ1pBWkNieTZLWkN4bkt3S0NwZHIxUGdDN0tic2dnSjZKbXNTcjViUEltbHhSc3pnem5KeHBMZGRGOXJCZE9GR1pBN0Y5ckN5SG1sTzBFUUlXVXhFaFVrYTFobTR5RUdKb3ZPOWV6V2FtWFpBaHpxYjZpWHRpZDc4ekpraHlsZDM5ZkE0TFVaRCIsImFsZ29yaXRobSI6IkhNQUMtU0hBMjU2IiwiaXNzdWVkX2F0IjoxNzQzNzAzMTM4fQ; csrftoken=1i7PtiSYRFPqGAT8IOHEZE8n4HZo7bK9; sessionid=44814296679%3A3emMe01mS4Lwk9%3A23%3AAYds7SH4lmpbGWgjIxHaNjTViN039HGf8Ub0UI7WOQ")
 
           
         # إنشاء الملفات فقط إذا لم تكن موجودة
