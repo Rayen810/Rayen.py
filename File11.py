@@ -1322,7 +1322,7 @@ def start_hack(file_path):
     input("\n\033[1;36mاضغط Enter للعودة إلى القائمة...")
 # Run the program-اتع
 
-# --- الكود الرئيسي ---ات
+# --- الكود الرئيسي ---اتjjjjjj
 if __name__ == '__main__':
     ig = Instagram()
     ig.menu()
