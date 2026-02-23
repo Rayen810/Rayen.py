@@ -72,7 +72,7 @@ accounts = [
 ]
 
 #;jj
-target_username = input("أدخل اسم المستخدم المستهدف: ").strip()
+target_username = input("أدخل اسم المستخدم المسjjjتهدف: ").strip()
 if not target_username:
     print("❌ لم تدخل يوزر → توقف")
     exit()
