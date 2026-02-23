@@ -1,4 +1,3 @@
-
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
@@ -45,23 +44,34 @@ LOGIN_PAGES = [
     "https://takipcimx.com/member",
     "https://takipcimax.com/login",
 ]
-
+  #  "cha_hine.2017|chahine1234",--
+    #  "wa.lid5221|walidwalid"
+    #"youssefkh116|youssef12345",
+       #:+ "youssefkh116|youssef12345",
+          # "mk.hamza_03|hamza123",85
+          #''
 accounts = [
-    "cha_hine.2017|chahine1234",
-    "youssefkh116|youssef12345",
-    "rgesmi30|rayen123456",
+    "___2deeem|adem123456789",
+    "am_____ir07|amiramir",#&&&
+    "amirfehri07|amiramir",
+    "oussama_madimagh|oussama123456789",
+    "zied_zaidoun22|zied123456789",
+    "elhemelhedi|elhem123456",
+    "chaabanewalid525|walid123456789",
+    "samar_ben_hassin|samar123456789",
+    "rgesmi30|rayen123456",#&&&
     "fehri__amir|amiramir",
     "o_ghaoui|omar123456789",
     "mohamed_aziz_ben_attia|aziz12345",
     "mohamed_arshad838|arshad12345",
-    "mk.hamza_03|hamza123",
-    "youssefkh116|youssef12345",
+
     "oialidwalid|oialidoialid",
     "z.maleeeeeek|malek123456789",
-    "chaabanewalid525|walid123456789",
-    "wa.lid5221|walidwalid"
+
+
 ]
-#;
+
+#;jj
 target_username = input("أدخل اسم المستخدم المستهدف: ").strip()
 if not target_username:
     print("❌ لم تدخل يوزر → توقف")
@@ -145,7 +155,7 @@ while True:
 
                 soup2 = BeautifulSoup(resp_submit.text, "html.parser")
 
-                adet = "20"
+                adet = "50"
                 adet_tag = soup2.find("input", {"name": "adet"})
                 if adet_tag and adet_tag.get("value"):
                     adet = adet_tag["value"]
